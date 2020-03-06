@@ -1,7 +1,7 @@
 package sample;
 import java.io.*;
 
-public class menu {
+public class Menu {
 	public static void main (String args[]) {
 	System.out.println("Choose your identity");
 	System.out.println("1.Doctor");
