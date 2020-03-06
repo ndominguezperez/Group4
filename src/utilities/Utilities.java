@@ -1,9 +1,9 @@
-package utilidades;
+package utilities;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Utilidades {
+public class Utilities {
     public static String leer() {
 
         BufferedReader consola = new BufferedReader(new InputStreamReader(System.in));
