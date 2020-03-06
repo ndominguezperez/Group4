@@ -6,6 +6,6 @@ public class Patient {
 	Fecha dob;
 	String medical_chart;
 	Integer treatment_id;
-	// ytfuvbiu
+	// prueba para ver si va
 	
 }
