@@ -12,7 +12,7 @@ public class Fecha implements Comparable<Fecha> {
         this.ano = 0;
     }
 
-    public void Fecha(int dia, int mes, int ano) {
+    public void Fecha (int dia, int mes, int ano) {
         this.dia = dia;
         this.mes = mes;
         this.ano = ano;

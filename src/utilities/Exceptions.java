@@ -9,7 +9,7 @@ public class Exceptions {
             comprobation = true;
             try {
                 if (day < 0) {
-                    throw new RuntimeException("NEGATIVE NUMBERS DO NOT EXITS");
+                    throw new RuntimeException("NEGATIVE NUMBERS DO NOT EXIT");
                 }
                 if (day > 31) {
                     throw new RuntimeException("NUMBERS BIGGER THAN 31 DO NOT EXIT IN A MONTH");
