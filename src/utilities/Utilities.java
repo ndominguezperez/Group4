@@ -11,7 +11,7 @@ public class Utilities {
         try {
             read = console.readLine();
         } catch (IOException ex) {
-            System.out.println("ERROR");
+            System.out.println("Detected a error");
         }
         return read;
     }
