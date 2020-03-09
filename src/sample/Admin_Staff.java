@@ -1,5 +1,9 @@
 package sample;
 
 public class Admin_Staff {
-	Integer id;
+	int id;
+	String name;
+	Fecha dob;
+	float salary;
+	
 }

@@ -4,16 +4,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Utilities {
-    public static String leer() {
+    public static String read() {
 
-        BufferedReader consola = new BufferedReader(new InputStreamReader(System.in));
-        String leido = "ERROR";
+        BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+        String read = "ERROR";
         try {
-            leido = consola.readLine();
+            read = console.readLine();
         } catch (IOException ex) {
-            System.out.println("Hay un error");
+            System.out.println("ERROR");
         }
-        return leido;
+        return read;
     }
 
 }

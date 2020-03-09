@@ -83,7 +83,7 @@ public class Exceptions {
         boolean comprobation = true;
         String read;
         do {
-            read = Utilities.leer();
+            read = Utilities.read();
             comprobation = true;
             try {
                 whole = Integer.parseInt(read);
@@ -101,7 +101,7 @@ public class Exceptions {
         boolean comprobation = true;
         String read;
         do {
-            read = Utilities.leer();
+            read = Utilities.read();
             comprobation = true;
             try {
                 f = Float.parseFloat(read);
