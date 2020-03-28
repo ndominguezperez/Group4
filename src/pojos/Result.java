@@ -1,8 +1,16 @@
 package pojos;
 
-public class Results {
+public class Result {
+	
 	int id;
 	String type;
+	
+	public Result(int id, String type) {
+		super();
+		this.id = id;
+		this.type = type;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -15,13 +23,16 @@ public class Results {
 	public void setType(String type) {
 		this.type = type;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + id;
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -30,10 +41,20 @@ public class Results {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Results other = (Results) obj;
+		Result other = (Result) obj;
 		if (id != other.id)
 			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Results [id=" + id + ", type=" + type + "]";
 	}
 	
 }
