@@ -14,17 +14,17 @@ public class Patient {
 	String gender;
 	int admin_staff_id;
 	int treatment_id;
-	int examination_id;
 	
 	List<Doctor> doctors;
 	List<Nurse> nurses;
 	List<Result> results;
 	List<Appointment> schedule;
 	List<Machine> machines;
-	List<Admin_staff> Admin_staffs;
+	List<Admin_staff> admin_staffs;
+	List<Examination> examinations;
 	
 	public Patient(Integer id, String name, String surname, Date dob, String medical_chart, String gender,
-			int admin_staff_id, int treatment_id, int examination_id, List<Doctor> doctors, List<Nurse> nurses,
+			int admin_staff_id, int treatment_id, List<Examination> examinations, List<Doctor> doctors, List<Nurse> nurses,
 			List<Result> results, List<Appointment> schedule, List<Machine> machines, List<Admin_staff> admin_staffs) {
 		super();
 		this.id = id;
@@ -35,13 +35,13 @@ public class Patient {
 		this.gender = gender;
 		this.admin_staff_id = admin_staff_id;
 		this.treatment_id = treatment_id;
-		this.examination_id = examination_id;
+		this.examinations = examinations;
 		this.doctors = doctors;
 		this.nurses = nurses;
 		this.results = results;
 		this.schedule = schedule;
 		this.machines = machines;
-		Admin_staffs = admin_staffs;
+		this.admin_staffs = admin_staffs;
 	}
 	
 	public Integer getId() {
@@ -92,11 +92,11 @@ public class Patient {
 	public void setTreatment_id(int treatment_id) {
 		this.treatment_id = treatment_id;
 	}
-	public int getExamination_id() {
-		return examination_id;
+	public List<Examination> getExaminations() {
+		return examinations;
 	}
-	public void setExamination_id(int examination_id) {
-		this.examination_id = examination_id;
+	public void setExaminations(List<Examination> examinations) {
+		this.examinations = examinations;
 	}
 	public List<Doctor> getDoctors() {
 		return doctors;
@@ -129,10 +129,10 @@ public class Patient {
 		this.machines = machines;
 	}
 	public List<Admin_staff> getAdmin_staffs() {
-		return Admin_staffs;
+		return admin_staffs;
 	}
 	public void setAdmin_staffs(List<Admin_staff> admin_staffs) {
-		Admin_staffs = admin_staffs;
+		this.admin_staffs = admin_staffs;
 	}
 
 	@Override
@@ -164,9 +164,9 @@ public class Patient {
 	public String toString() {
 		return "Patient [id=" + id + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", medical_chart="
 				+ medical_chart + ", gender=" + gender + ", admin_staff_id=" + admin_staff_id + ", treatment_id="
-				+ treatment_id + ", examination_id=" + examination_id + ", doctors=" + doctors + ", nurses=" + nurses
-				+ ", results=" + results + ", schedule=" + schedule + ", machines=" + machines + ", Admin_staffs="
-				+ Admin_staffs + "]";
+				+ treatment_id + ", doctors=" + doctors + ", nurses=" + nurses + ", results=" + results + ", schedule="
+				+ schedule + ", machines=" + machines + ", admin_staffs=" + admin_staffs + ", examinations="
+				+ examinations + "]";
 	}
 
 
