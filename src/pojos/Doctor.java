@@ -12,10 +12,18 @@ public class Doctor {
 	String speciality;
 	Date dob;
 	Date start_date;
+	
+	List <Patient> patients;
+	List <Result> results;
+	
+	List<Examination> examinations;
 	List<Appointment> schedule;
+	
+	int treatment_id;
 
 	public Doctor(int id, String name, float salary, String speciality, Date dob, Date start_date,
-			List<Appointment> schedule) {
+			List<Patient> patients, List<Result> results, List<Examination> examinations, List<Appointment> schedule,
+			int treatment_id) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -23,9 +31,13 @@ public class Doctor {
 		this.speciality = speciality;
 		this.dob = dob;
 		this.start_date = start_date;
+		this.patients = patients;
+		this.results = results;
+		this.examinations = examinations;
 		this.schedule = schedule;
+		this.treatment_id = treatment_id;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -68,18 +80,37 @@ public class Doctor {
 	public void setSchedule(List<Appointment> schedule) {
 		this.schedule = schedule;
 	}
+	public List<Patient> getPatients() {
+		return patients;
+	}
+	public void setPatients(List<Patient> patients) {
+		this.patients = patients;
+	}
+	public List<Result> getResults() {
+		return results;
+	}
+	public void setResults(List<Result> results) {
+		this.results = results;
+	}
+	public List<Examination> getExaminations() {
+		return examinations;
+	}
+	public void setExaminations(List<Examination> examinations) {
+		this.examinations = examinations;
+	}
+	public int getTreatment_id() {
+		return treatment_id;
+	}
+	public void setTreatment_id(int treatment_id) {
+		this.treatment_id = treatment_id;
+	}
+
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((dob == null) ? 0 : dob.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + Float.floatToIntBits(salary);
-		result = prime * result + ((schedule == null) ? 0 : schedule.hashCode());
-		result = prime * result + ((speciality == null) ? 0 : speciality.hashCode());
-		result = prime * result + ((start_date == null) ? 0 : start_date.hashCode());
 		return result;
 	}
 
@@ -92,34 +123,7 @@ public class Doctor {
 		if (getClass() != obj.getClass())
 			return false;
 		Doctor other = (Doctor) obj;
-		if (dob == null) {
-			if (other.dob != null)
-				return false;
-		} else if (!dob.equals(other.dob))
-			return false;
 		if (id != other.id)
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (Float.floatToIntBits(salary) != Float.floatToIntBits(other.salary))
-			return false;
-		if (schedule == null) {
-			if (other.schedule != null)
-				return false;
-		} else if (!schedule.equals(other.schedule))
-			return false;
-		if (speciality == null) {
-			if (other.speciality != null)
-				return false;
-		} else if (!speciality.equals(other.speciality))
-			return false;
-		if (start_date == null) {
-			if (other.start_date != null)
-				return false;
-		} else if (!start_date.equals(other.start_date))
 			return false;
 		return true;
 	}
@@ -127,7 +131,8 @@ public class Doctor {
 	@Override
 	public String toString() {
 		return "Doctor [id=" + id + ", name=" + name + ", salary=" + salary + ", speciality=" + speciality + ", dob="
-				+ dob + ", start_date=" + start_date + ", schedule=" + schedule + "]";
+				+ dob + ", start_date=" + start_date + ", patients=" + patients + ", results=" + results
+				+ ", examinations=" + examinations + ", schedule=" + schedule + ", treatment_id=" + treatment_id + "]";
 	}
 		
 }

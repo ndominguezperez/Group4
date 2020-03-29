@@ -1,16 +1,30 @@
 package pojos;
 
+import java.util.List;
+
 public class Result {
 	
 	int id;
 	String type;
 	
-	public Result(int id, String type) {
+	List<Doctor> doctors;
+	List<Nurse> nurses;
+	List<Machine> machines;
+	
+	int patient_id;
+	
+	
+	public Result(int id, String type, List<Doctor> doctors, List<Nurse> nurses, List<Machine> machines,
+			int patient_id) {
 		super();
 		this.id = id;
 		this.type = type;
+		this.doctors = doctors;
+		this.nurses = nurses;
+		this.machines = machines;
+		this.patient_id = patient_id;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -23,13 +37,36 @@ public class Result {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
+	public List<Doctor> getDoctors() {
+		return doctors;
+	}
+	public void setDoctors(List<Doctor> doctors) {
+		this.doctors = doctors;
+	}
+	public List<Nurse> getNurses() {
+		return nurses;
+	}
+	public void setNurses(List<Nurse> nurses) {
+		this.nurses = nurses;
+	}
+	public List<Machine> getMachines() {
+		return machines;
+	}
+	public void setMachines(List<Machine> machines) {
+		this.machines = machines;
+	}
+	public int getPatient_id() {
+		return patient_id;
+	}
+	public void setPatient_id(int patient_id) {
+		this.patient_id = patient_id;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + id;
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 	
@@ -44,17 +81,13 @@ public class Result {
 		Result other = (Result) obj;
 		if (id != other.id)
 			return false;
-		if (type == null) {
-			if (other.type != null)
-				return false;
-		} else if (!type.equals(other.type))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Results [id=" + id + ", type=" + type + "]";
+		return "Result [id=" + id + ", type=" + type + ", doctors=" + doctors + ", nurses=" + nurses + ", machines="
+				+ machines + ", patient_id=" + patient_id + "]";
 	}
 	
 }

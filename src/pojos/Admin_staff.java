@@ -1,6 +1,7 @@
 package pojos;
 
 import java.sql.Date;
+import java.util.List;
 
 
 
@@ -11,14 +12,21 @@ public class Admin_staff {
 	Date star_date;
 	float salary;
 	
-	public Admin_staff(int id, String name, Date star_date, float salary) {
+	List<Patient> patients;
+	List<Appointment> schedule;
+	
+	
+	public Admin_staff(int id, String name, Date star_date, float salary, List<Patient> patients,
+			List<Appointment> schedule) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.star_date = star_date;
 		this.salary = salary;
+		this.patients = patients;
+		this.schedule = schedule;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -43,15 +51,24 @@ public class Admin_staff {
 	public void setSalary(float salary) {
 		this.salary = salary;
 	}
+	public List<Patient> getPatients() {
+		return patients;
+	}
+	public void setPatients(List<Patient> patients) {
+		this.patients = patients;
+	}
+	public List<Appointment> getSchedule() {
+		return schedule;
+	}
+	public void setSchedule(List<Appointment> schedule) {
+		this.schedule = schedule;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + id;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + Float.floatToIntBits(salary);
-		result = prime * result + ((star_date == null) ? 0 : star_date.hashCode());
 		return result;
 	}
 
@@ -66,26 +83,14 @@ public class Admin_staff {
 		Admin_staff other = (Admin_staff) obj;
 		if (id != other.id)
 			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (Float.floatToIntBits(salary) != Float.floatToIntBits(other.salary))
-			return false;
-		if (star_date == null) {
-			if (other.star_date != null)
-				return false;
-		} else if (!star_date.equals(other.star_date))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Admin_staff [id=" + id + ", name=" + name + ", star_date=" + star_date + ", salary=" + salary + "]";
+		return "Admin_staff [id=" + id + ", name=" + name + ", star_date=" + star_date + ", salary=" + salary
+				+ ", patients=" + patients + ", schedule=" + schedule + "]";
 	}
-
 	
 }
 

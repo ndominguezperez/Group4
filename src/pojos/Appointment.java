@@ -1,6 +1,7 @@
 package pojos;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Appointment {
 	
@@ -9,14 +10,24 @@ public class Appointment {
 	Date date;
 	Float time;
 	
-	public Appointment(int id, String type, Date date, Float time) {
+	int doctor_id;
+	int patient_id;
+	int nurse_id;
+	List <Admin_staff> admin_staffs;
+
+	public Appointment(int id, String type, Date date, Float time, int doctor_id, int patient_id, int nurse_id,
+			List<Admin_staff> admin_staffs) {
 		super();
 		this.id = id;
 		this.type = type;
 		this.date = date;
 		this.time = time;
+		this.doctor_id = doctor_id;
+		this.patient_id = patient_id;
+		this.nurse_id = nurse_id;
+		this.admin_staffs = admin_staffs;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -41,15 +52,36 @@ public class Appointment {
 	public void setTime(Float time) {
 		this.time = time;
 	}
-	
+	public int getDoctor_id() {
+		return doctor_id;
+	}
+	public void setDoctor_id(int doctor_id) {
+		this.doctor_id = doctor_id;
+	}
+	public int getPatient_id() {
+		return patient_id;
+	}
+	public void setPatient_id(int patient_id) {
+		this.patient_id = patient_id;
+	}
+	public int getNurse_id() {
+		return nurse_id;
+	}
+	public void setNurse_id(int nurse_id) {
+		this.nurse_id = nurse_id;
+	}
+	public List<Admin_staff> getAdmin_staffs() {
+		return admin_staffs;
+	}
+	public void setAdmin_staffs(List<Admin_staff> admin_staffs) {
+		this.admin_staffs = admin_staffs;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((time == null) ? 0 : time.hashCode());
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 	
@@ -62,29 +94,11 @@ public class Appointment {
 		if (getClass() != obj.getClass())
 			return false;
 		Appointment other = (Appointment) obj;
-		if (date == null) {
-			if (other.date != null)
-				return false;
-		} else if (!date.equals(other.date))
-			return false;
 		if (id != other.id)
-			return false;
-		if (time == null) {
-			if (other.time != null)
-				return false;
-		} else if (!time.equals(other.time))
-			return false;
-		if (type == null) {
-			if (other.type != null)
-				return false;
-		} else if (!type.equals(other.type))
 			return false;
 		return true;
 	}
 	
-	@Override
-	public String toString() {
-		return "Appointment [id=" + id + ", type=" + type + ", date=" + date + ", time=" + time + "]";
-	}
+
 	
 }
