@@ -1,9 +1,13 @@
 package pojos;
 
+import java.sql.Date;
+
 public class Treatment {
 	
 	int id;
 	String disease;
+	String drug;
+	Date finish_date;
 	
 	public Treatment(int id, String disease) {
 		super();
@@ -55,6 +59,22 @@ public class Treatment {
 	@Override
 	public String toString() {
 		return "Treatment [id=" + id + ", disease=" + disease + "]";
+	}
+
+	public String getDrug() {
+		return drug;
+	}
+
+	public void setDrug(String drug) {
+		this.drug = drug;
+	}
+
+	public Date getFinish_date() {
+		return finish_date;
+	}
+
+	public void setFinish_date(Date finish_date) {
+		this.finish_date = finish_date;
 	}
 	
 }

@@ -11,6 +11,7 @@ public class Patient {
 	String surname;
 	Date dob;
 	String medical_chart;
+	Sexo Hombre,Mujer;
 	List<Appointment> schedule;
 	List<Result> results;
 
