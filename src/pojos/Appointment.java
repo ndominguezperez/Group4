@@ -11,11 +11,11 @@ public class Appointment {
 	Float time;
 	Doctor doctor;
 	Patient patient;
-	
+	String speciality;
 	
 
 
-	public Appointment(int id, String type, Date date, Float time, Doctor doctor, Patient patient) {
+	public Appointment(int id, String type, Date date, Float time, Doctor doctor, Patient patient, String speciality) {
 		super(); 
 		this.id = id;
 		this.type = type;
@@ -23,8 +23,19 @@ public class Appointment {
 		this.time = time;
 		this.doctor = doctor;
 		this.patient = patient;
+		this.speciality = speciality;
 	}
 	
+
+	public String getSpeciality() {
+		return speciality;
+	}
+
+
+	public void setSpeciality(String speciality) {
+		this.speciality = speciality;
+	}
+
 
 	public Appointment() {
 		super();
@@ -99,6 +110,13 @@ public class Appointment {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Appointment [id=" + id + ", type=" + type + ", date=" + date + ", time=" + time + ", doctor=" + doctor
+				+ ", patient=" + patient + ", speciality=" + speciality + "]";
 	}
 	
 

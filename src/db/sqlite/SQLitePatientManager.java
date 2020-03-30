@@ -11,7 +11,7 @@ public class SQLitePatientManager {
 	public SQLitePatientManager(Connection c) {
 		this.c = c;
 	}
-	public void admit(Patient patient) {
+	public void addNewPatient(Patient patient) {
 		
 		try {  
 			String sql = "INSERT INTO patients (name, surname , date of birth , gender, medical chart) "

@@ -12,8 +12,7 @@ public class Patient {
 	Date dob;
 	String medical_chart;
 	String gender;
-	Treatment treatment;
-	
+	List<Treatment>treatments;
 	List<Doctor> doctors;
 	List<Result> results;
 	List<Appointment> schedule;
@@ -25,7 +24,7 @@ public class Patient {
 	
 
 	public Patient(Integer id, String name, String surname, Date dob, String medical_chart, String gender,
-			Treatment treatment, List<Doctor> doctors, List<Result> results, List<Appointment> schedule,
+			List <Treatment>treatments, List<Doctor> doctors, List<Result> results, List<Appointment> schedule,
 			List<Machine> machines, List<Examination> examinations) {
 		super();
 		this.id = id;
@@ -34,7 +33,7 @@ public class Patient {
 		this.dob = dob;
 		this.medical_chart = medical_chart;
 		this.gender = gender;
-		this.treatment = treatment;
+		this.treatments = treatments;
 		this.doctors = doctors;
 		this.results = results;
 		this.schedule = schedule;
@@ -96,13 +95,17 @@ public class Patient {
 		this.gender = gender;
 	}
 
-	public Treatment getTreatment() {
-		return treatment;
+	
+
+	public List<Treatment> getTreatments() {
+		return treatments;
 	}
 
-	public void setTreatment(Treatment treatment) {
-		this.treatment = treatment;
+
+	public void setTreatments(List<Treatment> treatments) {
+		this.treatments = treatments;
 	}
+
 
 	public List<Doctor> getDoctors() {
 		return doctors;
@@ -173,7 +176,7 @@ public class Patient {
 	@Override
 	public String toString() {
 		return "Patient [id=" + id + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", medical_chart="
-				+ medical_chart + ", gender=" + gender + ", treatment=" + treatment + ", doctors=" + doctors
+				+ medical_chart + ", gender=" + gender + ", treatment=" + treatments + ", doctors=" + doctors
 				+ ", results=" + results + ", schedule=" + schedule + ", machines=" + machines + ", examinations="
 				+ examinations + "]";
 	}
