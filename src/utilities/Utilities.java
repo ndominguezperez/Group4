@@ -14,13 +14,23 @@ public class Utilities {
         }
         return read;
     }
-    public static int askId() {
+    public static int searchPatientById() {
         String leido = null;
-        System.out.println(" Which is the patient id?");
+        System.out.println("Which is the patient id?");
         leido = read();
         int code= Integer.parseInt(leido);
         return code;
     }
+    
+    public static int searchPatientByName() {
+    	String leido = null;
+    	System.out.println("What is the name of the patient your looking for?");
+    	leido = read();
+  
+    	int patient_id=0;
+    	return patient_id;
+    }
+    
     /* hay qu añadir en PatientMager todoo
      private static void getPatientByName() throws Exception {
 	System.out.println("Type!");
