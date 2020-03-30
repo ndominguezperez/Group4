@@ -12,18 +12,18 @@ public class Doctor {
 	String speciality;
 	Date dob;
 	Date start_date;
-	
+	List <Treatment>treatments;
 	List <Patient> patients;
 	List <Result> results;
 	List<Examination> examinations;
 	List<Appointment> schedule;
-	Treatment treatment;
+	
 
 	
 
 	public Doctor(int id, String name, float salary, String speciality, Date dob, Date start_date,
 			List<Patient> patients, List<Result> results, List<Examination> examinations, List<Appointment> schedule,
-			Treatment treatment) {
+			List <Treatment>treatments) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -35,11 +35,19 @@ public class Doctor {
 		this.results = results;
 		this.examinations = examinations;
 		this.schedule = schedule;
-		this.treatment = treatment;
+		this.treatments = treatments;
 	}
 
 	public Doctor() {
 		super();
+	}
+
+	public List<Treatment> getTreatments() {
+		return treatments;
+	}
+
+	public void setTreatments(List<Treatment> treatments) {
+		this.treatments = treatments;
 	}
 
 	public int getId() {
@@ -122,13 +130,6 @@ public class Doctor {
 		this.schedule = schedule;
 	}
 
-	public Treatment getTreatment() {
-		return treatment;
-	}
-
-	public void setTreatment(Treatment treatment) {
-		this.treatment = treatment;
-	}
 
 	@Override
 	public int hashCode() {
@@ -156,7 +157,7 @@ public class Doctor {
 	public String toString() {
 		return "Doctor [id=" + id + ", name=" + name + ", salary=" + salary + ", speciality=" + speciality + ", dob="
 				+ dob + ", start_date=" + start_date + ", patients=" + patients + ", results=" + results
-				+ ", examinations=" + examinations + ", schedule=" + schedule + ", treatment" + treatment + "]";
+				+ ", examinations=" + examinations + ", schedule=" + schedule + ", treatments" + treatments + "]";
 	}
 		
 }

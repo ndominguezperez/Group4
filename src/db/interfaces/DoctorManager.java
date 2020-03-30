@@ -18,5 +18,6 @@ public interface DoctorManager {
 	public Treatment viewTreatment(int id);
 	public boolean modifyTreatment(int id); 
 	public boolean setUpMachine(int id, Date date);
+	public void addNewDoctor(Doctor doctor);
 
 }

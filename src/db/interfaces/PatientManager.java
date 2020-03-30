@@ -7,5 +7,6 @@ import pojos.*;
 public interface PatientManager {
 	public List<Appointment> viewSchedule();
 	public List <Result> viewResults();
+	public void addNewPatient(Patient patient);
 	
 }
