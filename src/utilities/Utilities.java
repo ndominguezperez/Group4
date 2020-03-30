@@ -11,6 +11,7 @@ import pojos.*;
 public class Utilities {
 	private static PatientManager patientManager;
 	private static DoctorManager doctorManager;
+	private static AdministrationManager adminManager;
 	
     public static String read() {
         BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
@@ -66,14 +67,14 @@ public class Utilities {
 		}
 	}
 	
-	public static void getPatientSchedule() {
-		List<Appointment> schedule = patientManager.viewSchedule();
+	public static void getPatientSchedule(Patient a) {
+		List<Appointment> schedule = adminManager.viewSchedule(a.getId());
 		for (Appointment appointment: schedule) {
 			System.out.println(appointment);
 		}
 	}
-	public static void getDoctorSchedule() {
-		List<Appointment> schedule = doctorManager.viewSchedule();
+	public static void getDoctorSchedule(Doctor a) {
+		List<Appointment> schedule = adminManager.viewSchedule(a.getId());
 		for (Appointment appointment: schedule) {
 			System.out.println(appointment);
 		}

@@ -15,7 +15,7 @@ public interface AdministrationManager {
 	public Treatment viewTreatment(int id);
 	public boolean modifyTreatment(int id); 
 	//Appointment
-	public List<Appointment> viewSchedule();
+	public List<Appointment> viewSchedule(int id);
 	public boolean setUpAppointment (Appointment appointment);
 	public boolean modifyAppointment (Appointment appointment);
 	public Appointment getAppointmentById(int id);

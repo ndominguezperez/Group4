@@ -8,4 +8,5 @@ import pojos.*;
 public interface DoctorManager {
 	public List<Patient> listAllPatientsofDoctor();
 	public void addNewDoctor(Doctor doctor);
+	
 }

@@ -10,5 +10,6 @@ public interface PatientManager {
 	public void addNewPatient(Patient patient);
 	public Patient getPatient(int patientId);
 	public List<Patient> searchByName(String name);
+	
 	public List<Patient> searchBySurname(String surname);
 }
