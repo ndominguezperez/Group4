@@ -1,6 +1,6 @@
  package ui;
- 
-import utilities.Utilities;
+
+//import utilities.Utilities;
 
 
 public class Menu {
@@ -14,12 +14,12 @@ public class Menu {
 	        int option = Integer.parseInt(read);
 	        switch (option) {
 	        	case 1: //View schedule
-	        		
+	        		utilities.Utilities.getDoctorSchedule();
 	        		break;
 	        		
 	        	case 2: //Patient	
 	        		//Which patient you want?
-	        		Utilities.askForId();
+	        		utilities.Utilities.getPatientById();
 	        		
 	        		//
 	        		

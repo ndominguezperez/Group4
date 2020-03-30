@@ -36,6 +36,8 @@ public class Utilities {
         return patient;
     }
     
+    
+    
     public static void searchPatientByName() {
     	String name = null;
     	int i;
