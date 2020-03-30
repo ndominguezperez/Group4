@@ -1,6 +1,6 @@
  package ui;
-
-//import utilities.Utilities;
+ 
+import utilities.Utilities;
 
 
 public class Menu {
@@ -19,7 +19,7 @@ public class Menu {
 	        		
 	        	case 2: //Patient	
 	        		//Which patient you want?
-	        		utilities.Utilities.searchPatientById();
+	        		Utilities.askForId();
 	        		
 	        		//
 	        		

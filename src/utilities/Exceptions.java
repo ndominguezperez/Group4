@@ -1,6 +1,9 @@
 package utilities;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 public class Exceptions {
-
+	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     public static int validateDay() {
         boolean comprobation = true;
         int day = 0;
@@ -113,5 +116,10 @@ public class Exceptions {
         return f;
 
     }
-
+  public static Date checkDate() {
+	  String day = Utilities.read();
+		LocalDate admissionDate = LocalDate.parse(day, formatter);
+		Date date= Date.valueOf(admissionDate);
+		return date;
+  }
 }

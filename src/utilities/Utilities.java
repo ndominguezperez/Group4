@@ -2,8 +2,16 @@ package utilities;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
+import db.interfaces.*;
+import pojos.*;
 
 public class Utilities {
+	private static PatientManager patientManager;
+	private static DoctorManager doctorManager;
+	
     public static String read() {
         BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
         String read = "ERROR";
@@ -14,75 +22,74 @@ public class Utilities {
         }
         return read;
     }
-    public static int searchPatientById() {
-        String leido = null;
-        System.out.println("Which is the patient id?");
-        leido = read();
-        int code= Integer.parseInt(leido);
-        return code;
+    
+    public static int askForId() {
+         int id;
+         System.out.println("Which is the id?");
+         id= Exceptions.checkInt();
+         return id;    
     }
     
-    public static int searchPatientByName() {
-    	String leido = null;
+    public static Patient getPatientById() {
+        int patientId= askForId();
+        Patient patient= patientManager.getPatient(patientId);
+        return patient;
+    }
+    
+    public static void searchPatientByName() {
+    	String name = null;
+    	int i;
     	System.out.println("What is the name of the patient your looking for?");
-    	leido = read();
-  
-    	int patient_id=0;
-    	return patient_id;
+    	name = read();
+    	List<Patient> patients = patientManager.searchByName(name);
+		for (Patient patient: patients) {
+			System.out.println(patient);
+		}
+    }
+    public static void searchPatientBySurname() {
+    	String name = null;
+    	int i;
+    	System.out.println("What is the name of the patient your looking for?");
+    	name = read();
+    	List<Patient> patients = patientManager.searchBySurname(name);
+		for (Patient patient: patients) {
+			System.out.println(patient);
+		}
     }
     
-    /* hay qu añadir en PatientMager todoo
-     private static void getPatientByName() throws Exception {
-	System.out.println("Type!");
-	System.out.print("Name: ");
-	String name = read();
-	List<Patient> patients = DoctorManager.searchPatientByName(name);
-	for (Patient patient : patients) {
-		System.out.println(patient);
+	public static void getAllPatiens() {
+		List<Patient> patientsList = patientManager.listAllPatients();
+		for (Patient patient: patientsList) {
+			System.out.println(patient);
+		}
 	}
-}
-private static Patient getPatientById() throws Exception {
-	int id=askId();
-	Patient a=null;
-	List<Patient> patients = DoctorManager.searchPatientById(id);
-	for (Patient patient : patients) {
-		System.out.println(patient);
-		a=patient;
+	
+	public static void getPatientSchedule() {
+		List<Appointment> schedule = patientManager.viewSchedule();
+		for (Appointment appointment: schedule) {
+			System.out.println(appointment);
+		}
 	}
-	return a;
+	public static void getDoctorSchedule() {
+		List<Appointment> schedule = doctorManager.viewSchedule();
+		for (Appointment appointment: schedule) {
+			System.out.println(appointment);
+		}
 	}
-	private static void getPatientBySurname() throws Exception {
-	System.out.println("Type!");
-	System.out.print("Surname: ");
-	String surname = read();
-	List<Patient> patients =DoctorManager.searchPatientBySurname(surname);
-	for (Patient patient : patients) {
-		System.out.println(patient);
+	public static void addPatient() {
+		System.out.print("Name: ");
+		String name = read();
+		System.out.print("Surname: ");
+		String surname = read();
+		// Only allow for floats
+		System.out.print("Weight: ");
+		Float weight = Exceptions.checkFloat();
+		//
+		System.out.print("Admission Date (yyyy-MM-dd): ");
+		Date date = Exceptions.checkDate();
+		//Patient patient = new Patient(name,surname , weight,date );
+		//patientManager.addNewPatient(patient);
+		
 	}
-}
-  private static void listAllPatients() throws Exception {
-    List <Patient> patients = DoctorManager.listAllPatients();
-    Patient a= null;
-	for (i=0;i<patients.length();i++) {
-	    a= patients(i);
-		System.out.println(patient);
-	}
-}
-private static void seeSchedule(Patient p) throws Exception {
-	int i;
-	Patient b=null;
-	Appointment a= null;
-   List <Patient> patients =  DoctorManager.listAllPatients();
-	for (t=0;t<patients.length();t++) {
-      b=patients.get(i);
-      if(p.equals(patients)){
-		System.out.println(patient);
-	for (i=0;i<b.getSchedule.length();i++) {
-	    a= b.getSchedule.get(i);
-		System.out.println(a);
-}
-}
-}
-*/
 
 	}
