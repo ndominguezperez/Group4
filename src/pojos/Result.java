@@ -2,7 +2,7 @@ package pojos;
 
 import java.util.List;
 
-public class Result {
+public class Result { 
 	
 	int id;
 	String type;

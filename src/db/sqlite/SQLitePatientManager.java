@@ -7,13 +7,13 @@ import java.sql.Connection;
 
 public class SQLitePatientManager {
 	private Connection c;
-
+ 
 	public SQLitePatientManager(Connection c) {
 		this.c = c;
 	}
 	public void admit(Patient patient) {
 		
-		try {  //no voy a poner medical chart que es algo que ya meteremos creo yo
+		try {  
 			String sql = "INSERT INTO patients (name, surname , date of birth , gender, medical chart) "
 					+ "VALUES (?,?,?,?,?);";
 			PreparedStatement prep = c.prepareStatement(sql);

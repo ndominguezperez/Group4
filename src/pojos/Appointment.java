@@ -16,7 +16,7 @@ public class Appointment {
 
 
 	public Appointment(int id, String type, Date date, Float time, Doctor doctor, Patient patient) {
-		super();
+		super(); 
 		this.id = id;
 		this.type = type;
 		this.date = date;

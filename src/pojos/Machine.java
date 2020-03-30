@@ -6,7 +6,7 @@ public class Machine {
 	
 	int id;
 	String type;
-	
+	 
 	List<Result> results;
 	Patient patient;
 	

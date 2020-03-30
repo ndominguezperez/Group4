@@ -13,10 +13,10 @@ public interface DoctorManager {
 	public List<Appointment> viewSchedule();
 	public boolean modifyAppointment(int id);
 	public Examination viewExamination(int id);
-	public boolean modifyExamination(int id);
+	public boolean modifyExamination(int id); 
 	public boolean createTreatmen(int id);
 	public Treatment viewTreatment(int id);
-	public boolean modifyTreatment(int id);
+	public boolean modifyTreatment(int id); 
 	public boolean setUpMachine(int id, Date date);
 
 }

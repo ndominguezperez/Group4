@@ -4,7 +4,7 @@ package pojos;
 
 public class Examination {
 	
-	int id;
+	int id; 
 	String observations;
 	Float temperature;
 	int breathing_rate;

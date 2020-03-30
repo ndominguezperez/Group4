@@ -7,7 +7,7 @@ import java.util.List;
 public class Patient {
 	
 	Integer id;
-	String name;
+	String name; 
 	String surname;
 	Date dob;
 	String medical_chart;

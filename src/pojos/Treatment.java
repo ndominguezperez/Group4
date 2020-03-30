@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Treatment {
 	
 	int id;
-	String disease;
+	String disease; 
 	String drug;
 	Date finish_date;
 	Patient patient;

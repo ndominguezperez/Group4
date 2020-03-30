@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Doctor {
 
-	int id;
+	int id; 
 	String name;
 	float salary;
 	String speciality;
