@@ -2,9 +2,13 @@ package db.sqlite;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import pojos.Doctor;
+import java.util.List;
 
-public class SQLiteDoctorManager {
+import db.interfaces.DoctorManager;
+import pojos.Doctor;
+import pojos.Patient;
+
+public class SQLiteDoctorManager implements DoctorManager {
 	private Connection c;
 
 	public SQLiteDoctorManager(Connection c) {
@@ -27,6 +31,11 @@ public class SQLiteDoctorManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	@Override
+	public List<Patient> listAllPatientsOfDoctor() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
