@@ -1,7 +1,7 @@
 package pojos;
 
 import java.sql.Date;
-import java.util.List;
+
 
 public class Appointment {
 	
@@ -9,72 +9,74 @@ public class Appointment {
 	String type;
 	Date date;
 	Float time;
+	Doctor doctor;
+	Patient patient;
 	
-	int doctor_id;
-	int patient_id;
-	int nurse_id;
-	List <Admin_staff> admin_staffs;
+	
 
-	public Appointment(int id, String type, Date date, Float time, int doctor_id, int patient_id, int nurse_id,
-			List<Admin_staff> admin_staffs) {
+
+	public Appointment(int id, String type, Date date, Float time, Doctor doctor, Patient patient) {
 		super();
 		this.id = id;
 		this.type = type;
 		this.date = date;
 		this.time = time;
-		this.doctor_id = doctor_id;
-		this.patient_id = patient_id;
-		this.nurse_id = nurse_id;
-		this.admin_staffs = admin_staffs;
+		this.doctor = doctor;
+		this.patient = patient;
 	}
+	
+
+	public Appointment() {
+		super();
+	}
+
 
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getType() {
 		return type;
 	}
+
 	public void setType(String type) {
 		this.type = type;
 	}
+
 	public Date getDate() {
 		return date;
 	}
+
 	public void setDate(Date date) {
 		this.date = date;
 	}
+
 	public Float getTime() {
 		return time;
 	}
+
 	public void setTime(Float time) {
 		this.time = time;
 	}
-	public int getDoctor_id() {
-		return doctor_id;
+
+	public Doctor getDoctor() {
+		return doctor;
 	}
-	public void setDoctor_id(int doctor_id) {
-		this.doctor_id = doctor_id;
+
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
 	}
-	public int getPatient_id() {
-		return patient_id;
+
+	public Patient getPatient() {
+		return patient;
 	}
-	public void setPatient_id(int patient_id) {
-		this.patient_id = patient_id;
-	}
-	public int getNurse_id() {
-		return nurse_id;
-	}
-	public void setNurse_id(int nurse_id) {
-		this.nurse_id = nurse_id;
-	}
-	public List<Admin_staff> getAdmin_staffs() {
-		return admin_staffs;
-	}
-	public void setAdmin_staffs(List<Admin_staff> admin_staffs) {
-		this.admin_staffs = admin_staffs;
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
 	}
 
 	@Override

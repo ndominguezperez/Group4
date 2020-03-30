@@ -12,20 +12,21 @@ public class Patient {
 	Date dob;
 	String medical_chart;
 	String gender;
-	int admin_staff_id;
-	int treatment_id;
+	Treatment treatment;
 	
 	List<Doctor> doctors;
-	List<Nurse> nurses;
 	List<Result> results;
 	List<Appointment> schedule;
 	List<Machine> machines;
-	List<Admin_staff> admin_staffs;
 	List<Examination> examinations;
 	
+	
+
+	
+
 	public Patient(Integer id, String name, String surname, Date dob, String medical_chart, String gender,
-			int admin_staff_id, int treatment_id, List<Examination> examinations, List<Doctor> doctors, List<Nurse> nurses,
-			List<Result> results, List<Appointment> schedule, List<Machine> machines, List<Admin_staff> admin_staffs) {
+			Treatment treatment, List<Doctor> doctors, List<Result> results, List<Appointment> schedule,
+			List<Machine> machines, List<Examination> examinations) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -33,106 +34,114 @@ public class Patient {
 		this.dob = dob;
 		this.medical_chart = medical_chart;
 		this.gender = gender;
-		this.admin_staff_id = admin_staff_id;
-		this.treatment_id = treatment_id;
-		this.examinations = examinations;
+		this.treatment = treatment;
 		this.doctors = doctors;
-		this.nurses = nurses;
 		this.results = results;
 		this.schedule = schedule;
 		this.machines = machines;
-		this.admin_staffs = admin_staffs;
+		this.examinations = examinations;
 	}
 	
+
+	public Patient() {
+		super();
+	}
+
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getSurname() {
 		return surname;
 	}
+
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
+
 	public Date getDob() {
 		return dob;
 	}
+
 	public void setDob(Date dob) {
 		this.dob = dob;
 	}
+
 	public String getMedical_chart() {
 		return medical_chart;
 	}
+
 	public void setMedical_chart(String medical_chart) {
 		this.medical_chart = medical_chart;
 	}
+
 	public String getGender() {
 		return gender;
 	}
+
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public int getAdmin_staff_id() {
-		return admin_staff_id;
+
+	public Treatment getTreatment() {
+		return treatment;
 	}
-	public void setAdmin_staff_id(int admin_staff_id) {
-		this.admin_staff_id = admin_staff_id;
+
+	public void setTreatment(Treatment treatment) {
+		this.treatment = treatment;
 	}
-	public int getTreatment_id() {
-		return treatment_id;
-	}
-	public void setTreatment_id(int treatment_id) {
-		this.treatment_id = treatment_id;
-	}
-	public List<Examination> getExaminations() {
-		return examinations;
-	}
-	public void setExaminations(List<Examination> examinations) {
-		this.examinations = examinations;
-	}
+
 	public List<Doctor> getDoctors() {
 		return doctors;
 	}
+
 	public void setDoctors(List<Doctor> doctors) {
 		this.doctors = doctors;
 	}
-	public List<Nurse> getNurses() {
-		return nurses;
-	}
-	public void setNurses(List<Nurse> nurses) {
-		this.nurses = nurses;
-	}
+
 	public List<Result> getResults() {
 		return results;
 	}
+
 	public void setResults(List<Result> results) {
 		this.results = results;
 	}
+
 	public List<Appointment> getSchedule() {
 		return schedule;
 	}
+
 	public void setSchedule(List<Appointment> schedule) {
 		this.schedule = schedule;
 	}
+
 	public List<Machine> getMachines() {
 		return machines;
 	}
+
 	public void setMachines(List<Machine> machines) {
 		this.machines = machines;
 	}
-	public List<Admin_staff> getAdmin_staffs() {
-		return admin_staffs;
+
+	public List<Examination> getExaminations() {
+		return examinations;
 	}
-	public void setAdmin_staffs(List<Admin_staff> admin_staffs) {
-		this.admin_staffs = admin_staffs;
+
+	public void setExaminations(List<Examination> examinations) {
+		this.examinations = examinations;
 	}
 
 	@Override
@@ -160,14 +169,18 @@ public class Patient {
 		return true;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Patient [id=" + id + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", medical_chart="
-				+ medical_chart + ", gender=" + gender + ", admin_staff_id=" + admin_staff_id + ", treatment_id="
-				+ treatment_id + ", doctors=" + doctors + ", nurses=" + nurses + ", results=" + results + ", schedule="
-				+ schedule + ", machines=" + machines + ", admin_staffs=" + admin_staffs + ", examinations="
+				+ medical_chart + ", gender=" + gender + ", treatment=" + treatment + ", doctors=" + doctors
+				+ ", results=" + results + ", schedule=" + schedule + ", machines=" + machines + ", examinations="
 				+ examinations + "]";
 	}
+
+
+
+
 
 
 }

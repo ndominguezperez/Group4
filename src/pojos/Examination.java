@@ -11,11 +11,13 @@ public class Examination {
 	int heart_rate;
 	Float blood_pressure;
 	Float oxigen_saturations;
-	int doctor_id;
-	int patient_id;
+	Doctor doctor;
+	Patient patient;
 	
+	
+
 	public Examination(int id, String observations, Float temperature, int breathing_rate, int heart_rate,
-			Float blood_pressure, Float oxigen_saturations, int doctor_id, int patient_id) {
+			Float blood_pressure, Float oxigen_saturations, Doctor doctor, Patient patient) {
 		super();
 		this.id = id;
 		this.observations = observations;
@@ -24,63 +26,84 @@ public class Examination {
 		this.heart_rate = heart_rate;
 		this.blood_pressure = blood_pressure;
 		this.oxigen_saturations = oxigen_saturations;
-		this.doctor_id = doctor_id;
-		this.patient_id = patient_id;
+		this.doctor = doctor;
+		this.patient = patient;
+	}
+
+	public Examination() {
+		super();
 	}
 
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getObservations() {
 		return observations;
 	}
+
 	public void setObservations(String observations) {
 		this.observations = observations;
 	}
+
 	public Float getTemperature() {
 		return temperature;
 	}
+
 	public void setTemperature(Float temperature) {
 		this.temperature = temperature;
 	}
+
 	public int getBreathing_rate() {
 		return breathing_rate;
 	}
+
 	public void setBreathing_rate(int breathing_rate) {
 		this.breathing_rate = breathing_rate;
 	}
+
 	public int getHeart_rate() {
 		return heart_rate;
 	}
+
 	public void setHeart_rate(int heart_rate) {
 		this.heart_rate = heart_rate;
 	}
+
 	public Float getBlood_pressure() {
 		return blood_pressure;
 	}
+
 	public void setBlood_pressure(Float blood_pressure) {
 		this.blood_pressure = blood_pressure;
 	}
+
 	public Float getOxigen_saturations() {
 		return oxigen_saturations;
 	}
+
 	public void setOxigen_saturations(Float oxigen_saturations) {
 		this.oxigen_saturations = oxigen_saturations;
 	}
-	public int getDoctor_id() {
-		return doctor_id;
+
+	public Doctor getDoctor() {
+		return doctor;
 	}
-	public void setDoctor_id(int doctor_id) {
-		this.doctor_id = doctor_id;
+
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
 	}
-	public int getPatient_id() {
-		return patient_id;
+
+	public Patient getPatient() {
+		return patient;
 	}
-	public void setPatient_id(int patient_id) {
-		this.patient_id = patient_id;
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
 	}
 
 	@Override
@@ -109,9 +132,11 @@ public class Examination {
 	public String toString() {
 		return "Examination [id=" + id + ", observations=" + observations + ", temperature=" + temperature
 				+ ", breathing_rate=" + breathing_rate + ", heart_rate=" + heart_rate + ", blood_pressure="
-				+ blood_pressure + ", oxigen_saturations=" + oxigen_saturations + ", doctor_id=" + doctor_id
-				+ ", patient_id=" + patient_id + "]";
+				+ blood_pressure + ", oxigen_saturations=" + oxigen_saturations + ", doctor=" + doctor + ", patient="
+				+ patient + "]";
 	}
+
+	
 	
 	
 
