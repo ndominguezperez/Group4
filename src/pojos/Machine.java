@@ -1,9 +1,14 @@
 package pojos;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Machine {
+public class Machine implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7827998889210822174L;
 	int id;
 	String type;
 	 

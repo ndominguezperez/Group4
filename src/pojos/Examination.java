@@ -1,9 +1,13 @@
 package pojos;
 
+import java.io.Serializable;
 
-
-public class Examination {
+public class Examination implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -500401169261401858L;
 	int id; 
 	String observations;
 	Float temperature;

@@ -1,9 +1,14 @@
 package pojos;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Result { 
+public class Result implements Serializable{ 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 408496146159668583L;
 	int id;
 	String type;
 	
