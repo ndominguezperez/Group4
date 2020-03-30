@@ -1,6 +1,7 @@
 package pojos;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.List;
 
 public class Result implements Serializable{ 
@@ -11,20 +12,32 @@ public class Result implements Serializable{
 	private static final long serialVersionUID = 408496146159668583L;
 	int id;
 	String type;
-	
+	Date date;
 	List<Doctor> doctors;
-	List<Machine> machines;
+
 	Patient patient;
 	
 	
 
-	public Result(int id, String type, List<Doctor> doctors, List<Machine> machines, Patient patient) {
+	public Result(int id, String type, List<Doctor> doctors, Patient patient,Date date) {
 		super();
 		this.id = id;
 		this.type = type;
 		this.doctors = doctors;
-		this.machines = machines;
+		this.date=date;
 		this.patient = patient;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	public Result() {
@@ -55,13 +68,6 @@ public class Result implements Serializable{
 		this.doctors = doctors;
 	}
 
-	public List<Machine> getMachines() {
-		return machines;
-	}
-
-	public void setMachines(List<Machine> machines) {
-		this.machines = machines;
-	}
 
 	public Patient getPatient() {
 		return patient;
@@ -95,8 +101,7 @@ public class Result implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Result [id=" + id + ", type=" + type + ", doctors=" + doctors +  ", machines="
-				+ machines + ", patient=" + patient + "]";
+		return "Result [id=" + id + ", type=" + type + ", doctors=" + doctors +   ", patient=" + patient + " , date=" + date+" ]";
 	}
 	
 }

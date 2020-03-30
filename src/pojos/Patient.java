@@ -25,7 +25,6 @@ public class Patient implements Serializable {
 	List<Doctor> doctors;
 	List<Result> results;
 	List<Appointment> schedule;
-	List<Machine> machines;
 	List<Examination> examinations;
 	
 	
@@ -33,8 +32,8 @@ public class Patient implements Serializable {
 	
 
 	public Patient(Integer id, String name, String surname, Date dob, String medical_chart, String gender,
-			List <Treatment>treatments, List<Doctor> doctors, List<Result> results, List<Appointment> schedule,
-			List<Machine> machines, List<Examination> examinations) {
+			List <Treatment>treatments, List<Doctor> doctors, List<Result> results, List<Appointment> schedule
+			, List<Examination> examinations) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -46,7 +45,6 @@ public class Patient implements Serializable {
 		this.doctors = doctors;
 		this.results = results;
 		this.schedule = schedule;
-		this.machines = machines;
 		this.examinations = examinations;
 	}
 	
@@ -140,13 +138,6 @@ public class Patient implements Serializable {
 		this.schedule = schedule;
 	}
 
-	public List<Machine> getMachines() {
-		return machines;
-	}
-
-	public void setMachines(List<Machine> machines) {
-		this.machines = machines;
-	}
 
 	public List<Examination> getExaminations() {
 		return examinations;
@@ -186,7 +177,7 @@ public class Patient implements Serializable {
 	public String toString() {
 		return "Patient [id=" + id + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", medical_chart="
 				+ medical_chart + ", gender=" + gender + ", treatment=" + treatments + ", doctors=" + doctors
-				+ ", results=" + results + ", schedule=" + schedule + ", machines=" + machines + ", examinations="
+				+ ", results=" + results + ", schedule=" + schedule +  ", examinations="
 				+ examinations + "]";
 	}
 
