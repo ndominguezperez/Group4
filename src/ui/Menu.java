@@ -18,7 +18,7 @@ public class Menu {
 	        switch (option) {
 	        	case 1: //View schedule
 	        		System.out.println("\n\n\tYour schedule Doctor:%d \n" + doctor_id);
-	        		utilities.Utilities.getDoctorSchedule(); //Tener que meter el doctor_id
+	        		utilities.Utilities.getDoctorSchedule(doctor_id); //Tener que meter el doctor_id
 	        		utilities.Utilities.read();
 	        		break;
 	        		
@@ -61,6 +61,6 @@ public class Menu {
 	        }while (option !=1 || option !=2 || option != 3);
 	        
 		}
-	
 
 }
+

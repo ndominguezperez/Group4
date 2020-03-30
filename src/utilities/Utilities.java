@@ -65,14 +65,14 @@ public class Utilities {
 		}
 	}
 	
-	public static void getPatientSchedule(Patient a) {
-		List<Appointment> schedule = adminManager.viewSchedule(a.getId());
+	public static void getPatientSchedule(int a) {
+		List<Appointment> schedule = adminManager.viewSchedule(a);
 		for (Appointment appointment: schedule) {
 			System.out.println(appointment);
 		}
 	}
-	public static void getDoctorSchedule(Doctor a) {
-		List<Appointment> schedule = adminManager.viewSchedule(a.getId());
+	public static void getDoctorSchedule(int a) {
+		List<Appointment> schedule = adminManager.viewSchedule(a);
 		for (Appointment appointment: schedule) {
 			System.out.println(appointment);
 		}
