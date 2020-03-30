@@ -1,8 +1,17 @@
 package pojos;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Treatment {
+public class Treatment implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4194636208392461949L;
+	/**
+	 * 
+	 */
 	
 	int id;
 	String disease; 

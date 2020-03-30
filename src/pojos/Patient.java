@@ -1,13 +1,22 @@
 package pojos;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
 
-public class Patient {
+public class Patient implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5376639357396620040L;  
+	/**
+	 * 
+	 */
+
 	Integer id;
-	String name; 
+	String name;  
 	String surname;
 	Date dob;
 	String medical_chart;

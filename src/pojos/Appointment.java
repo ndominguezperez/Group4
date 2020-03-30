@@ -1,15 +1,20 @@
 package pojos;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 
-public class Appointment {
-	
+public class Appointment implements Serializable{
+	 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2382859282871358054L;
 	int id;
 	String type;
 	Date date;
-	Float time;
-	Doctor doctor;
+	Float time; 
+	Doctor doctor;  
 	Patient patient;
 	String speciality;
 	
