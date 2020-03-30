@@ -6,7 +6,7 @@ import java.util.List;
 import pojos.*;
 
 public interface DoctorManager {
-	public List<Patient> listAllPatientsofDoctor();
+	public List<Patient> listAllPatientsOfDoctor();
 	public void addNewDoctor(Doctor doctor);
 	
 }

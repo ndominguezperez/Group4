@@ -37,8 +37,6 @@ public class Utilities {
         return patient;
     }
     
-    
-    
     public static void searchPatientByName() {
     	String name = null;
     	int i;
@@ -80,19 +78,39 @@ public class Utilities {
 		}
 	}
 	public static void addPatient() {
+		System.out.print("ID Number: ");
+		int id = Exceptions.checkInt();
 		System.out.print("Name: ");
 		String name = read();
 		System.out.print("Surname: ");
 		String surname = read();
-		// Only allow for floats
-		System.out.print("Weight: ");
-		Float weight = Exceptions.checkFloat();
-		//
-		System.out.print("Admission Date (yyyy-MM-dd): ");
+		System.out.print("Date of birth(yyyy-MM-dd): ");
 		Date date = Exceptions.checkDate();
-		//Patient patient = new Patient(name,surname , weight,date );
-		//patientManager.addNewPatient(patient);
-		
+		System.out.print("Gender: ");
+		String gender = read();
+		System.out.print("Medical Chart: ");
+		String medicalChart = read();
+		//Patient patient = new Patient(name,surname ,date, gender, medicalChart);
+		//patientManager.addNewPatient(patient);	
 	}
-
+	
+	public static void addDoctor() {
+		//name, salary , specialty, date of birth, start date
+		System.out.print("Hole Name: ");
+		String name = read();
+		System.out.print("Surname: ");
+		Float salary = Exceptions.checkFloat();
+		System.out.print("Date of birth(yyyy-MM-dd): ");
+		Date dob = Exceptions.checkDate();
+		System.out.print("Date of birth(yyyy-MM-dd): ");
+		Date startdate = Exceptions.checkDate();
+		//Doctor doctor = new Doctor(name, salary , specialty, date of birth, start date);
+		//doctorManager.addNewDoctor(doctor);	
+	}
+	public static void listAllPatientsOfDoctor(int docId) {
+		List<Patient> patientsList = doctorManager.listAllPatientsOfDoctor();
+		for (Patient patient: patientsList) {
+			System.out.println(patient);
+		}
+	}
 	}

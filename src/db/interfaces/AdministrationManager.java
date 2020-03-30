@@ -24,6 +24,4 @@ public interface AdministrationManager {
 	public Examination viewExamination(int id);
 	public boolean modifyExamination(int id); 
 	public List <Result> viewResults();
-	//Machine
-	public boolean setUpMachine(int id, Date date);
 }
