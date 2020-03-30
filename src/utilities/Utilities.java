@@ -26,7 +26,7 @@ public class Utilities {
 	System.out.println("Type!");
 	System.out.print("Name: ");
 	String name = read();
-	List<Patient> patients = PatientManager.searchByName(name);
+	List<Patient> patients = DoctorManager.searchPatientByName(name);
 	for (Patient patient : patients) {
 		System.out.println(patient);
 	}
@@ -34,7 +34,7 @@ public class Utilities {
 private static Patient getPatientById() throws Exception {
 	int id=askId();
 	Patient a=null;
-	List<Patient> patients = PatientManager.searchById(id);
+	List<Patient> patients = DoctorManager.searchPatientById(id);
 	for (Patient patient : patients) {
 		System.out.println(patient);
 		a=patient;
@@ -45,13 +45,13 @@ private static Patient getPatientById() throws Exception {
 	System.out.println("Type!");
 	System.out.print("Surname: ");
 	String surname = read();
-	List<Patient> patients = PatientManager.searchByName(surname);
+	List<Patient> patients =DoctorManager.searchPatientBySurname(surname);
 	for (Patient patient : patients) {
 		System.out.println(patient);
 	}
 }
   private static void listAllPatients() throws Exception {
-    List <Patient> patients = PatientManager.getAll();
+    List <Patient> patients = DoctorManager.listAllPatients();
     Patient a= null;
 	for (i=0;i<patients.length();i++) {
 	    a= patients(i);
@@ -62,7 +62,7 @@ private static void seeSchedule(Patient p) throws Exception {
 	int i;
 	Patient b=null;
 	Appointment a= null;
-   List <Patient> patients = PatientManager.getAll();
+   List <Patient> patients =  DoctorManager.listAllPatients();
 	for (t=0;t<patients.length();t++) {
       b=patients.get(i);
       if(p.equals(patients)){
