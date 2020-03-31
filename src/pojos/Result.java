@@ -13,17 +13,16 @@ public class Result implements Serializable{
 	int id;
 	String type;
 	Date date;
-	List<Doctor> doctors;
-
+	Doctor doctor;
 	Patient patient;
 	
 	
 
-	public Result(int id, String type, List<Doctor> doctors, Patient patient,Date date) {
+	public Result(int id, String type, Doctor doctor, Patient patient,Date date) {
 		super();
 		this.id = id;
 		this.type = type;
-		this.doctors = doctors;
+		this.doctor = doctor;
 		this.date=date;
 		this.patient = patient;
 	}
@@ -60,12 +59,12 @@ public class Result implements Serializable{
 		this.type = type;
 	}
 
-	public List<Doctor> getDoctors() {
-		return doctors;
+	public Doctor getDoctor() {
+		return doctor;
 	}
 
-	public void setDoctors(List<Doctor> doctors) {
-		this.doctors = doctors;
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
 	}
 
 
@@ -101,7 +100,7 @@ public class Result implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Result [id=" + id + ", type=" + type + ", doctors=" + doctors +   ", patient=" + patient + " , date=" + date+" ]";
+		return "Result [id=" + id + ", type=" + type + ", doctor=" + doctor +   ", patient=" + patient + " , date=" + date+" ]";
 	}
 	
 }

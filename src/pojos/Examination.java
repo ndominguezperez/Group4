@@ -14,14 +14,14 @@ public class Examination implements Serializable{
 	int breathing_rate;
 	int heart_rate;
 	Float blood_pressure;
-	Float oxigen_saturations;
+	Float oxygen_saturations;
 	Doctor doctor;
 	Patient patient;
 	
 	
 
 	public Examination(int id, String observations, Float temperature, int breathing_rate, int heart_rate,
-			Float blood_pressure, Float oxigen_saturations, Doctor doctor, Patient patient) {
+			Float blood_pressure, Float oxygen_saturations, Doctor doctor, Patient patient) {
 		super();
 		this.id = id;
 		this.observations = observations;
@@ -29,7 +29,7 @@ public class Examination implements Serializable{
 		this.breathing_rate = breathing_rate;
 		this.heart_rate = heart_rate;
 		this.blood_pressure = blood_pressure;
-		this.oxigen_saturations = oxigen_saturations;
+		this.oxygen_saturations = oxygen_saturations;
 		this.doctor = doctor;
 		this.patient = patient;
 	}
@@ -86,12 +86,12 @@ public class Examination implements Serializable{
 		this.blood_pressure = blood_pressure;
 	}
 
-	public Float getOxigen_saturations() {
-		return oxigen_saturations;
+	public Float getOxygen_saturations() {
+		return oxygen_saturations;
 	}
 
-	public void setOxigen_saturations(Float oxigen_saturations) {
-		this.oxigen_saturations = oxigen_saturations;
+	public void setOxygen_saturations(Float oxygen_saturations) {
+		this.oxygen_saturations = oxygen_saturations;
 	}
 
 	public Doctor getDoctor() {
@@ -136,7 +136,7 @@ public class Examination implements Serializable{
 	public String toString() {
 		return "Examination [id=" + id + ", observations=" + observations + ", temperature=" + temperature
 				+ ", breathing_rate=" + breathing_rate + ", heart_rate=" + heart_rate + ", blood_pressure="
-				+ blood_pressure + ", oxigen_saturations=" + oxigen_saturations + ", doctor=" + doctor + ", patient="
+				+ blood_pressure + ", oxygen_saturations=" + oxygen_saturations + ", doctor=" + doctor + ", patient="
 				+ patient + "]";
 	}
 
