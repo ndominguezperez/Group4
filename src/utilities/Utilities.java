@@ -57,8 +57,8 @@ public class Utilities {
 			System.out.println(patient);
 		}
     }
-    
-	public static void getAllPatiens() {
+   
+	public static void listAllPatiens() {
 		List<Patient> patientsList = patientManager.listAllPatients();
 		for (Patient patient: patientsList) {
 			System.out.println(patient);
@@ -112,5 +112,14 @@ public class Utilities {
 		for (Patient patient: patientsList) {
 			System.out.println(patient);
 		}
+	}
+	public static void setUpAppointment(Patient p) {
+		p.getSchedule();
+		//esto es jodido
+	}
+	public static void modifyAppointment(Patient p) {
+		
+		p.getSchedule();
+		
 	}
 	}
