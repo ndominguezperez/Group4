@@ -3,6 +3,7 @@ import pojos.*;
 import utilities.Exceptions;
 import utilities.Utilities;
 
+import java.sql.Date;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import db.interfaces.*;
@@ -212,7 +213,23 @@ public class Menu {
 			searchPatientMenu();
 		    break;
 		case 3:
-			Utilities.addPatient();
+			//Utilities.addPatient();
+				System.out.print("ID Number: ");
+				int id = Exceptions.checkInt();
+				System.out.print("Name: ");
+				String name = Utilities.read();
+				System.out.print("Surname: ");
+				String surname = Utilities.read();
+				System.out.print("Date of birth(yyyy-MM-dd): ");
+				Date date = Exceptions.checkDate();
+				System.out.print("Gender: ");
+				String gender = Utilities.read();
+				System.out.print("Medical Chart: ");
+				String medicalChart = Utilities.read();
+				Patient patient = new Patient(id, name, surname, date, medicalChart, gender);
+				System.out.println(patient);
+				patientManager.addNewPatient(patient);
+			
 		    break;
 		case 4:
 			appointmentMenu();

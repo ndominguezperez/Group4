@@ -99,6 +99,7 @@ public class Utilities {
 		System.out.println(patient);
 		patientManager.addNewPatient(patient);
 	}
+	
 
 	public static void addDoctor() {
 		System.out.print("Hole Name: ");
