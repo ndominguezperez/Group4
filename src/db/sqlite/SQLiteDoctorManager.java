@@ -17,7 +17,8 @@ public class SQLiteDoctorManager implements DoctorManager {
 	public void addNewDoctor(Doctor doctor) {
 		
 		try {  
-			String sql = "INSERT INTO patients (name, salary , specialty, date of birth, start date) "
+			String sql = "INSERT INTO patients (name, salary , specialty, dob, startD"
+					+ "ate) "
 					+ "VALUES (?,?,?,?,?);";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, doctor.getName());

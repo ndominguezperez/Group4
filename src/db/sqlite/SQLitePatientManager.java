@@ -21,7 +21,7 @@ public class SQLitePatientManager implements PatientManager{
 	public void addNewPatient(Patient patient) {
 		
 		try {  
-			String sql = "INSERT INTO patients (id, name, surname , date of birth, medical chart, gender) "
+			String sql = "INSERT INTO patients (id, name, surname , dob, medical_chart, gender) "
 					+ "VALUES (?,?,?,?,?);";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, patient.getId());
