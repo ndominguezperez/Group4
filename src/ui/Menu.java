@@ -6,28 +6,22 @@ import utilities.Utilities;
 import java.util.List;
 
 import db.interfaces.*;
-import utilities.Utilities;
+ import utilities.Utilities;
 
 
 public class Menu {
-	
-	// DB Managers
-		private static DBManager dbManager;
-		private static PatientManager patientManager;
-		private static DoctorManager medicineManager;
-
 	public static void main(String[] args){
 		int option;
+		do {
 		System.out.println("Select who you are");
 		System.out.println("\n\t1.Doctor");		
 		System.out.println("\n\t2.Patient");
 		System.out.println("\n\t3.Admin Staff");
 		System.out.println("\n\t4.Exit");
-		do {
 		option=Exceptions.checkInt();
 		switch(option) {
 		case 1:
-			//doctorMenu();
+			doctorMenu();
 			break;
 		case 2:
 			patientMenu();
@@ -42,89 +36,110 @@ public class Menu {
 	}
 	
 	//Esto seria con la contraseña y eso supongo....
-	//private static void doctorMenu () {		
-	  //Doctor doctor= Utilities.getDoctortById();
-	//  if (doctor==null) {
-	//	return;
-	//  }
-	 //  else {// esta funcion mal
-		//doctorSubMenu(doctor.getId());
-	    // }
-	//}
-	private static void doctorSubMenu (int doctor_id) {		
+	private static void doctorMenu () {		
+	  Doctor doctor= Utilities.getDoctortById();
+	  if (doctor==null) {
+		return;
+	  }
+	   else {// esta funcion mal
+		doctorSubMenu(doctor.getId());
+	     }
+	}
+	private static void doctorSubMenu (int doctorId) {		
 		int option;
-			do {
+		do {
 				System.out.println("Select what you want to do");
-				System.out.println("\n\t1.Schedule");		
-				System.out.println("\n\t2.Patient");
-				System.out.println("\n\t3.Exit");
+				System.out.println("\n\t1.See Your schedule");	
+				System.out.println("\\n\\t2.List all your patients");
+				System.out.println("\n\t3.Patient");
+				System.out.println("\n\t4.Exit");
 				option = Exceptions.checkInt();
-			
 	        switch (option) {
 	        	case 1: //View schedule
-	        		System.out.println("\n\n\tYour schedule Doctor:%d \n" + doctor_id);
-	        		Utilities.getDoctorSchedule(doctor_id); //Tener que meter el doctor_id
+	        		System.out.println("\n\n\tYour schedule Doctor:%d \n" + doctorId);
+	        		Utilities.getDoctorSchedule(doctorId); 
+	        		System.out.println("\n\n\tPulse intro togo bacj to your menu");
 	        		Utilities.read();
 	        		break;
-	        		
-	        	case 2: //Patient	
-	        		System.out.println("\nHow do you want to search your patient?");
-	        		System.out.println("\n\t1.By name");
-	        		System.out.println("\n\t2.By surname");
-	        		System.out.println("\n\t3.By id");
-	        		System.out.println("\n\t4.I don´t want to search a patient");
-	        		int patient_option;
-	        		do {
-	        		patient_option = Exceptions.checkInt();}
-	        		while (patient_option != 1 || patient_option != 2|| patient_option != 3 || patient_option != 4);
-	        		switch (patient_option) {
-	        			case 1: 
-	        				System.out.println("Patient searched by name");
-	        				Utilities.searchPatientByName();
-	        				Utilities.read();
-	        				break;
-	        			case 2: 
-	        				System.out.println("Patient searched by surname");
-	        				Utilities.searchPatientBySurname();
-	        				Utilities.read();
-	        				break;
-	        			case 3: 
-	        				System.out.println("\nPatient searched by id");
-	        				Utilities.getPatientById();
-	        				Utilities.read();
-	        				break;
-	        			case 4: 
-	        				utilities.Utilities.read();
-	        				break;
-	        		}
-	        		break;
-	        	case 3: 
+	        	case 2:
+	        		Utilities.listAllPatientsOfDoctor(doctorId);
+	        	case 3: //Patient	
+	        		Patient a= searchPatientMenu();
+                    doctorPatientMenu(a);
+	        	case 4: 
 	        		break;	        		
 	        		
 	        }
 	        
-	        }while (option !=1 || option !=2 || option != 3);
+	        }while (option != 3);
 	        
 		}
-	private static void patientMenu() {	
+	private static void doctorPatientMenu(Patient patient) {
+		System.out.println("Select what you want to do");
+		System.out.println("\n\t1.See Examinations");		
+		System.out.println("\n\t2.Modify Examination");
+		System.out.println("\n\t3.Create Treatment");
+		System.out.println("\n\t4.Modify Treatment");
+		System.out.println("\n\t5.View Treatment");
+		System.out.println("\n\t6.Back");
+		int option;
+		do {
+			option = Exceptions.checkInt();
+		switch(option) {
+		case 1: 
+			//habria que hacer una funcion
+    		//patient.getExaminations(); y un print como en patient
+    		break;
+    	case 2:
+    		//funcion en utilities con sets 
+    		break;
+    	case 3: 	
+    		//fucnicon
+    		break;
+    	case 4: 
+    		//fnction
+    		break;
+    	case 5: 
+    		//function con 
+    		//patient.getTreatments();
+    		break;
+    	case 6: 
+    		return;
+		}
+		 }while (option != 6);
+        	
+	}
+	private static void patientMenu() {
+		 Patient patient= Utilities.getPatientById();
+		 System.out.println("Estoy aqui");
+		  if (patient==null) {
+			  System.out.println("Estoy");
+			return;
+		  }
+		   else {
+			patientSubMenu(patient);
+		     }
+	}
+	private static void patientSubMenu(Patient patient) {
+		int option;
+		do {
 		System.out.println("Select what you want to do");
 		System.out.println("\n\t1.Schedule");
 		System.out.println("\n\t2.See examinations");
-		System.out.println("\n\t3.G0 back");
-		int option= Exceptions.checkInt();
-		Patient p;
+		System.out.println("\n\t3.Go back");
+	    option= Exceptions.checkInt();
 		 switch(option) {
 		  case 1:
-			  p=searchPatientMenu();
-			  Utilities.getPatientSchedule(p.getId());
+			  Utilities.getPatientSchedule(patient.getId());
 			  break;
 		  case 2:
-			  p=searchPatientMenu();
-			  List <Examination> a=p.getExaminations();
+			  //Uitlitzar la funcion creada con doctorPatientMenu
+			  List <Examination> a=patient.getExaminations();
 			  break;
 		  case 3:
 			 return;
 		  }
+		}while(option!=3);
 	}
 	private static Patient searchPatientMenu() {
 		  System.out.println("\n\t1.To search by id number");
