@@ -1,16 +1,30 @@
 package ui;
-import db.interfaces.DBManager;
 import pojos.*;
 import utilities.Exceptions;
 import utilities.Utilities;
+
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-
 import db.interfaces.*;
- import utilities.Utilities;
-
+import db.sqlite.SQLiteManager;
+import utilities.Utilities;
 
 public class Menu {
+	
+	private static PatientManager patientManager;
+	private static DoctorManager doctorManager;
+	private static AdministrationManager adminManager;
+	private static DBManager dbManager;
+	
+	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
 	public static void main(String[] args){
+		 dbManager = new SQLiteManager();
+		 dbManager.connect();
+		 patientManager= dbManager.getPatientManager();
+		 doctorManager= dbManager.getDoctorManager();
+		 //adminManager= dbManager.getAdminManager();
+		
 		int option;
 		do {
 		System.out.println("Select who you are");
