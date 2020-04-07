@@ -12,7 +12,7 @@ import pojos.Treatment;
 public class SQLiteAdministrationManager implements AdministrationManager {
 
 	@Override
-	public boolean createTreatmen(int id) {
+	public boolean createTreatment(int id) {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -11,7 +11,7 @@ import pojos.Treatment;
 
 public interface AdministrationManager {
 	//Treatment
-	public boolean createTreatmen(int id);
+	public boolean createTreatment(int id);
 	public Treatment viewTreatment(int id);
 	public boolean modifyTreatment(int id); 
 	//Appointment
