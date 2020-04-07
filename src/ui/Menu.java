@@ -18,6 +18,7 @@ public class Menu {
 
 	public static void main(String[] args){
 		int option;
+		
 		while(true) {
 		System.out.println("Select who you are");
 		System.out.println("\n\t1.Doctor");		
