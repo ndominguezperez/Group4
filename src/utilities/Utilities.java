@@ -93,7 +93,9 @@ public class Utilities {
 		//Patient patient = new Patient(name,surname ,date, gender, medicalChart);
 		//patientManager.addNewPatient(patient);	
 	}
+	
 //Sobre el doc
+	//esta hay que cambiar
 	 public static Doctor getDoctortById() {
 	        int doctorId= askForId();
 	        Doctor doctor=null;

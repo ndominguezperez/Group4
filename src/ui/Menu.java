@@ -40,6 +40,7 @@ public class Menu {
 		}
 		}while(option != 4);
 	}
+	
 	//Esto seria con la contraseña y eso supongo....
 	private static void doctorMenu () {		
 	  Doctor doctor= Utilities.getDoctortById();
