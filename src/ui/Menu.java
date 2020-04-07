@@ -24,7 +24,8 @@ public class Menu {
 		 patientManager= dbManager.getPatientManager();
 		 doctorManager= dbManager.getDoctorManager();
 		 //adminManager= dbManager.getAdminManager();
-		
+		System.out.println("Welcome!");
+		dbManager.createTables();
 		int option;
 		do {
 		System.out.println("Select who you are");

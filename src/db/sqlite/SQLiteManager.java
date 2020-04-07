@@ -61,7 +61,7 @@ public class SQLiteManager implements DBManager {
 			stmt1 = c.createStatement();
 			String sql2 = "CREATE TABLE patients " + "(id     INTEGER  PRIMARY KEY,"
 					+ " name   TEXT   NOT NULL," + " surname  TEXT   NOT NULL, " + "dateofbirth DATE NOT NULL, " + "medical_chart TEXT NOT NULL, " 
-					+ " gender TEXT   NOT NULL, )";
+					+ " gender TEXT   NOT NULL )";
 			stmt1.executeUpdate(sql2);
 			
 			stmt1 = c.createStatement();
