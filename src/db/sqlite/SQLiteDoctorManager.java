@@ -38,6 +38,12 @@ public class SQLiteDoctorManager implements DoctorManager {
 		return null;
 	}
 	
+	public Doctor getDoctorById(int id) {
+		return null;
+		
+	}
+
+	
 	
 	
 	
