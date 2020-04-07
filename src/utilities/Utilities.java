@@ -96,7 +96,8 @@ public class Utilities {
 //Sobre el doc
 	 public static Doctor getDoctortById() {
 	        int doctorId= askForId();
-	        Doctor doctor= doctorManager.getDoctorById(doctorId);
+	        Doctor doctor=null;
+	       // doctor = doctorManager.getDoctorById(doctorId);
 	        return doctor;
 	    }
 	public static void addDoctor() {

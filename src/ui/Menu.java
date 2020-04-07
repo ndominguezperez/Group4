@@ -46,7 +46,7 @@ public class Menu {
 	  if (doctor==null) {
 		return;
 	  }
-	   else {
+	   else {// esta funcion mal
 		doctorSubMenu(doctor.getId());
 	     }
 	}
