@@ -29,7 +29,7 @@ public class SQLitePatientManager implements PatientManager{
 			prep.setString(3, patient.getSurname());
 			prep.setDate(4,patient.getDob());
 	        prep.setString(5, patient.getMedical_chart());
-			prep.setString(6, patient.getGender());
+			prep.setString(6, patient.getGender()); 
 			prep.executeUpdate();
 			prep.close();
 		} catch (Exception e) {
