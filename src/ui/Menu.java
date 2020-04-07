@@ -18,13 +18,12 @@ public class Menu {
 
 	public static void main(String[] args){
 		int option;
-		
-		while(true) {
 		System.out.println("Select who you are");
 		System.out.println("\n\t1.Doctor");		
 		System.out.println("\n\t2.Patient");
 		System.out.println("\n\t3.Admin Staff");
 		System.out.println("\n\t4.Exit");
+		do {
 		option=Exceptions.checkInt();
 		switch(option) {
 		case 1:
@@ -36,19 +35,20 @@ public class Menu {
 		case 3: 
 			adminMenu();
 			break;
+		case 4:
+			System.exit(0);
 		}
-		}
+		}while(option != 4);
 	}
+	
 	//Esto seria con la contraseña y eso supongo....
 	private static void doctorMenu () {		
-	  System.out.println("Enter your id number");
-	  System.out.println("If you want to go back press 0");
-	  int id= Exceptions.checkInt();
-	  if (id==0) {
+	  Doctor doctor= Utilities.getDoctortById();
+	  if (doctor==null) {
 		return;
 	  }
-	   else {
-		doctorSubMenu(id);
+	   else {// esta funcion mal
+		doctorSubMenu(doctor.getId());
 	     }
 	}
 	private static void doctorSubMenu (int doctor_id) {		
@@ -63,8 +63,8 @@ public class Menu {
 	        switch (option) {
 	        	case 1: //View schedule
 	        		System.out.println("\n\n\tYour schedule Doctor:%d \n" + doctor_id);
-	        		utilities.Utilities.getDoctorSchedule(doctor_id); //Tener que meter el doctor_id
-	        		utilities.Utilities.read();
+	        		Utilities.getDoctorSchedule(doctor_id); //Tener que meter el doctor_id
+	        		Utilities.read();
 	        		break;
 	        		
 	        	case 2: //Patient	
@@ -75,23 +75,23 @@ public class Menu {
 	        		System.out.println("\n\t4.I don´t want to search a patient");
 	        		int patient_option;
 	        		do {
-	        		patient_option = utilities.Exceptions.checkInt();}
+	        		patient_option = Exceptions.checkInt();}
 	        		while (patient_option != 1 || patient_option != 2|| patient_option != 3 || patient_option != 4);
 	        		switch (patient_option) {
 	        			case 1: 
 	        				System.out.println("Patient searched by name");
-	        				utilities.Utilities.searchPatientByName();
-	        				utilities.Utilities.read();
+	        				Utilities.searchPatientByName();
+	        				Utilities.read();
 	        				break;
 	        			case 2: 
 	        				System.out.println("Patient searched by surname");
-	        				utilities.Utilities.searchPatientBySurname();
-	        				utilities.Utilities.read();
+	        				Utilities.searchPatientBySurname();
+	        				Utilities.read();
 	        				break;
 	        			case 3: 
 	        				System.out.println("\nPatient searched by id");
-	        				utilities.Utilities.getPatientById();
-	        				utilities.Utilities.read();
+	        				Utilities.getPatientById();
+	        				Utilities.read();
 	        				break;
 	        			case 4: 
 	        				utilities.Utilities.read();
