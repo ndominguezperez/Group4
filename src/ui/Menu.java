@@ -22,8 +22,8 @@ public class Menu {
 		System.out.println("Select who you are");
 		System.out.println("\n\t1.Doctor");		
 		System.out.println("\n\t2.Patient");
-		System.out.println("\n\t1.Admin Staff");
-		System.out.println("\n\t3.Exit");
+		System.out.println("\n\t3.Admin Staff");
+		System.out.println("\n\t4.Exit");
 		option=Exceptions.checkInt();
 		switch(option) {
 		case 1:
