@@ -2,6 +2,7 @@ package pojos;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -30,6 +31,24 @@ public class Patient implements Serializable {
 	
 
 	
+
+	public Patient(int id, String name, String surname, Date dob, String medical_chart, String gender) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.dob = dob;
+		this.medical_chart = medical_chart;
+		this.gender = gender;
+		this.treatments = new ArrayList<Treatment>();
+		this.doctors = new ArrayList<Doctor>();
+		this.results = new ArrayList<Result>();
+		this.schedule = new ArrayList<Appointment>();
+		this.examinations = new ArrayList<Examination>();
+		
+		
+	}
+
 
 	public Patient(Integer id, String name, String surname, Date dob, String medical_chart, String gender,
 			List <Treatment>treatments, List<Doctor> doctors, List<Result> results, List<Appointment> schedule

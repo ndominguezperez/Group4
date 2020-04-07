@@ -6,7 +6,7 @@ import utilities.Utilities;
 import java.util.List;
 
 import db.interfaces.*;
- import utilities.Utilities;
+import utilities.Utilities;
 
 
 public class Menu {
@@ -27,7 +27,7 @@ public class Menu {
 		option=Exceptions.checkInt();
 		switch(option) {
 		case 1:
-			doctorMenu();
+			//doctorMenu();
 			break;
 		case 2:
 			patientMenu();
@@ -42,15 +42,15 @@ public class Menu {
 	}
 	
 	//Esto seria con la contraseña y eso supongo....
-	private static void doctorMenu () {		
-	  Doctor doctor= Utilities.getDoctortById();
-	  if (doctor==null) {
-		return;
-	  }
-	   else {// esta funcion mal
-		doctorSubMenu(doctor.getId());
-	     }
-	}
+	//private static void doctorMenu () {		
+	  //Doctor doctor= Utilities.getDoctortById();
+	//  if (doctor==null) {
+	//	return;
+	//  }
+	 //  else {// esta funcion mal
+		//doctorSubMenu(doctor.getId());
+	    // }
+	//}
 	private static void doctorSubMenu (int doctor_id) {		
 		int option;
 			do {

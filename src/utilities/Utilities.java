@@ -30,7 +30,7 @@ public class Utilities {
          id= Exceptions.checkInt();
          return id;    
     }
-    //Funiciones sobre patient
+    
     public static Patient getPatientById() {
         int patientId= askForId();
         Patient patient= patientManager.getPatient(patientId);
@@ -90,18 +90,11 @@ public class Utilities {
 		String gender = read();
 		System.out.print("Medical Chart: ");
 		String medicalChart = read();
-		//Patient patient = new Patient(name,surname ,date, gender, medicalChart);
-		//patientManager.addNewPatient(patient);	
+		Patient patient = new Patient(id, name,surname ,date, medicalChart, gender);
+		System.out.println(patient);
+		patientManager.addNewPatient(patient);	
 	}
 	
-//Sobre el doc
-	//esta hay que cambiar
-	 public static Doctor getDoctortById() {
-	        int doctorId= askForId();
-	        Doctor doctor=null;
-	       // doctor = doctorManager.getDoctorById(doctorId);
-	        return doctor;
-	    }
 	public static void addDoctor() {
 		//name, salary , specialty, date of birth, start date
 		System.out.print("Hole Name: ");
