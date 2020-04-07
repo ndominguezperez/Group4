@@ -101,17 +101,18 @@ public class Utilities {
 	}
 
 	public static void addDoctor() {
-//name, salary , specialty, date of birth, start date
 		System.out.print("Hole Name: ");
 		String name = read();
-		System.out.print("Surname: ");
+		System.out.print("Salary: ");
 		Float salary = Exceptions.checkFloat();
+		System.out.print("Speciality: ");
+		String speciality = read();
 		System.out.print("Date of birth(yyyy-MM-dd): ");
 		Date dob = Exceptions.checkDate();
-		System.out.print("Date of birth(yyyy-MM-dd): ");
-		Date startdate = Exceptions.checkDate();
-//Doctor doctor = new Doctor(name, salary , specialty, date of birth, start date);
-//doctorManager.addNewDoctor(doctor);
+		System.out.print("Start date(yyyy-MM-dd): ");
+		Date startDate = Exceptions.checkDate();
+        Doctor doctor = new Doctor(name, salary , speciality, dob, startDate);
+        doctorManager.addNewDoctor(doctor);
 	}
 
 	public static void listAllPatientsOfDoctor(int docId) {

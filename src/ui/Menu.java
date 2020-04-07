@@ -52,13 +52,21 @@ public class Menu {
 	
 	//Esto seria con la contraseña y eso supongo....
 	private static void doctorMenu () {		
-	  Doctor doctor= Utilities.getDoctortById();
-	  if (doctor==null) {
-		return;
-	  }
-	   else {// esta funcion mal
-		doctorSubMenu(doctor.getId());
-	     }
+		Doctor doctor=null;
+		try {
+		  doctor= Utilities.getDoctortById();
+		}catch(NullPointerException e) {
+			 System.out.println("\n\n\tID not founded");
+			 return;
+	 }
+		 System.out.println("Estoy aqui");
+		  if (doctor==null) {
+			  System.out.println("Estoy");
+			return;
+		  }
+		   else {
+			doctorSubMenu(doctor.getId());
+		     }
 	}
 	private static void doctorSubMenu (int doctorId) {		
 		int option;
@@ -125,7 +133,13 @@ public class Menu {
         	
 	}
 	private static void patientMenu() {
-		 Patient patient= Utilities.getPatientById();
+		Patient patient=null;
+		try {
+		  patient= Utilities.getPatientById();
+		}catch(NullPointerException e) {
+			 System.out.println("\n\n\tID not founded");
+			 return;
+	 }
 		 System.out.println("Estoy aqui");
 		  if (patient==null) {
 			  System.out.println("Estoy");
@@ -187,7 +201,8 @@ public class Menu {
 		System.out.println("\n\t2.View a patient");
 		System.out.println("\n\t3.Add a new patient");
 		System.out.println("\n\t4.Appointmets");
-		System.out.println("\n\t5.Exit");
+		System.out.println("\n\t5.Add new doctor");
+		System.out.println("\n\t6.Exit");
 		int option = Exceptions.checkInt();
 		switch(option) {
 		case 1:
@@ -203,6 +218,9 @@ public class Menu {
 			appointmentMenu();
 			break;
 		case 5:
+			Utilities.addDoctor();
+			break;
+		case 6:
 			return;
 			
 		}
