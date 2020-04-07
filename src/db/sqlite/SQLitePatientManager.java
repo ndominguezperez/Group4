@@ -34,7 +34,7 @@ public class SQLitePatientManager implements PatientManager{
 			prep.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} 
 	}
 
 
