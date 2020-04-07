@@ -21,15 +21,15 @@ public class SQLitePatientManager implements PatientManager{
 	public void addNewPatient(Patient patient) {
 		
 		try {  
-			String sql = "INSERT INTO patients (id, name, surname , date of birth , gender, medical chart) "
+			String sql = "INSERT INTO patients (id, name, surname , date of birth, medical chart, gender) "
 					+ "VALUES (?,?,?,?,?);";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, patient.getId());
 			prep.setString(2, patient.getName());
 			prep.setString(3, patient.getSurname());
 			prep.setDate(4,patient.getDob());
-			prep.setString(5, patient.getGender());
-			prep.setString(6, patient.getMedical_chart());
+	        prep.setString(5, patient.getMedical_chart());
+			prep.setString(6, patient.getGender());
 			prep.executeUpdate();
 			prep.close();
 		} catch (Exception e) {
