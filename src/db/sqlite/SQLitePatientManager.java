@@ -19,8 +19,6 @@ public class SQLitePatientManager implements PatientManager{
 		this.c = c;
 	}
 	public void addNewPatient(Patient patient) {
-		System.out.println("Estoy en addNewPatient");
-		System.out.println(patient);
 		try {  
 			String sql = "INSERT INTO patients (id, name, surname , dob, medical_chart, gender) "
 					+ "VALUES (?,?,?,?,?,?);";
@@ -34,7 +32,6 @@ public class SQLitePatientManager implements PatientManager{
 			prep.executeUpdate();
 			prep.close();
 		} catch (Exception e) {
-			System.out.println("Estoy en caths");
 			e.printStackTrace();
 		} 
 	}

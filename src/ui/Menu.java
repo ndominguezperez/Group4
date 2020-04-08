@@ -213,8 +213,8 @@ public class Menu {
 			searchPatientMenu();
 		    break;
 		case 3:
-			//Utilities.addPatient();
-				System.out.print("ID Number: ");
+			Utilities.addPatient();
+				/*System.out.print("ID Number: ");
 				int id = Exceptions.checkInt();
 				System.out.print("Name: ");
 				String name = Utilities.read();
@@ -228,7 +228,7 @@ public class Menu {
 				String medicalChart = Utilities.read();
 				Patient patient = new Patient(id, name, surname, date, medicalChart, gender);
 				System.out.println(patient);
-				patientManager.addNewPatient(patient);
+				patientManager.addNewPatient(patient);*/
 			
 		    break;
 		case 4:
