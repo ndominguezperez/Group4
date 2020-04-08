@@ -39,8 +39,31 @@ public class SQLitePatientManager implements PatientManager{
 
 	@Override
 	public List<Patient> listAllPatients() {
-		// TODO Auto-generated method stub
-		return null;
+		// Create an empty list of patients
+				List<Patient> patientsList = new ArrayList<Patient>();
+				// Search for all patients
+				try {
+					String sql = "SELECT * FROM patients";
+					PreparedStatement prep = c.prepareStatement(sql);
+					ResultSet rs = prep.executeQuery();
+					// For each result...
+					while (rs.next()) {
+						int id = rs.getInt("id");
+						String patientName = rs.getString("name");
+						String patientSurname = rs.getString("surname");
+						Date patientDob = rs.getDate("dob");
+						String patientMedical_chart = rs.getString("medical_chart");
+						String patientGender = rs.getString("gender");
+						// Create a new dog and...
+						Patient newPatient = new Patient (id, patientName, patientSurname, patientDob, patientMedical_chart, patientGender);
+						// Add it to the list
+						patientsList.add(newPatient);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				// Return the list
+				return patientsList;
 	}
 	@Override
 	public List<Patient> searchByName(String name) {

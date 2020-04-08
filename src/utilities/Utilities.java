@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import db.interfaces.*;
+import db.sqlite.SQLiteDoctorManager;
 import pojos.*;
 
 public class Utilities {
@@ -61,12 +62,12 @@ public class Utilities {
 		}
 	}
 
-	public static void listAllPatiens() {
+	/*public static void listAllPatiens() {
 		List<Patient> patientsList = patientManager.listAllPatients();
 		for (Patient patient : patientsList) {
 			System.out.println(patient);
 		}
-	}
+	}*/
 
 	public static void getPatientSchedule(int a) {
 		List<Appointment> schedule = adminManager.viewSchedule(a);
@@ -82,7 +83,7 @@ public class Utilities {
 		}
 	}
 
-	public static void addPatient() {
+	/*public static void addPatient() {
 		System.out.print("ID Number: ");
 		int id = Exceptions.checkInt();
 		System.out.print("Name: ");
@@ -98,10 +99,10 @@ public class Utilities {
 		Patient patient = new Patient(id, name, surname, date, medicalChart, gender);
 		System.out.println(patient);
 		patientManager.addNewPatient(patient);
-	}
+	}*/
 	
 
-	public static void addDoctor() {
+	/*public static void addDoctor() {
 		System.out.print("Hole Name: ");
 		String name = read();
 		System.out.print("Salary: ");
@@ -113,8 +114,8 @@ public class Utilities {
 		System.out.print("Start date(yyyy-MM-dd): ");
 		Date startDate = Exceptions.checkDate();
         Doctor doctor = new Doctor(name, salary , speciality, dob, startDate);
-        doctorManager.addNewDoctor(doctor);
-	}
+        SQLiteDoctorManager.addNewDoctor(doctor);
+	}*/
 
 	public static void listAllPatientsOfDoctor(int docId) {
 		List<Patient> patientsList = doctorManager.listAllPatientsOfDoctor();
