@@ -18,6 +18,7 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 		this.c = c;
 	}
 
+	
 	@Override
 	public void addNewTreatment(Treatment treatment) {
 		// TODO Auto-generated method stub
