@@ -133,15 +133,16 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 		}
 	}
 	
-
+	@Override
 	public void addNewAppointment(Appointment appointment) {
-		
-	try {  
+		System.out.println(appointment);
+	try { 
+		System.out.println(appointment);
 		String sql = "INSERT INTO appointments (type,speciality,date,time) "
-				+ "VALUES (?,?,?,?,?);";
+				+ "VALUES (?,?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setString(1, appointment.getType());
-		prep.setString(2, appointment.getType());
+		prep.setString(2, appointment.getSpeciality());
 		prep.setDate(3, appointment.getDate());
 		prep.setFloat(4, appointment.getTime());
 	

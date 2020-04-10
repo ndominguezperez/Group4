@@ -222,6 +222,7 @@ public class Menu {
 			searchPatientMenu();
 			break;
 		case 3:
+		
 			addPatient();
 			break;
 		case 4:
@@ -237,7 +238,7 @@ public class Menu {
 	}
 
 	private static void appointmentMenu() {
-		Patient p = searchPatientMenu();
+		//Patient p = searchPatientMenu();
 		System.out.println("Select what you want to do");
 		System.out.println("\n\t1.Set Up a new one");
 		System.out.println("\n\t2.Modify");
@@ -246,11 +247,10 @@ public class Menu {
 		int option = Exceptions.checkInt();
 		switch (option) {
 		case 1:
-			// funcion sin hacer!!!
-			Utilities.setUpAppointment(p);
+			addAppointment();
 		case 2:
 
-			Utilities.modifyAppointment(p);
+			//Utilities.modifyAppointment();
 			break;
 		case 3:
 			appointmentMenu();
@@ -367,6 +367,7 @@ public class Menu {
 		System.out.print("Speciality: ");
 		String speciality = Utilities.read();
 		Appointment appointment = new Appointment(type,speciality,date,time);
+		System.out.println(appointment);
 		adminManager.addNewAppointment(appointment);
 	}
 
