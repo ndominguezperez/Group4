@@ -18,7 +18,7 @@ public class Menu {
 
 	private static PatientManager patientManager;
 	private static DoctorManager doctorManager;
-	private static AdministrationManager adminManager;
+	private static AdministrationManager administrationManager;
 	private static DBManager dbManager;
 
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -171,7 +171,7 @@ public class Menu {
 				Utilities.getPatientSchedule(patient.getId());
 				break;
 			case 2:
-				// Uitlitzar la funcion creada con doctorPatientMenu
+				// Uitlizar la funcion creada con doctorPatientMenu
 				List<Examination> a = patient.getExaminations();
 				break;
 			case 3:
@@ -247,9 +247,13 @@ public class Menu {
 		int option = Exceptions.checkInt();
 		switch (option) {
 		case 1:
-			addAppointment();
+			List<Patient> patientsList = patientManager.listAllPatients();
+			Patient patient = patientsList.get(0);
+			List<Doctor> doctorsList = doctorManager.listAllDoctors();
+			Doctor doctor = doctorsList.get(0);
+			addAppointment(patient,doctor);
 		case 2:
-
+			addResult();
 			//Utilities.modifyAppointment();
 			break;
 		case 3:
@@ -295,14 +299,15 @@ public class Menu {
 			}
 		}while (p==false);
 		
-	System.out.print("Name: ");
-	String name = Utilities.read();System.out.print("Surname: ");
-	String surname = Utilities.read();System.out.print("Date of birth(yyyy-MM-dd): ");
-	Date date = Exceptions.checkDate();System.out.print("Gender: ");
-	String gender = Utilities.read();System.out.print("Medical Chart: ");
-	String medicalChart = Utilities.read();
-	Patient patient = new Patient(id, name, surname, date, medicalChart,
-			gender);System.out.println(patient);patientManager.addNewPatient(patient);
+		System.out.print("Name: ");
+		String name = Utilities.read();System.out.print("Surname: ");
+		String surname = Utilities.read();System.out.print("Date of birth(yyyy-MM-dd): ");
+		Date date = Exceptions.checkDate();System.out.print("Gender: ");
+		String gender = Utilities.read();System.out.print("Medical Chart: ");
+		String medicalChart = Utilities.read();
+		Patient patient = new Patient(id, name, surname, date, medicalChart,gender);
+		System.out.println(patient);
+		patientManager.addNewPatient(patient);
 	}
 
 	private static void listAllPatiens() {
@@ -323,7 +328,7 @@ public class Menu {
 		System.out.print("Date: ");
 		Date date = Exceptions.checkDate();
 		Result result = new Result (type, date);
-		adminManager.addNewResult(result);
+		administrationManager.addNewResult(result);
 	
 	}
 	private static void addExamination() {
@@ -341,7 +346,7 @@ public class Menu {
 		String observations = Utilities.read();
 		Examination examination = new Examination(observations, temperature,breathingRate,heartRate, bloodPreasure, oxygenSaturation );
 		System.out.println(examination);
-		adminManager.addNewExamination(examination);
+		administrationManager.addNewExamination(examination);
 	}
 	
 	private static void addTreatment() {
@@ -352,12 +357,12 @@ public class Menu {
 		System.out.print("Finish date(yyyy-MM-dd): ");
 		Date finishDate = Exceptions.checkDate();
 		Treatment treatment = new Treatment(disease, drug,finishDate);
-		adminManager.addNewTreatment(treatment);
+		administrationManager.addNewTreatment(treatment);
 	}
 
 
 	
-	private static void addAppointment() {
+	private static void addAppointment(Patient patient, Doctor doctor) {
 		System.out.print("Introduce the type: ");
 		String type = Utilities.read();
 		System.out.print("Date (yyyy-MM-dd): ");
@@ -366,9 +371,12 @@ public class Menu {
 		Float time = Exceptions.checkFloat();
 		System.out.print("Speciality: ");
 		String speciality = Utilities.read();
-		Appointment appointment = new Appointment(type,speciality,date,time);
-		System.out.println(appointment);
-		adminManager.addNewAppointment(appointment);
+		//Appointment appointment = new Appointment(type,speciality,date,time);
+		Appointment appointment1 = new Appointment(type,date,time,speciality,doctor,patient);
+		System.out.println(appointment1);
+		administrationManager.addNewAppointment(appointment1);
+		System.out.print("HEEEEEY ");
+		administrationManager.addNewAppointment(appointment1);
 	}
 
 

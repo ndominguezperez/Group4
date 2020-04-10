@@ -2,6 +2,7 @@ package pojos;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -54,6 +55,22 @@ public class Doctor implements Serializable{
 
 	public Doctor() {
 		super();
+	}
+
+	public Doctor(int id, String name, float salary, Date dob, String speciality, Date startDate) {
+		super();
+		this.id=id;
+		this.name=name;
+		this.salary=salary;
+		this.dob=dob;
+		this.speciality=speciality;
+		this.start_date=startDate;
+		this.treatments = new ArrayList<Treatment>();
+		this.results = new ArrayList<Result>();
+		this.schedule = new ArrayList<Appointment>();
+		this.examinations = new ArrayList<Examination>();
+		this.patients = new ArrayList<Patient>();
+
 	}
 
 	public List<Treatment> getTreatments() {

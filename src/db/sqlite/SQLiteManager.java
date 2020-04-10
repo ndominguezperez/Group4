@@ -70,7 +70,7 @@ public class SQLiteManager implements DBManager {
 			Statement stmt3;
 			stmt3 = c.createStatement();
 			String sql3 = "CREATE TABLE appointments " + "(id     INTEGER  PRIMARY KEY AUTOINCREMENT,"
-					+ " type   TEXT   NOT NULL," + " speciality  TEXT   NOT NULL, " 
+					+ "type TEXT   NOT NULL," + " speciality  TEXT   NOT NULL, " 
 					+ "date DATE NOT NULL," + "time FLOAT NOT NULL," 
 					+ "doctorId INTEGER REFERENCES doctors(id) ON UPDATE CASCADE ON DELETE SET NULL,"
 					+ "patientId INTEGER REFERENCES patients(id)ON UPDATE CASCADE ON DELETE SET NULL)";

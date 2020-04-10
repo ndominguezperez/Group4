@@ -138,14 +138,15 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 		System.out.println(appointment);
 	try { 
 		System.out.println(appointment);
-		String sql = "INSERT INTO appointments (type,speciality,date,time) "
-				+ "VALUES (?,?,?,?);";
+		String sql = "INSERT INTO appointments (type ,speciality ,date ,time ,doctor ,patient) "
+				+ "VALUES (?,?,?,?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setString(1, appointment.getType());
 		prep.setString(2, appointment.getSpeciality());
 		prep.setDate(3, appointment.getDate());
 		prep.setFloat(4, appointment.getTime());
-	
+		prep.setObject(5, appointment.getDoctor());
+		prep.setObject(6, appointment.getPatient());
 		
 		prep.executeUpdate();
 		prep.close();
