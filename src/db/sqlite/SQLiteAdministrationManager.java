@@ -70,8 +70,24 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 	@Override
 	public void addNewExamination(Examination examination) {
 		// TODO Auto-generated method stub
-		
-	}
+			try { 
+				
+				String sql = "INSERT INTO examinations (temperature, breathingRate, heartRate , bloodPresure, oxygenSaturation, observations) "
+						+ "VALUES (?,?,?,?,?,?);";
+				PreparedStatement prep = c.prepareStatement(sql);
+				prep.setFloat(1, examination.getTemperature());
+				prep.setInt(2, examination.getBreathing_rate());
+				prep.setInt(3, examination.getHeart_rate());
+				prep.setFloat(4,examination.getBlood_pressure());
+		        prep.setFloat(5, examination.getOxygen_saturations());
+				prep.setString(6, examination.getObservations()); 
+				prep.executeUpdate();
+				prep.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+		}
+
 	
 	@Override
 	public Examination viewExamination(int id) {

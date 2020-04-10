@@ -11,25 +11,36 @@ public class Examination implements Serializable{
 	int id; 
 	String observations;
 	Float temperature;
-	int breathing_rate;
-	int heart_rate;
-	Float blood_pressure;
-	Float oxygen_saturations;
+	int breathingRate;
+	int heartRate;
+	Float bloodPressure;
+	Float oxygenSaturations;
 	Doctor doctor;
 	Patient patient;
 	
 	
-
+    public Examination (String observations, Float temperature, int breathingRate, int heartRate, Float bloodPresure, Float oxygenSaturation) {
+    	super();
+    	this.id=0;
+    	this.temperature=temperature;
+    	this.breathingRate=breathingRate;
+    	this.heartRate=heartRate;
+    	this.bloodPressure=bloodPresure;
+    	this.oxygenSaturations=oxygenSaturation;
+    	this.observations=observations;
+    	this.doctor=null;
+    	this.patient=null;
+    }
 	public Examination(int id, String observations, Float temperature, int breathing_rate, int heart_rate,
 			Float blood_pressure, Float oxygen_saturations, Doctor doctor, Patient patient) {
 		super();
 		this.id = id;
 		this.observations = observations;
 		this.temperature = temperature;
-		this.breathing_rate = breathing_rate;
-		this.heart_rate = heart_rate;
-		this.blood_pressure = blood_pressure;
-		this.oxygen_saturations = oxygen_saturations;
+		this.breathingRate = breathing_rate;
+		this.heartRate = heart_rate;
+		this.bloodPressure = blood_pressure;
+		this.oxygenSaturations = oxygen_saturations;
 		this.doctor = doctor;
 		this.patient = patient;
 	}
@@ -63,35 +74,35 @@ public class Examination implements Serializable{
 	}
 
 	public int getBreathing_rate() {
-		return breathing_rate;
+		return breathingRate;
 	}
 
 	public void setBreathing_rate(int breathing_rate) {
-		this.breathing_rate = breathing_rate;
+		this.breathingRate = breathing_rate;
 	}
 
 	public int getHeart_rate() {
-		return heart_rate;
+		return heartRate;
 	}
 
 	public void setHeart_rate(int heart_rate) {
-		this.heart_rate = heart_rate;
+		this.heartRate = heart_rate;
 	}
 
 	public Float getBlood_pressure() {
-		return blood_pressure;
+		return bloodPressure;
 	}
 
 	public void setBlood_pressure(Float blood_pressure) {
-		this.blood_pressure = blood_pressure;
+		this.bloodPressure = blood_pressure;
 	}
 
 	public Float getOxygen_saturations() {
-		return oxygen_saturations;
+		return oxygenSaturations;
 	}
 
 	public void setOxygen_saturations(Float oxygen_saturations) {
-		this.oxygen_saturations = oxygen_saturations;
+		this.oxygenSaturations = oxygen_saturations;
 	}
 
 	public Doctor getDoctor() {
@@ -135,8 +146,8 @@ public class Examination implements Serializable{
 	@Override
 	public String toString() {
 		return "Examination [id=" + id + ", observations=" + observations + ", temperature=" + temperature
-				+ ", breathing_rate=" + breathing_rate + ", heart_rate=" + heart_rate + ", blood_pressure="
-				+ blood_pressure + ", oxygen_saturations=" + oxygen_saturations + ", doctor=" + doctor + ", patient="
+				+ ", breathing_rate=" + breathingRate + ", heart_rate=" + heartRate + ", blood_pressure="
+				+ bloodPressure + ", oxygen_saturations=" + oxygenSaturations + ", doctor=" + doctor + ", patient="
 				+ patient + "]";
 	}
 

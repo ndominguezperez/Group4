@@ -326,4 +326,21 @@ public class Menu {
 		adminManager.addNewResult(result);
 	
 	}
+	private static void addExamination() {
+		System.out.println("Introduce the temperature");
+		Float temperature = Exceptions.checkFloat();
+		System.out.println("Introduce the breathing rate");
+		int breathingRate = Exceptions.checkInt();
+		System.out.println("Introduce the heart rate");
+		int heartRate = Exceptions.checkInt();
+		System.out.println("Introduce the blood presure");
+		Float bloodPreasure = Exceptions.checkFloat();
+		System.out.println("Introduce the oxygen saturation");
+		Float oxygenSaturation= Exceptions.checkFloat();
+		System.out.println("Introduce the observations");
+		String observations = Utilities.read();
+		Examination examination = new Examination(observations, temperature,breathingRate,heartRate, bloodPreasure, oxygenSaturation );
+		System.out.println(examination);
+		adminManager.addNewExamination(examination);
+	}
 }

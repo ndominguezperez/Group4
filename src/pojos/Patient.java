@@ -45,8 +45,7 @@ public class Patient implements Serializable {
 		this.results = new ArrayList<Result>();
 		this.schedule = new ArrayList<Appointment>();
 		this.examinations = new ArrayList<Examination>();
-		
-		
+			
 	}
 
 
