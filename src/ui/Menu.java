@@ -315,4 +315,15 @@ public class Menu {
 			System.out.print("There are no patients already\n");
 		}
 	}
+	
+	private static void addResult() {
+		
+		System.out.print("Type: ");
+		String type = Utilities.read();
+		System.out.print("Date: ");
+		Date date = Exceptions.checkDate();
+		Result result = new Result (type, date);
+		adminManager.addNewResult(result);
+	
+	}
 }

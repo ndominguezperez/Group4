@@ -11,17 +11,21 @@ import pojos.Treatment;
 
 public interface AdministrationManager {
 	//Treatment
-	public boolean createTreatment(int id);
+	public void addNewTreatment(Treatment treatment);
 	public Treatment viewTreatment(int id);
 	public boolean modifyTreatment(int id); 
 	//Appointment
+	public void addNewUpAppointment (Appointment appointment);
 	public List<Appointment> viewSchedule(int id);
-	public boolean setUpAppointment (Appointment appointment);
 	public boolean modifyAppointment (Appointment appointment);
 	public Appointment getAppointmentById(int id);
 	public List<Appointment> searchAppoitmentByDate(Date date);
 	//Examination
+	public void addNewExamination(Examination examination);
 	public Examination viewExamination(int id);
 	public boolean modifyExamination(int id); 
+	//Result
+	public void addNewResult(Result result);
 	public List <Result> viewResults();
+	
 }

@@ -62,18 +62,18 @@ public class SQLiteManager implements DBManager {
 			Statement stmt2;
 			stmt2 = c.createStatement();
 			String sql2 = "CREATE TABLE patients " + "(id     INTEGER  PRIMARY KEY,"
-					+ " name   TEXT   NOT NULL," + " surname  TEXT   NOT NULL, " + "dob DATE NOT NULL, " + "medical_chart TEXT NOT NULL, " 
-					+ " gender TEXT   NOT NULL )";
+					+ " name   TEXT   NOT NULL," + " surname  TEXT   NOT NULL, " + "dob DATE NOT NULL, " 
+					+ "medicalChart TEXT NOT NULL, " + " gender TEXT   NOT NULL )";
 			stmt2.executeUpdate(sql2);
 			stmt2.close();
 			
 			Statement stmt3;
 			stmt3 = c.createStatement();
-			String sql3 = "CREATE TABLE appointments " + "(id     INTEGER  PRIMARY KEY,"
+			String sql3 = "CREATE TABLE appointments " + "(id     INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					+ " type   TEXT   NOT NULL," + " speciality  TEXT   NOT NULL, " 
 					+ "date DATE NOT NULL," + "time FLOAT NOT NULL," 
-					+ "doctor_id INTEGER REFERENCES doctors(id) ON UPDATE CASCADE ON DELETE SET NULL,"
-					+ "patient_id INTEGER REFERENCES patients(id)ON UPDATE CASCADE ON DELETE SET NULL)";
+					+ "doctorId INTEGER REFERENCES doctors(id) ON UPDATE CASCADE ON DELETE SET NULL,"
+					+ "patientId INTEGER REFERENCES patients(id)ON UPDATE CASCADE ON DELETE SET NULL)";
 			
 			//+ "doctor_id INTEGER FOREIGN KEY(doctor_id) REFERENCES doctors(id),"
 			//+ "patient_id INTEGER FOREIGN KEY(patient_id) REFERENCES patients(id))";
@@ -82,12 +82,12 @@ public class SQLiteManager implements DBManager {
 			
 			Statement stmt4;
 			stmt4 = c.createStatement();
-			String sql4 =  "CREATE TABLE examinations " + "(id     INTEGER  PRIMARY KEY,"
+			String sql4 =  "CREATE TABLE examinations " + "(id     INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					+ "observations   TEXT   NOT NULL,"+ "temperature FLOAT NOT NULL," 
-					+ "breathing_rate INTEGER NOT NULL," + "heart_rate INTEGER NOT NULL,"
-					+ "blood_pressure FLOAT NOT NULL," + "oxygen_saturations FLOAT NOT NULL," 
-					+ "doctor_id INTEGER REFERENCES doctors(id)ON UPDATE CASCADE ON DELETE SET NULL,"
-					+ "patient_id INTEGER REFERENCES patients(id)ON UPDATE CASCADE ON DELETE SET NULL )";
+					+ "breathingRate INTEGER NOT NULL," + "heartRate INTEGER NOT NULL,"
+					+ "bloodPressure FLOAT NOT NULL," + "oxygenSaturations FLOAT NOT NULL," 
+					+ "doctorId INTEGER REFERENCES doctors(id)ON UPDATE CASCADE ON DELETE SET NULL,"
+					+ "patientId INTEGER REFERENCES patients(id)ON UPDATE CASCADE ON DELETE SET NULL )";
 
 			//+ "doctor_id INTEGER FOREIGN KEY(doctor_id) REFERENCES doctors(id),"
 			//+ "patient_id INTEGER FOREIGN KEY(patient_id) REFERENCES patients(id))";
@@ -96,10 +96,10 @@ public class SQLiteManager implements DBManager {
 			
 			Statement stmt5;
 			stmt5 = c.createStatement();
-			String sql5=  "CREATE TABLE results " + "(id     INTEGER  PRIMARY KEY,"
+			String sql5=  "CREATE TABLE results " + "(id     INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					+ "type   TEXT   NOT NULL,"+ "date DATE NOT NULL," 
-					+ "doctor_id INTEGER REFERENCES doctors(id)ON UPDATE CASCADE ON DELETE SET NULL,"
-					+ "patient_id INTEGER REFERENCES patients(id)ON UPDATE CASCADE ON DELETE SET NULL)";
+					+ "doctorId INTEGER REFERENCES doctors(id)ON UPDATE CASCADE ON DELETE SET NULL,"
+					+ "patientId INTEGER REFERENCES patients(id)ON UPDATE CASCADE ON DELETE SET NULL)";
 			
 			//+ "doctor_id INTEGER FOREIGN KEY(doctor_id) REFERENCES doctors(id),"
 			//+ "patient_id INTEGER FOREIGN KEY(patient_id) REFERENCES patients(id))";
@@ -108,11 +108,11 @@ public class SQLiteManager implements DBManager {
 			
 			Statement stmt6;
 			stmt6 = c.createStatement();
-			String sql6=  "CREATE TABLE treatments " + "(id     INTEGER  PRIMARY KEY,"
+			String sql6=  "CREATE TABLE treatments " + "(id     INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					+ "disease   TEXT   NOT NULL,"+ "drug TEXT NOT NULL," 
-					+ "finish_date DATE NOT NULL," 
-					+ "doctor_id INTEGER REFERENCES doctors(id)ON UPDATE CASCADE ON DELETE SET NULL,"
-					+ "patient_id INTEGER REFERENCES patients(id)ON UPDATE CASCADE ON DELETE SET NULL)";
+					+ "finishDate DATE NOT NULL," 
+					+ "doctorId INTEGER REFERENCES doctors(id)ON UPDATE CASCADE ON DELETE SET NULL,"
+					+ "patientId INTEGER REFERENCES patients(id)ON UPDATE CASCADE ON DELETE SET NULL)";
 			
 			//+ "doctor_id INTEGER FOREIGN KEY(doctor_id) REFERENCES doctors(id),"
 			//+ "patient_id INTEGER FOREIGN KEY(patient_id) REFERENCES patients(id))";

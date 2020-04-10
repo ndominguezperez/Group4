@@ -16,8 +16,17 @@ public class Result implements Serializable{
 	Doctor doctor;
 	Patient patient;
 	
-	
+	public Result (String type, Date date) {
+		super();
+		this.id = 0;
+		this.type = type;
+		this.date = date;
+		this.doctor = null;
+		this.patient = null;
+		
+	}
 
+	
 	public Result(int id, String type, Doctor doctor, Patient patient,Date date) {
 		super();
 		this.id = id;
