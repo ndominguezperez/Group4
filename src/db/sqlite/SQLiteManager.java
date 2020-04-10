@@ -55,7 +55,7 @@ public class SQLiteManager implements DBManager {
 			stmt1 = c.createStatement();
 			String sql1 = "CREATE TABLE doctors " + "(id     INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					+ " name   TEXT   NOT NULL, " + " speciality  TEXT   NOT NULL, " + " salary FLOAT  NOT NULL, "
-					+ " startDate DATE   NOT NULL)";
+					+ "dob DATE NOT NULL, " + " startDate DATE   NOT NULL)";
 			stmt1.executeUpdate(sql1);
 			stmt1.close();
 			
