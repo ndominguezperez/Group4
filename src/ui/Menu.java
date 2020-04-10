@@ -300,10 +300,14 @@ public class Menu {
 		}while (p==false);
 		
 		System.out.print("Name: ");
-		String name = Utilities.read();System.out.print("Surname: ");
-		String surname = Utilities.read();System.out.print("Date of birth(yyyy-MM-dd): ");
-		Date date = Exceptions.checkDate();System.out.print("Gender: ");
-		String gender = Utilities.read();System.out.print("Medical Chart: ");
+		String name = Utilities.read();
+		System.out.print("Surname: ");
+		String surname = Utilities.read();
+		System.out.print("Date of birth(yyyy-MM-dd): ");
+		Date date = Exceptions.checkDate();
+		System.out.print("Gender: ");
+		String gender = Utilities.read();
+		System.out.print("Medical Chart: ");
 		String medicalChart = Utilities.read();
 		Patient patient = new Patient(id, name, surname, date, medicalChart,gender);
 		System.out.println(patient);
