@@ -355,21 +355,20 @@ public class Menu {
 		adminManager.addNewTreatment(treatment);
 	}
 
-	public void addNewTreatment(Treatment treatment) {
-		try {  
-			String sql = "INSERT INTO treatments (disease, drug , finishDate, doctorId, patientId) "
-					+ "VALUES (?,?,?,?,?);";
-			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, treatment.getDisease());
-			prep.setString(2, treatment.getDrug());
-			prep.setDate(3, treatment.getFinishDate());
-			prep.setInt(4, treatment.getDoctor().getId());
-			prep.setInt(5, treatment.getPatient().getId());
-			
-			prep.executeUpdate();
-			prep.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
+	
+	private static void addAppointment() {
+		System.out.print("Introduce the type: ");
+		String type = Utilities.read();
+		System.out.print("Date (yyyy-MM-dd): ");
+		Date date = Exceptions.checkDate();
+		System.out.print("Time: ");
+		Float time = Exceptions.checkFloat();
+		System.out.print("Speciality: ");
+		String speciality = Utilities.read();
+		Appointment appointment = new Appointment(type,speciality,date,time);
+		adminManager.addNewAppointment(appointment);
 	}
+
+
 }

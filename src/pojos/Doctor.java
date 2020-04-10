@@ -44,6 +44,7 @@ public class Doctor implements Serializable{
 	}
 	
 	public Doctor(String name, float salary , String speciality, Date dob, Date startDate) {
+		super();
 		this.name = name;
 		this.salary = salary;
 		this.speciality = speciality;

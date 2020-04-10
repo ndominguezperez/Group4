@@ -20,7 +20,7 @@ public class Appointment implements Serializable{
 	
 
 
-	public Appointment(int id, String type, Date date, Float time, Doctor doctor, Patient patient, String speciality) {
+	public Appointment(int id, String type, Date date, Float time, String speciality,Doctor doctor, Patient patient) {
 		super(); 
 		this.id = id;
 		this.type = type;
@@ -31,6 +31,18 @@ public class Appointment implements Serializable{
 		this.speciality = speciality;
 	}
 	
+
+	public Appointment(String type, String speciality,Date date, Float time) {
+		super();
+		this.type = type;
+		this.date = date;
+		this.time = time;
+		this.speciality = speciality;
+		this.id=0;
+		this.doctor=null;
+		this.patient=null;
+	}
+
 
 	public String getSpeciality() {
 		return speciality;
