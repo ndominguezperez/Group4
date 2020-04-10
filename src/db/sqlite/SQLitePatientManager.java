@@ -20,7 +20,7 @@ public class SQLitePatientManager implements PatientManager{
 	}
 	public void addNewPatient(Patient patient) {
 		try {  
-			String sql = "INSERT INTO patients (id, name, surname , dob, medical_chart, gender) "
+			String sql = "INSERT INTO patients (id, name, surname , dob, medicalChart, gender) "
 					+ "VALUES (?,?,?,?,?,?);";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, patient.getId());
@@ -52,7 +52,7 @@ public class SQLitePatientManager implements PatientManager{
 						String patientName = rs.getString("name");
 						String patientSurname = rs.getString("surname");
 						Date patientDob = rs.getDate("dob");
-						String patientMedical_chart = rs.getString("medical_chart");
+						String patientMedical_chart = rs.getString("medicalChart");
 						String patientGender = rs.getString("gender");
 						// Create a new dog and...
 						Patient newPatient = new Patient (id, patientName, patientSurname, patientDob, patientMedical_chart, patientGender);
