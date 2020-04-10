@@ -16,19 +16,19 @@ public class Treatment implements Serializable{
 	int id;
 	String disease; 
 	String drug;
-	Date finish_date;
+	Date finishDate;
 	Patient patient;
 	Doctor doctor;
 	
 	
 
 
-	public Treatment(int id, String disease, String drug, Date finish_date, Patient patient, Doctor doctor) {
+	public Treatment(int id, String disease, String drug, Date finishDate, Patient patient, Doctor doctor) {
 		super();
 		this.id = id;
 		this.disease = disease;
 		this.drug = drug;
-		this.finish_date = finish_date;
+		this.finishDate = finishDate;
 		this.patient = patient;
 		this.doctor = doctor;
 	}
@@ -36,6 +36,18 @@ public class Treatment implements Serializable{
 
 	public Treatment() {
 		super();
+	}
+
+
+	public Treatment(String disease2, String drug2, Date finishDate) {
+		super();
+		this.id = 0;
+		this.disease = disease2;
+		this.drug = drug2;
+		this.finishDate = finishDate;
+		this.patient = null;
+		this.doctor = null;
+		
 	}
 
 
@@ -69,13 +81,13 @@ public class Treatment implements Serializable{
 	}
 
 
-	public Date getFinish_date() {
-		return finish_date;
+	public Date getFinishDate() {
+		return finishDate;
 	}
 
 
-	public void setFinish_date(Date finish_date) {
-		this.finish_date = finish_date;
+	public void setFinishDate(Date finishDate) {
+		this.finishDate = finishDate;
 	}
 
 
@@ -125,7 +137,7 @@ public class Treatment implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Treatment [id=" + id + ", disease=" + disease + ", drug=" + drug + ", finish_date=" + finish_date
+		return "Treatment [id=" + id + ", disease=" + disease + ", drug=" + drug + ", finishDate=" + finishDate
 				+ ", patient=" + patient + ", doctor=" + doctor + "]";
 	}
 

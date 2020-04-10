@@ -343,4 +343,33 @@ public class Menu {
 		System.out.println(examination);
 		adminManager.addNewExamination(examination);
 	}
+	
+	private static void addTreatment() {
+		System.out.print("Disease: ");
+		String disease = Utilities.read();
+		System.out.print("Drug: ");
+		String drug = Utilities.read();
+		System.out.print("Finish date(yyyy-MM-dd): ");
+		Date finishDate = Exceptions.checkDate();
+		Treatment treatment = new Treatment(disease, drug,finishDate);
+		adminManager.addNewTreatment(treatment);
+	}
+
+	public void addNewTreatment(Treatment treatment) {
+		try {  
+			String sql = "INSERT INTO treatments (disease, drug , finishDate, doctorId, patientId) "
+					+ "VALUES (?,?,?,?,?);";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, treatment.getDisease());
+			prep.setString(2, treatment.getDrug());
+			prep.setDate(3, treatment.getFinishDate());
+			prep.setInt(4, treatment.getDoctor().getId());
+			prep.setInt(5, treatment.getPatient().getId());
+			
+			prep.executeUpdate();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
