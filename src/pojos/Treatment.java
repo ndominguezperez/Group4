@@ -32,6 +32,15 @@ public class Treatment implements Serializable{
 		this.patient = patient;
 		this.doctor = doctor;
 	}
+	
+	public Treatment(String disease, String drug, Date finishDate, Patient patient, Doctor doctor) {
+		super();
+		this.disease = disease;
+		this.drug = drug;
+		this.finishDate = finishDate;
+		this.patient = patient;
+		this.doctor = doctor;
+	}
 
 
 	public Treatment() {

@@ -15,6 +15,7 @@ public class SQLiteManager implements DBManager {
 	private Connection c;
 	private DoctorManager doctor;
 	private PatientManager patient;
+	private AdministrationManager admin;
 
 	public SQLiteManager() {
 		super();
@@ -31,6 +32,8 @@ public class SQLiteManager implements DBManager {
 			doctor = new SQLiteDoctorManager(c);
 			// Create PatientManager
 			patient = new SQLitePatientManager(c);
+			// Create AdminManager
+			admin  = new SQLiteAdministrationManager(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -72,10 +75,9 @@ public class SQLiteManager implements DBManager {
 			String sql3 = "CREATE TABLE appointments " + "(id     INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					+ "type TEXT   NOT NULL," + " speciality  TEXT   NOT NULL, " 
 					+ "date DATE NOT NULL," + "time FLOAT NOT NULL," 
-					+ "doctorId INTEGER ,"
-					+ "patientId INTEGER, "
-					+ "FOREIGN KEY (doctorId) REFERENCES doctors(id), " 
-					+ "FOREIGN KEY (patientId) REFERENCES patients(id))";
+					+ "doctorId INTEGER REFERENCES doctors(id)ON UPDATE CASCADE ON DELETE SET NULL,"
+					+ "patientId INTEGER REFERENCES patients(id)ON UPDATE CASCADE ON DELETE SET NULL)";
+					
 					
 			//+ "doctorId INTEGER ,"
 			//+ "patientId INTEGER, "
@@ -169,6 +171,11 @@ public class SQLiteManager implements DBManager {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	@Override
+	public AdministrationManager getAdministrationManager() {
+		return admin;
 	}
 }
  

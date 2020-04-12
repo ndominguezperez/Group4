@@ -44,6 +44,19 @@ public class Examination implements Serializable{
 		this.doctor = doctor;
 		this.patient = patient;
 	}
+	
+	public Examination( String observations, Float temperature, int breathing_rate, int heart_rate,
+			Float blood_pressure, Float oxygen_saturations, Doctor doctor, Patient patient) {
+		super();
+		this.observations = observations;
+		this.temperature = temperature;
+		this.breathingRate = breathing_rate;
+		this.heartRate = heart_rate;
+		this.bloodPressure = blood_pressure;
+		this.oxygenSaturations = oxygen_saturations;
+		this.doctor = doctor;
+		this.patient = patient;
+	}
 
 	public Examination() {
 		super();

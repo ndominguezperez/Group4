@@ -1,8 +1,9 @@
 package ui;
 
 import pojos.*;
-import utilities.Exceptions;
-import utilities.Utilities;
+import ui.utilities.Adds;
+import ui.utilities.Exceptions;
+import ui.utilities.Utilities;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -12,14 +13,13 @@ import java.util.List;
 import db.interfaces.*;
 import db.sqlite.SQLiteDoctorManager;
 import db.sqlite.SQLiteManager;
-import utilities.Utilities;
 
 public class Menu {
 
-	private static PatientManager patientManager;
-	private static DoctorManager doctorManager;
-	private static AdministrationManager administrationManager;
-	private static DBManager dbManager;
+	public static PatientManager patientManager;
+	public static DoctorManager doctorManager;
+	public static AdministrationManager administrationManager;
+	public static DBManager dbManager;
 
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -29,7 +29,7 @@ public class Menu {
 		dbManager.connect();
 		patientManager = dbManager.getPatientManager();
 		doctorManager = dbManager.getDoctorManager();
-		// adminManager= dbManager.getAdminManager();
+		administrationManager= dbManager.getAdministrationManager();
 		System.out.println("Welcome!");
 		dbManager.createTables();
 
@@ -216,20 +216,20 @@ public class Menu {
 		int option = Exceptions.checkInt();
 		switch (option) {
 		case 1:
-			listAllPatiens();
+			Utilities.listAllPatiens();
 			break;
 		case 2:
 			searchPatientMenu();
 			break;
 		case 3:
 		
-			addPatient();
+			Adds.addPatient();
 			break;
 		case 4:
 			appointmentMenu();
 			break;
 		case 5:
-			addDoctor();
+			Adds.addDoctor();
 			break;
 		case 6:
 			return;
@@ -245,15 +245,17 @@ public class Menu {
 		System.out.println("\n\t3.Search appointment by date");
 		System.out.println("\n\t4.Exit");
 		int option = Exceptions.checkInt();
+		List<Patient> patientsList = patientManager.listAllPatients();
+		List<Doctor> doctorsList = doctorManager.listAllDoctors();
 		switch (option) {
 		case 1:
-			List<Patient> patientsList = patientManager.listAllPatients();
-			Patient patient = patientsList.get(0);
-			List<Doctor> doctorsList = doctorManager.listAllDoctors();
-			Doctor doctor = doctorsList.get(0);
-			addAppointment(patient,doctor);
+			Patient patient1 = patientsList.get(0);
+			Doctor doctor1 = doctorsList.get(0);
+			Adds.addAppointment(patient1,doctor1);
 		case 2:
-			addResult();
+			Patient patient2 = patientsList.get(0);
+			Doctor doctor2 = doctorsList.get(0);
+			Adds.addResult(patient2,doctor2);
 			//Utilities.modifyAppointment();
 			break;
 		case 3:
@@ -263,125 +265,5 @@ public class Menu {
 
 	}
 
-	private static void addDoctor() {
-		System.out.print("Hole Name: ");
-		String name = Utilities.read();
-		System.out.print("Salary: ");
-		Float salary = Exceptions.checkFloat();
-		System.out.print("Speciality: ");
-		String speciality = Utilities.read();
-		System.out.print("Date of birth(yyyy-MM-dd): ");
-		Date dob = Exceptions.checkDate();
-		System.out.print("Start date(yyyy-MM-dd): ");
-		Date startDate = Exceptions.checkDate();
-		Doctor doctor = new Doctor(name, salary, speciality, dob, startDate);
-		doctorManager.addNewDoctor(doctor);
-	}
-
-	private static void addPatient() {
-		boolean p=true; 
-		int id=0;
-		System.out.print("ID Number: ");
-		do {
-			p=true;
-			id = Exceptions.checkInt();
-			List<Patient> patientsList = patientManager.listAllPatients();
-			if(patientsList!=null) {
-				for (Patient patient : patientsList) {
-					if (patient.getId()==id){
-						System.out.print("That id already exist, try another one: \n");
-						p=false;
-						break;
-					}
-				}
-			}else {
-				p=true;
-			}
-		}while (p==false);
-		
-		System.out.print("Name: ");
-		String name = Utilities.read();
-		System.out.print("Surname: ");
-		String surname = Utilities.read();
-		System.out.print("Date of birth(yyyy-MM-dd): ");
-		Date date = Exceptions.checkDate();
-		System.out.print("Gender: ");
-		String gender = Utilities.read();
-		System.out.print("Medical Chart: ");
-		String medicalChart = Utilities.read();
-		Patient patient = new Patient(id, name, surname, date, medicalChart,gender);
-		System.out.println(patient);
-		patientManager.addNewPatient(patient);
-	}
-
-	private static void listAllPatiens() {
-		List<Patient> patientsList = patientManager.listAllPatients();
-		if (patientsList != null) {
-			for (Patient patient : patientsList) {
-				System.out.println(patient);
-			}
-		} else {
-			System.out.print("There are no patients already\n");
-		}
-	}
 	
-	private static void addResult() {
-		
-		System.out.print("Type: ");
-		String type = Utilities.read();
-		System.out.print("Date: ");
-		Date date = Exceptions.checkDate();
-		Result result = new Result (type, date);
-		administrationManager.addNewResult(result);
-	
-	}
-	private static void addExamination() {
-		System.out.println("Introduce the temperature");
-		Float temperature = Exceptions.checkFloat();
-		System.out.println("Introduce the breathing rate");
-		int breathingRate = Exceptions.checkInt();
-		System.out.println("Introduce the heart rate");
-		int heartRate = Exceptions.checkInt();
-		System.out.println("Introduce the blood presure");
-		Float bloodPreasure = Exceptions.checkFloat();
-		System.out.println("Introduce the oxygen saturation");
-		Float oxygenSaturation= Exceptions.checkFloat();
-		System.out.println("Introduce the observations");
-		String observations = Utilities.read();
-		Examination examination = new Examination(observations, temperature,breathingRate,heartRate, bloodPreasure, oxygenSaturation );
-		System.out.println(examination);
-		administrationManager.addNewExamination(examination);
-	}
-	
-	private static void addTreatment() {
-		System.out.print("Disease: ");
-		String disease = Utilities.read();
-		System.out.print("Drug: ");
-		String drug = Utilities.read();
-		System.out.print("Finish date(yyyy-MM-dd): ");
-		Date finishDate = Exceptions.checkDate();
-		Treatment treatment = new Treatment(disease, drug,finishDate);
-		administrationManager.addNewTreatment(treatment);
-	}
-
-
-	
-	private static void addAppointment(Patient patient, Doctor doctor) {
-		System.out.print("Introduce the type: ");
-		String type = Utilities.read();
-		System.out.print("Date (yyyy-MM-dd): ");
-		Date date = Exceptions.checkDate();
-		System.out.print("Time: ");
-		Float time = Exceptions.checkFloat();
-		System.out.print("Speciality: ");
-		String speciality = Utilities.read();
-		//Appointment appointment = new Appointment(type,speciality,date,time);
-		Appointment appointment1 = new Appointment(type,date,time,speciality,doctor,patient);
-		System.out.println(appointment1);
-		administrationManager.addNewAppointment(appointment1);
-		System.out.print("HEEEEEY ");
-		administrationManager.addNewAppointment(appointment1);
-	}
-
-
 }

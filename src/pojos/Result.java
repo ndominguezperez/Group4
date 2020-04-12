@@ -35,6 +35,14 @@ public class Result implements Serializable{
 		this.date=date;
 		this.patient = patient;
 	}
+	
+	public Result( String type, Doctor doctor, Patient patient,Date date) {
+		super();
+		this.type = type;
+		this.doctor = doctor;
+		this.date=date;
+		this.patient = patient;
+	}
 
 	public Date getDate() {
 		return date;

@@ -7,5 +7,6 @@ package db.interfaces;
 		public void createTables();
 		public DoctorManager getDoctorManager();
 		public PatientManager getPatientManager();
+		public AdministrationManager getAdministrationManager();
 		public int getLastId();
 	}

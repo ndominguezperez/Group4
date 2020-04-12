@@ -65,8 +65,8 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 		// TODO Auto-generated method stub
 			try { 
 				
-				String sql = "INSERT INTO examinations (temperature, breathingRate, heartRate , bloodPresure, oxygenSaturation, observations) "
-						+ "VALUES (?,?,?,?,?,?);";
+				String sql = "INSERT INTO examinations (temperature, breathingRate, heartRate , bloodPresure, oxygenSaturation, observations, patientId, doctorId) "
+						+ "VALUES (?,?,?,?,?,?,?,?);";
 				PreparedStatement prep = c.prepareStatement(sql);
 				prep.setFloat(1, examination.getTemperature());
 				prep.setInt(2, examination.getBreathing_rate());
@@ -74,6 +74,8 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 				prep.setFloat(4,examination.getBlood_pressure());
 		        prep.setFloat(5, examination.getOxygen_saturations());
 				prep.setString(6, examination.getObservations()); 
+				prep.setInt(7, examination.getPatient().getId());
+				prep.setInt(8, examination.getDoctor().getId());
 				prep.executeUpdate();
 				prep.close();
 			} catch (Exception e) {
@@ -97,11 +99,13 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 	@Override
 	public void addNewResult(Result result) {
 		try {  
-			String sql = "INSERT INTO results (type, date) "
-					+ "VALUES (?,?);";
+			String sql = "INSERT INTO results (type, date, doctorId, patientId) "
+					+ "VALUES (?,?,?,?);";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, result.getType());
 			prep.setDate(2, result.getDate());
+			prep.setInt(3, result.getDoctor().getId());
+			prep.setInt(4, result.getPatient().getId());
 			
 			prep.executeUpdate();
 			prep.close();
@@ -138,15 +142,15 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 		System.out.println(appointment);
 	try { 
 		System.out.println(appointment);
-		String sql = "INSERT INTO appointments (type ,speciality ,date ,time ,doctor ,patient) "
+		String sql = "INSERT INTO appointments (type ,speciality ,date ,time ,doctorId ,patientId) "
 				+ "VALUES (?,?,?,?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setString(1, appointment.getType());
 		prep.setString(2, appointment.getSpeciality());
 		prep.setDate(3, appointment.getDate());
 		prep.setFloat(4, appointment.getTime());
-		prep.setObject(5, appointment.getDoctor());
-		prep.setObject(6, appointment.getPatient());
+		prep.setObject(5, appointment.getDoctor().getId());
+		prep.setObject(6, appointment.getPatient().getId());
 		
 		prep.executeUpdate();
 		prep.close();
