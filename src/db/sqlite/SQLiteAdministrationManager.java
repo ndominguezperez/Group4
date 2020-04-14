@@ -8,7 +8,6 @@ import java.util.List;
 import db.interfaces.AdministrationManager;
 import pojos.Appointment;
 import pojos.Examination;
-import pojos.Result;
 import pojos.Treatment;
 
 public class SQLiteAdministrationManager implements AdministrationManager {
@@ -96,29 +95,6 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 		return false;
 	}
 
-	@Override
-	public void addNewResult(Result result) {
-		try {  
-			String sql = "INSERT INTO results (type, date, doctorId, patientId) "
-					+ "VALUES (?,?,?,?);";
-			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, result.getType());
-			prep.setDate(2, result.getDate());
-			prep.setInt(3, result.getDoctor().getId());
-			prep.setInt(4, result.getPatient().getId());
-			
-			prep.executeUpdate();
-			prep.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@Override
-	public List<Result> viewResults() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	public void addNewTreatment(Treatment treatment) {
 		try {  
 			String sql = "INSERT INTO treatments (disease, drug , finishDate, doctorId, patientId) "
@@ -156,5 +132,4 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 		e.printStackTrace();
 	}
 	}
-	
 }	

@@ -62,40 +62,40 @@ public class Menu {
 		Doctor doctor = null;
 		try {
 			doctor = Utilities.getDoctortById();
-		} catch (NullPointerException e) {
+		}catch (NullPointerException e) {
 			System.out.println("\n\n\tID not founded");
 			return;
 		}
-		System.out.println("Estoy aqui");
 		if (doctor == null) {
-			System.out.println("Estoy");
 			return;
 		} else {
-			doctorSubMenu(doctor.getId());
+			doctorSubMenu(doctor);
 		}
 	}
 
-	private static void doctorSubMenu(int doctorId) {
+	private static void doctorSubMenu(Doctor doctor) {
 		int option;
 		do {
 			System.out.println("Select what you want to do");
 			System.out.println("\n\t1.See Your schedule");
-			System.out.println("\\n\\t2.List all your patients");
+			System.out.println("\n\t2.List all your patients");
 			System.out.println("\n\t3.Patient");
 			System.out.println("\n\t4.Exit");
 			option = Exceptions.checkInt();
 			switch (option) {
 			case 1: // View schedule
-				System.out.println("\n\n\tYour schedule Doctor:%d \n" + doctorId);
-				Utilities.getDoctorSchedule(doctorId);
+				System.out.println("\n\n\tYour schedule Doctor:%d \n" + doctor.getId());
+				Utilities.getDoctorSchedule(doctor.getId());
 				System.out.println("\n\n\tPulse intro togo bacj to your menu");
 				Utilities.read();
 				break;
 			case 2:
-				Utilities.listAllPatientsOfDoctor(doctorId);
+				Utilities.listAllPatientsOfDoctor(doctor.getId());
+				break;
 			case 3: // Patient
-				Patient a = searchPatientMenu();
-				doctorPatientMenu(a);
+				Patient patient = searchPatientMenu();
+				doctorPatientMenu(patient, doctor);
+				break;
 			case 4:
 				break;
 
@@ -105,21 +105,21 @@ public class Menu {
 
 	}
 
-	private static void doctorPatientMenu(Patient patient) {
+	private static void doctorPatientMenu(Patient patient, Doctor doctor) {
 		System.out.println("Select what you want to do");
-		System.out.println("\n\t1.See Examinations");
-		System.out.println("\n\t2.Modify Examination");
-		System.out.println("\n\t3.Create Treatment");
-		System.out.println("\n\t4.Modify Treatment");
-		System.out.println("\n\t5.View Treatment");
-		System.out.println("\n\t6.Back");
+		System.out.println("\n\t1.Create Examinations");
+		System.out.println("\n\t2.See Examinations");
+		System.out.println("\n\t3.Modify Examination");
+		System.out.println("\n\t4.Create Treatment");
+		System.out.println("\n\t5.Modify Treatment");
+		System.out.println("\n\t6.View Treatment");
+		System.out.println("\n\t0.Back");
 		int option;
 		do {
 			option = Exceptions.checkInt();
 			switch (option) {
 			case 1:
-				// habria que hacer una funcion
-				// patient.getExaminations(); y un print como en patient
+				Adds.addExamination(patient, doctor);
 				break;
 			case 2:
 				// funcion en utilities con sets
@@ -128,13 +128,16 @@ public class Menu {
 				// fucnicon
 				break;
 			case 4:
-				// fnction
+				Adds.addTreatment(patient, doctor);
 				break;
 			case 5:
 				// function con
 				// patient.getTreatments();
 				break;
 			case 6:
+				
+				break;
+			case 0:
 				return;
 			}
 		} while (option != 6);
@@ -252,13 +255,9 @@ public class Menu {
 			Adds.addAppointment(p);
 			break;
 		case 2:
-			Patient patient2 = patientsList.get(0);
-			Doctor doctor2 = doctorsList.get(0);
-			Adds.addResult(patient2,doctor2);
-			//Utilities.modifyAppointment();
 			break;
 		case 3:
-			appointmentMenu();
+			
 			break;
 		case 4:
 			return;

@@ -20,7 +20,6 @@ public class Doctor implements Serializable{
 	Date start_date;
 	List <Treatment>treatments;
 	List <Patient> patients;
-	List <Result> results;
 	List<Examination> examinations;
 	List<Appointment> schedule;
 	
@@ -28,7 +27,7 @@ public class Doctor implements Serializable{
 	
 
 	public Doctor(int id, String name, float salary, String speciality, Date dob, Date start_date,
-			List<Patient> patients, List<Result> results, List<Examination> examinations, List<Appointment> schedule,
+			List<Patient> patients, List<Examination> examinations, List<Appointment> schedule,
 			List <Treatment>treatments) {
 		super();
 		this.id = id;
@@ -38,7 +37,6 @@ public class Doctor implements Serializable{
 		this.dob = dob;
 		this.start_date = start_date;
 		this.patients = patients;
-		this.results = results;
 		this.examinations = examinations;
 		this.schedule = schedule;
 		this.treatments = treatments;
@@ -77,7 +75,6 @@ public class Doctor implements Serializable{
 		this.speciality=speciality;
 		this.start_date=startDate;
 		this.treatments = new ArrayList<Treatment>();
-		this.results = new ArrayList<Result>();
 		this.schedule = new ArrayList<Appointment>();
 		this.examinations = new ArrayList<Examination>();
 		this.patients = new ArrayList<Patient>();
@@ -148,14 +145,6 @@ public class Doctor implements Serializable{
 		this.patients = patients;
 	}
 
-	public List<Result> getResults() {
-		return results;
-	}
-
-	public void setResults(List<Result> results) {
-		this.results = results;
-	}
-
 	public List<Examination> getExaminations() {
 		return examinations;
 	}
@@ -198,8 +187,8 @@ public class Doctor implements Serializable{
 	@Override
 	public String toString() {
 		return "Doctor [id=" + id + ", name=" + name + ", salary=" + salary + ", speciality=" + speciality + ", dob="
-				+ dob + ", start_date=" + start_date + ", patients=" + patients + ", results=" + results
-				+ ", examinations=" + examinations + ", schedule=" + schedule + ", treatments" + treatments + "]";
+				+ dob + ", start_date=" + start_date + ", patients=" + patients + ", examinations=" + examinations 
+				+ ", schedule=" + schedule + ", treatments" + treatments + "]";
 	}
 		
 }

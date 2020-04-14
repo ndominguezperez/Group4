@@ -6,7 +6,6 @@ import java.util.List;
 import pojos.Appointment;
 import pojos.Examination;
 import pojos.Patient;
-import pojos.Result;
 import pojos.Treatment;
 
 public interface AdministrationManager {
@@ -24,8 +23,6 @@ public interface AdministrationManager {
 	public void addNewExamination(Examination examination);
 	public Examination viewExamination(int id);
 	public boolean modifyExamination(int id); 
-	//Result
-	public void addNewResult(Result result);
-	public List <Result> viewResults();
+
 	
 }

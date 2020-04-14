@@ -105,19 +105,7 @@ public class SQLiteManager implements DBManager {
 			//+ "patient_id INTEGER FOREIGN KEY(patient_id) REFERENCES patients(id))";
 			stmt4.executeUpdate(sql4);
 			stmt4.close();
-			
-			Statement stmt5;
-			stmt5 = c.createStatement();
-			String sql5=  "CREATE TABLE results " + "(id     INTEGER  PRIMARY KEY AUTOINCREMENT,"
-					+ "type   TEXT   NOT NULL,"+ "date DATE NOT NULL," 
-					+ "doctorId INTEGER REFERENCES doctors(id)ON UPDATE CASCADE ON DELETE SET NULL,"
-					+ "patientId INTEGER REFERENCES patients(id)ON UPDATE CASCADE ON DELETE SET NULL)";
-			
-			//+ "doctor_id INTEGER FOREIGN KEY(doctor_id) REFERENCES doctors(id),"
-			//+ "patient_id INTEGER FOREIGN KEY(patient_id) REFERENCES patients(id))";
-			stmt5.executeUpdate(sql5);
-			stmt5.close();
-		
+
 			Statement stmt6;
 			stmt6 = c.createStatement();
 			String sql6=  "CREATE TABLE treatments " + "(id     INTEGER  PRIMARY KEY AUTOINCREMENT,"

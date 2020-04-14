@@ -7,22 +7,11 @@ import pojos.Appointment;
 import pojos.Doctor;
 import pojos.Examination;
 import pojos.Patient;
-import pojos.Result;
 import pojos.Treatment;
 import ui.Menu;
 
 public class Adds {
 	
-	public static void addResult(Patient patient, Doctor doctor) {
-		
-		System.out.print("Type: ");
-		String type = Utilities.read();
-		System.out.print("Date: ");
-		Date date = Exceptions.checkDate();
-		Result result = new Result (type,doctor,patient, date);
-		Menu.administrationManager.addNewResult(result);
-	
-	}
 	public static void addExamination(Patient patient, Doctor doctor) {
 		
 		System.out.println("Introduce the temperature");
