@@ -123,7 +123,7 @@ public class SQLitePatientManager implements PatientManager{
 		try {
 			String sql = "SELECT * FROM patients AS p JOIN doctorsPatients AS dp ON p.id = dp.patientId"
 					+ " JOIN doctors AS d ON dp.doctorId = d.id" 
-			        //+ " JOIN  appointments AS a ON p.id=a.patientId"
+			        + " JOIN  appointments AS a ON p.id=a.patientId"
 					//+ " JOIN  treatments AS t ON p.id=t.patientId"
 					+ " WHERE p.id = ?";
 		
@@ -131,8 +131,9 @@ public class SQLitePatientManager implements PatientManager{
 			p.setInt(1, patientId);
 			ResultSet rs = p.executeQuery();
 			List<Doctor> doctorList = new ArrayList<Doctor>();
-			//List<Appointment> appointmentList = new ArrayList<Appointment>();
+			List<Appointment> appointmentList = new ArrayList<Appointment>();
 			boolean patientCreated = false;
+			boolean doctorCreated = false;
 			while (rs.next()) {
 				if (!patientCreated) {
 					int pId = rs.getInt(1);
@@ -146,16 +147,17 @@ public class SQLitePatientManager implements PatientManager{
 				}
 				int docId = rs.getInt(9);
 				String docName = rs.getString(10);
-				Doctor newDoctor = new Doctor(docId, docName);
+				String speciality =rs.getString(11);
+				Doctor newDoctor = new Doctor(docId, docName, speciality);
 				doctorList.add(newDoctor);
 				
-				/*int appointmentId = rs.getInt(14);
-				String type =rs.getString(15);
-				String speciality =rs.getString(16);
-				Date date =rs.getDate(17);
-				Float time =rs.getFloat(18);
-				Appointment newAppointment = new Appointment(appointmentId, type, speciality, date, time);
-				appointmentList.add(newAppointment);*/
+				int appointmentId = rs.getInt(15);
+				String type =rs.getString(16);
+				String apSpeciality =rs.getString(17);
+				Date date =rs.getDate(18);
+				Float time =rs.getFloat(19);
+				Appointment newAppointment = new Appointment(appointmentId, type, apSpeciality, date, time);
+				appointmentList.add(newAppointment);
 				
 			}
 			newPatient.setDoctors(doctorList);
