@@ -144,16 +144,13 @@ public class Menu {
 	private static void patientMenu() {
 		Patient patient = null;
 		try {
-		    System.out.print("estoy aqui en try ");
 			patient = Utilities.getPatientById();
 			 System.out.print(patient);
 		} catch (NullPointerException e) {
 			System.out.println("\n\n\tID not founded");
 			return;
 		}
-		System.out.println("Estoy aqui");
 		if (patient == null) {
-			System.out.println("Estoy");
 			return;
 		} else {
 			patientSubMenu(patient);
