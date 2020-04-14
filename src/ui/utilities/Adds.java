@@ -66,7 +66,8 @@ public class Adds {
 		Utilities.listAllDoctors();
 		System.out.print("Id: ");
 		Doctor doctor= Utilities.getDoctortById();
-		Appointment appointment1 = new Appointment(type,date,time,doctor,patient);
+		String speciality = doctor.getSpeciality();
+		Appointment appointment1 = new Appointment(type,date,time,speciality,doctor,patient);
 		System.out.println(appointment1);
 		Menu.administrationManager.addNewAppointment(appointment1);
 	}

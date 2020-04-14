@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import db.interfaces.PatientManager;
+import pojos.Appointment;
 import pojos.Doctor;
 import pojos.Patient;
 import ui.Menu;
@@ -122,13 +123,15 @@ public class SQLitePatientManager implements PatientManager{
 		try {
 			String sql = "SELECT * FROM patients AS p JOIN doctorsPatients AS dp ON p.id = dp.patientId"
 					+ " JOIN doctors AS d ON dp.doctorId = d.id" 
-					//+ " JOIN  results AS r ON p.id=r.patientId"
+			        //+ " JOIN  appointments AS a ON p.id=a.patientId"
+					//+ " JOIN  treatments AS t ON p.id=t.patientId"
 					+ " WHERE p.id = ?";
 		
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setInt(1, patientId);
 			ResultSet rs = p.executeQuery();
 			List<Doctor> doctorList = new ArrayList<Doctor>();
+			//List<Appointment> appointmentList = new ArrayList<Appointment>();
 			boolean patientCreated = false;
 			while (rs.next()) {
 				if (!patientCreated) {
@@ -145,9 +148,18 @@ public class SQLitePatientManager implements PatientManager{
 				String docName = rs.getString(10);
 				Doctor newDoctor = new Doctor(docId, docName);
 				doctorList.add(newDoctor);
+				
+				/*int appointmentId = rs.getInt(14);
+				String type =rs.getString(15);
+				String speciality =rs.getString(16);
+				Date date =rs.getDate(17);
+				Float time =rs.getFloat(18);
+				Appointment newAppointment = new Appointment(appointmentId, type, speciality, date, time);
+				appointmentList.add(newAppointment);*/
+				
 			}
 			newPatient.setDoctors(doctorList);
-
+            
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

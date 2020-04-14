@@ -139,9 +139,7 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 	
 	@Override
 	public void addNewAppointment(Appointment appointment) {
-		System.out.println(appointment);
 	try { 
-		System.out.println(appointment);
 		String sql = "INSERT INTO appointments (type ,speciality ,date ,time ,doctorId ,patientId) "
 				+ "VALUES (?,?,?,?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql);

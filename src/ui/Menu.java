@@ -240,6 +240,7 @@ public class Menu {
 	}
 
 	private static void appointmentMenu() {
+		System.out.println("Patient: ");
 		Patient p = searchPatientMenu();
 		System.out.println("Select what you want to do");
 		System.out.println("\n\t1.Set Up a new one");
@@ -251,9 +252,8 @@ public class Menu {
 		List<Doctor> doctorsList = doctorManager.listAllDoctors();
 		switch (option) {
 		case 1:
-			//Patient patient1 = patientsList.get(0);
-			//Doctor doctor1 = doctorsList.get(0);
 			Adds.addAppointment(p);
+			break;
 		case 2:
 			Patient patient2 = patientsList.get(0);
 			Doctor doctor2 = doctorsList.get(0);
@@ -262,6 +262,9 @@ public class Menu {
 			break;
 		case 3:
 			appointmentMenu();
+			break;
+		case 4:
+			return;
 
 		}
 
