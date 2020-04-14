@@ -117,7 +117,7 @@ public class SQLiteManager implements DBManager {
 			//+ "patient_id INTEGER FOREIGN KEY(patient_id) REFERENCES patients(id))";
 			stmt5.executeUpdate(sql5);
 			stmt5.close();
-			
+		
 			Statement stmt6;
 			stmt6 = c.createStatement();
 			String sql6=  "CREATE TABLE treatments " + "(id     INTEGER  PRIMARY KEY AUTOINCREMENT,"
