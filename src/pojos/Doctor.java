@@ -52,7 +52,18 @@ public class Doctor implements Serializable{
 		this.dob = dob;
 		this.start_date = startDate;
 	}
-
+	
+	public Doctor(int id, String name) {
+		super();
+		this.id=id;
+	    this.name=name;
+	}
+	public Doctor(int id, String name, String speciality) {
+		super();
+		this.id=id;
+	    this.name=name;
+	    this.speciality=speciality;
+	}
 	public Doctor() {
 		super();
 	}

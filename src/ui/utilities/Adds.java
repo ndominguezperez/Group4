@@ -55,7 +55,7 @@ public class Adds {
 
 
 	
-	public static void addAppointment(Patient patient, Doctor doctor) {
+	public static void addAppointment(Patient patient) {
 		
 		System.out.print("Introduce the type: ");
 		String type = Utilities.read();
@@ -63,9 +63,10 @@ public class Adds {
 		Date date = Exceptions.checkDate();
 		System.out.print("Time: ");
 		Float time = Exceptions.checkFloat();
-		System.out.print("Speciality: ");
-		String speciality = Utilities.read();
-		Appointment appointment1 = new Appointment(type,date,time,speciality,doctor,patient);
+		Utilities.listAllDoctors();
+		System.out.print("Id: ");
+		Doctor doctor= Utilities.getDoctortById();
+		Appointment appointment1 = new Appointment(type,date,time,doctor,patient);
 		System.out.println(appointment1);
 		Menu.administrationManager.addNewAppointment(appointment1);
 	}
@@ -101,10 +102,13 @@ public class Adds {
 		String gender = Utilities.read();
 		System.out.print("Medical Chart: ");
 		String medicalChart = Utilities.read();
+		Utilities.listAllDoctors();
+		System.out.print("Choose a doctor: ");
+		Doctor doctor= Utilities.getDoctortById();
 		Patient patient = new Patient(id, name, surname, date, medicalChart,gender);
 		System.out.println(patient);
-		Menu.patientManager.addNewPatient(patient);
-	}
+		Menu.patientManager.addNewPatient(patient, doctor);
+		}
 	
 	public static void addDoctor() {
 		System.out.print("Hole Name: ");

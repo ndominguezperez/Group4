@@ -43,9 +43,20 @@ public class Utilities {
 			System.out.print("There are no patients already\n");
 		}
 	}
+	public static void listAllDoctors() {
+		List<Doctor> doctorsList = Menu.doctorManager.listAllDoctors();
+		if (doctorsList != null) {
+			for (Doctor doctor : doctorsList) {
+				System.out.println(doctor);
+			}
+		} else {
+			System.out.print("There are no patients already\n");
+		}
+	}
 
 	public static Patient getPatientById() {
 		int patientId = askForId();
+		System.out.println("en la funcion de utilities");
 		Patient patient = Menu.patientManager.getPatient(patientId);
 		return patient;
 	}

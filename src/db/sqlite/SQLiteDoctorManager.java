@@ -42,7 +42,23 @@ public class SQLiteDoctorManager implements DoctorManager {
 	}
 	
 	public Doctor getDoctorById(int id) {
-		return null;
+		Doctor newDoctor=null;
+		try {
+		String sql = "SELECT * FROM doctors WHERE id LIKE ?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setString(1, "%" + id + "%");
+		ResultSet rs = prep.executeQuery();
+		while(rs.next()) {
+			int doctorId = rs.getInt("id");
+			String doctorName = rs.getString("name");
+			String speciality = rs.getString("speciality");
+			 newDoctor= new Doctor(id,doctorName,speciality);
+			
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return newDoctor;
 		
 	}
 

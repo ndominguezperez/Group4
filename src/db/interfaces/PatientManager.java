@@ -7,8 +7,9 @@ import pojos.*;
 
 public interface PatientManager {
 	public List<Patient> listAllPatients();
-	public void addNewPatient(Patient patient);
+	public void addNewPatient(Patient patient, Doctor doctor);
 	public Patient getPatient(int patientId);
 	public List<Patient> searchByName(String name);
 	public List<Patient> searchBySurname(String surname);
+	public void assign (int doctorId,int patientId);
 }

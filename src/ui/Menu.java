@@ -144,7 +144,9 @@ public class Menu {
 	private static void patientMenu() {
 		Patient patient = null;
 		try {
+		    System.out.print("estoy aqui en try ");
 			patient = Utilities.getPatientById();
+			 System.out.print(patient);
 		} catch (NullPointerException e) {
 			System.out.println("\n\n\tID not founded");
 			return;
@@ -238,7 +240,7 @@ public class Menu {
 	}
 
 	private static void appointmentMenu() {
-		//Patient p = searchPatientMenu();
+		Patient p = searchPatientMenu();
 		System.out.println("Select what you want to do");
 		System.out.println("\n\t1.Set Up a new one");
 		System.out.println("\n\t2.Modify");
@@ -249,9 +251,9 @@ public class Menu {
 		List<Doctor> doctorsList = doctorManager.listAllDoctors();
 		switch (option) {
 		case 1:
-			Patient patient1 = patientsList.get(0);
-			Doctor doctor1 = doctorsList.get(0);
-			Adds.addAppointment(patient1,doctor1);
+			//Patient patient1 = patientsList.get(0);
+			//Doctor doctor1 = doctorsList.get(0);
+			Adds.addAppointment(p);
 		case 2:
 			Patient patient2 = patientsList.get(0);
 			Doctor doctor2 = doctorsList.get(0);

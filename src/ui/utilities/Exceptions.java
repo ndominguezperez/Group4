@@ -2,6 +2,7 @@ package ui.utilities;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 public class Exceptions {
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     public static int validateDay() {
@@ -117,9 +118,19 @@ public class Exceptions {
         
     }
   public static Date checkDate() {
-	  String day = Utilities.read();
+	  int i=0;
+	  Date date=null;
+	  while(i==0) {
+	  try {
+		String day = Utilities.read();
 		LocalDate admissionDate = LocalDate.parse(day, formatter);
-		Date date= Date.valueOf(admissionDate);
+		date= Date.valueOf(admissionDate);
+		i=1;
+	  }catch(DateTimeParseException e) {
+		  System.out.println("You should put a valid day in the right format");
+		  System.out.println("Date:");
+	  }
+	  }
 		return date;
   }
 }

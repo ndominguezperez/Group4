@@ -1,12 +1,16 @@
 package db.sqlite;
 import java.sql.PreparedStatement;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import db.interfaces.PatientManager;
+import pojos.Doctor;
 import pojos.Patient;
+import ui.Menu;
+
 import java.sql.Connection;
 import java.sql.Date;
 
@@ -18,7 +22,7 @@ public class SQLitePatientManager implements PatientManager{
 	public SQLitePatientManager(Connection c) {
 		this.c = c;
 	}
-	public void addNewPatient(Patient patient) {
+	public void addNewPatient(Patient patient, Doctor doctor) {
 		try {  
 			String sql = "INSERT INTO patients (id, name, surname , dob, medicalChart, gender) "
 					+ "VALUES (?,?,?,?,?,?);";
@@ -31,11 +35,12 @@ public class SQLitePatientManager implements PatientManager{
 			prep.setString(6, patient.getGender()); 
 			prep.executeUpdate();
 			prep.close();
+		    assign(doctor.getId(), patient.getId());
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
 	}
-
 
 	@Override
 	public List<Patient> listAllPatients() {
@@ -67,65 +72,102 @@ public class SQLitePatientManager implements PatientManager{
 	}
 	@Override
 	public List<Patient> searchByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		List <Patient> patientList= new ArrayList <Patient>();
+		try {
+		String sql = "SELECT * FROM patients WHERE name LIKE ?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setString(1, "%" + name + "%");
+		ResultSet rs = prep.executeQuery();
+		while(rs.next()) {
+			int id = rs.getInt("id");
+			String patientName = rs.getString("name");
+			String patientSurname = rs.getString("surname");
+			Date dob = rs.getDate("dob");
+			Patient newPatient= new Patient(id,patientName,patientSurname,dob);
+			patientList.add(newPatient);
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return patientList;
 	}
 	@Override
 	public List<Patient> searchBySurname(String surname) {
-		// TODO Auto-generated method stub
-		return null;
+		List <Patient> patientList= new ArrayList <Patient>();
+		try {
+		String sql = "SELECT * FROM patients WHERE surname LIKE ?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setString(1, "%" + surname + "%");
+		ResultSet rs = prep.executeQuery();
+		while(rs.next()) {
+			int id = rs.getInt("id");
+			String patientName = rs.getString("name");
+			String patientSurname = rs.getString("surname");
+			Date dob = rs.getDate("dob");
+			Patient newPatient= new Patient(id,patientName,patientSurname,dob);
+			patientList.add(newPatient);
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return patientList;
+
 	}
 
 	
 	
 
-	public Patient getPatient (int patientId) {return null;}/*
-		// Get Patients
+	public Patient getPatient (int patientId) {
 		Patient newPatient = null;
 		try {
-			String sql = "SELECT * FROM patients AS d JOIN dogsMedicines AS dm ON d.id = dm.dogId"
-					+ " JOIN medicines AS m ON dm.medicineId = m.id" + " WHERE d.id = ?";
-			// Get the joining of three tables
-			// id, name, breed, weight, admissionDate, releaseDate, dogId, medicineId, id,
-			// name
-			// EXAMPLE
-			// 1, Lassie, Collie, 10, 2020-06-01, 2020-08-01, 1, 1, 1, Dalsi
-			// 1, Lassie, Collie, 10, 2020-06-01, 2020-08-01, 1, 2, 2, Dogmotril
+			String sql = "SELECT * FROM patients AS p JOIN doctorsPatients AS dp ON p.id = dp.patientId"
+					+ " JOIN doctors AS d ON dp.doctorId = d.id" 
+					//+ " JOIN  results AS r ON p.id=r.patientId"
+					+ " WHERE p.id = ?";
+		
 			PreparedStatement p = c.prepareStatement(sql);
-			p.setInt(1, dogId);
+			p.setInt(1, patientId);
 			ResultSet rs = p.executeQuery();
-			List<Medicine> medicinesList = new ArrayList<Medicine>();
-			// WHEN YOU DO A JOIN WITH SQLITE YOU CANNOT USE COLUMN NAMES
-			// YOU MUST USE NUMBERS INSTEAD
-			// THIS IS BECAUSE SQLITE DOESN'T SUPPORT JOINS WITH ALIASES
-			// To avoid creating the dog several times
-			boolean dogCreated = false;
+			List<Doctor> doctorList = new ArrayList<Doctor>();
+			boolean patientCreated = false;
 			while (rs.next()) {
-				// If the dog has not been created
-				if (!dogCreated) {
-					// Get the dog information
-					int newDogId = rs.getInt(1);
-					String dogName = rs.getString(2);
-					String breed = rs.getString(3);
-					float weight = rs.getFloat(4);
-					Date admissionDate = rs.getDate(5);
-					Date releaseDate = rs.getDate(6);
-					// Create a new dog
-					newDog = new Dog(newDogId, dogName, breed, weight, admissionDate, releaseDate);
-					dogCreated = true;
+				if (!patientCreated) {
+					int pId = rs.getInt(1);
+					String name = rs.getString(2);
+					String surname = rs.getString(3);
+					Date dob = rs.getDate(4);
+					String medicalChart = rs.getString(5);
+					String gender = rs.getString(6);
+					newPatient = new Patient(pId, name, surname, dob, medicalChart, gender);
+					patientCreated = true;
 				}
-				// Get the medicine information
-				int medicineId = rs.getInt(9);
-				String medicineName = rs.getString(10);
-				Medicine newMedicine = new Medicine(medicineId, medicineName);
-				medicinesList.add(newMedicine);
+				int docId = rs.getInt(9);
+				String docName = rs.getString(10);
+				Doctor newDoctor = new Doctor(docId, docName);
+				doctorList.add(newDoctor);
 			}
-			newDog.setMedicines(medicinesList);
+			newPatient.setDoctors(doctorList);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return newDog;
-	}*/
+		return newPatient;
+		}
+	
+	public void assign(int doctorId, int patientId) {
+		try {
+			String sql = "INSERT INTO doctorsPatients (doctorId, patientId) "
+					+ "VALUES (?,?);";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, doctorId);
+			prep.setInt(2, patientId);
+			prep.executeUpdate();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
 }
 
