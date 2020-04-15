@@ -125,7 +125,8 @@ public class SQLitePatientManager implements PatientManager{
 					+ " JOIN doctors AS d ON dp.doctorId = d.id" 
 			        + " JOIN  appointments AS a ON p.id=a.patientId"
 					//+ " JOIN  treatments AS t ON p.id=t.patientId"
-					+ " WHERE p.id = ?";
+			        
+					+ " WHERE p.id = ? AND a.doctor_id = d.id";
 		
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setInt(1, patientId);
@@ -148,8 +149,12 @@ public class SQLitePatientManager implements PatientManager{
 				int docId = rs.getInt(9);
 				String docName = rs.getString(10);
 				String speciality =rs.getString(11);
+				
 				Doctor newDoctor = new Doctor(docId, docName, speciality);
-				doctorList.add(newDoctor);
+				if (!doctorList.contains(newDoctor)) { 
+					doctorList.add(newDoctor); 
+				}
+				
 				
 				int appointmentId = rs.getInt(15);
 				String type =rs.getString(16);
@@ -161,7 +166,7 @@ public class SQLitePatientManager implements PatientManager{
 				
 			}
 			newPatient.setDoctors(doctorList);
-            
+			newPatient.setSchedule(appointmentList);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
