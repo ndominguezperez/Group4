@@ -68,7 +68,13 @@ public class Utilities {
 		return doctor;
 	}
 	
-
+	public static Doctor getDoctortByIdPassingInt(int doctorId) {
+		//int doctorId = askForId();
+		Doctor doctor ;
+		doctor = Menu.doctorManager.getDoctorById(doctorId);
+		return doctor;
+	}
+	
 	public static void searchPatientByName() {
 		String name = null;
 		int i;

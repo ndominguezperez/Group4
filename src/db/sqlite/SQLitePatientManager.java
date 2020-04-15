@@ -11,6 +11,7 @@ import pojos.Appointment;
 import pojos.Doctor;
 import pojos.Patient;
 import ui.Menu;
+import ui.utilities.Utilities;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -126,7 +127,7 @@ public class SQLitePatientManager implements PatientManager{
 			        + " JOIN  appointments AS a ON p.id=a.patientId"
 					//+ " JOIN  treatments AS t ON p.id=t.patientId"
 			        
-					+ " WHERE p.id = ? AND a.doctor_id = d.id";
+					+ " WHERE p.id = ?"; //AND a.doctor_id = d.id";
 		
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setInt(1, patientId);
@@ -161,7 +162,10 @@ public class SQLitePatientManager implements PatientManager{
 				String apSpeciality =rs.getString(17);
 				Date date =rs.getDate(18);
 				Float time =rs.getFloat(19);
-				Appointment newAppointment = new Appointment(appointmentId, type, apSpeciality, date, time);
+				int doctorId = rs.getInt(20);
+				Doctor newDoctor2 = new Doctor();
+				newDoctor2 = ui.utilities.Utilities.getDoctortByIdPassingInt(doctorId) ;
+				Appointment newAppointment = new Appointment(appointmentId, type, apSpeciality, date, time,newDoctor2);
 				appointmentList.add(newAppointment);
 				
 			}
