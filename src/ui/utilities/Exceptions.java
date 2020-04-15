@@ -133,4 +133,21 @@ public class Exceptions {
 	  }
 		return date;
   }
+  public static boolean checkConfirmation() {
+	  int i=0;
+	  boolean yes=false;
+	  while(i==0) {
+		  System.out.println("Yes or No (Y/N)");
+		  String confirm = Utilities.read();
+		  if(confirm.equals("Y")) {
+			  i=1;
+			  yes=true;
+		  }
+		  if(confirm.equals("N")) {
+			  i=1;
+			  yes=false;
+		  }
+	  }
+	  return yes;
+  }
 }

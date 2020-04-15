@@ -121,5 +121,6 @@ public class Utilities {
 	public static void modifyAppointment(Patient p) {
 		p.getSchedule();
 	}
+	
 
 }
