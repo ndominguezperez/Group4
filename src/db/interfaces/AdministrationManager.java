@@ -17,13 +17,13 @@ public interface AdministrationManager {
 	public void addNewAppointment (Appointment appointment);
 	public List<Appointment> viewPatientSchedule(int id);
 	public List<Appointment> viewDoctorSchedule(int id);
-	public boolean modifyAppointment (Appointment appointment);
+	public void modifyAppointment (Appointment appointment);
 	public Appointment getAppointmentById(int id);
 	public List<Appointment> searchAppointmentByDate(Date date);
 	//Examination
 	public void addNewExamination(Examination examination);
 	public List<Examination> viewExamination(int patientId);
-	public boolean modifyExamination(int id); 
+	public void modifyExamination(int id); 
 
 	
 }
