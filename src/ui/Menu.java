@@ -44,7 +44,7 @@ public class Menu {
 			System.out.println("\n\t1.Doctor");
 			System.out.println("\n\t2.Patient");
 			System.out.println("\n\t3.Admin Staff");
-			System.out.println("\n\t4.Exit");
+			System.out.println("\n\t0.Exit");
 			option = Exceptions.checkInt();
 			switch (option) {
 			case 1:
@@ -56,7 +56,7 @@ public class Menu {
 			case 3:
 				adminMenu();
 				break;
-			case 4:
+			case 0:
 				System.exit(0);
 			}
 		} while (option != 4);
@@ -87,7 +87,7 @@ public class Menu {
 			System.out.println("\n\t1.See Your schedule");
 			System.out.println("\n\t2.List all your patients");
 			System.out.println("\n\t3.Patient");
-			System.out.println("\n\t4.Back");
+			System.out.println("\n\t0.Back");
 			option = Exceptions.checkInt();
 			switch (option) {
 			case 1: // View schedule
@@ -100,7 +100,7 @@ public class Menu {
 				Patient patient = searchPatientMenu();
 				doctorPatientMenu(patient, doctor);
 				break;
-			case 4:
+			case 0:
 				Menu();
 
 			}
@@ -140,7 +140,7 @@ public class Menu {
 				// patient.getTreatments();
 				break;
 			case 6:
-				
+				doctorManager.viewTreatment(patient.getId());
 				break;
 			case 0:
 				doctorSubMenu(doctor);
@@ -171,7 +171,7 @@ public class Menu {
 			System.out.println("Select what you want to do");
 			System.out.println("\n\t1.Schedule");
 			System.out.println("\n\t2.See examinations");
-			System.out.println("\n\t3.Back");
+			System.out.println("\n\t0.Back");
 			option = Exceptions.checkInt();
 			switch (option) {
 			case 1:
@@ -181,7 +181,7 @@ public class Menu {
 				// Uitlizar la funcion creada con doctorPatientMenu
 				List<Examination> a = patient.getExaminations();
 				break;
-			case 3:
+			case 0:
 				Menu();
 			}
 		} while (option != 3);
@@ -259,8 +259,9 @@ public class Menu {
 			Adds.addAppointment(p);
 			appointmentMenu();
 		case 2:
-			System.out.println("Patient: ");
+			System.out.println("From what patient do you want to modify the appointment: ");
 			p = searchPatientMenu();
+			ui.utilities.Sets.setAppointment(p);
 			appointmentMenu();
 		case 3:
 			ui.utilities.Utilities.searchAppointmentByDate();
