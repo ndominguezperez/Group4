@@ -57,7 +57,6 @@ public class Utilities {
 	public static Patient getPatientById() {
 		int patientId = askForId();
 		Patient patient = Menu.patientManager.getPatient(patientId);
-		System.out.println(patient);
 		return patient;
 	}
 	

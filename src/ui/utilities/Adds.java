@@ -92,12 +92,12 @@ public class Adds {
 		String gender = Utilities.read();
 		System.out.print("Medical Chart: ");
 		String medicalChart = Utilities.read();
+		System.out.print("Choose a doctor: \n");
 		Utilities.listAllDoctors();
-		System.out.print("Choose a doctor: ");
 		Doctor doctor= Utilities.getDoctortById();
 		Patient patient = new Patient(id, name, surname, date, medicalChart,gender);
-		System.out.println(patient);
 		Menu.patientManager.addNewPatient(patient, doctor);
+		System.out.println(patient);
 		}
 	
 	public static void addDoctor() {

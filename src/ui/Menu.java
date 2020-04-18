@@ -33,6 +33,11 @@ public class Menu {
 		System.out.println("Welcome!");
 		dbManager.createTables();
 
+		Menu();
+		
+	}
+
+	private static void Menu() {
 		int option;
 		do {
 			System.out.println("Select who you are");
@@ -56,8 +61,9 @@ public class Menu {
 			}
 		} while (option != 4);
 	}
-
+	
 	// Esto seria con la contraseña y eso supongo....
+	
 	private static void doctorMenu() {
 		Doctor doctor = null;
 		try {
@@ -80,13 +86,13 @@ public class Menu {
 			System.out.println("\n\t1.See Your schedule");
 			System.out.println("\n\t2.List all your patients");
 			System.out.println("\n\t3.Patient");
-			System.out.println("\n\t4.Exit");
+			System.out.println("\n\t4.Back");
 			option = Exceptions.checkInt();
 			switch (option) {
 			case 1: // View schedule
 				System.out.println("\n\n\tYour schedule Doctor:%d \n" + doctor.getId());
 				Utilities.getDoctorSchedule(doctor.getId());
-				System.out.println("\n\n\tPulse intro togo bacj to your menu");
+				System.out.println("\n\n\tPulse intro to go back to your menu");
 				Utilities.read();
 				break;
 			case 2:
@@ -97,7 +103,7 @@ public class Menu {
 				doctorPatientMenu(patient, doctor);
 				break;
 			case 4:
-				break;
+				Menu();
 
 			}
 
@@ -138,7 +144,7 @@ public class Menu {
 				
 				break;
 			case 0:
-				return;
+				doctorSubMenu(doctor);
 			}
 		} while (option != 6);
 
@@ -177,7 +183,7 @@ public class Menu {
 				List<Examination> a = patient.getExaminations();
 				break;
 			case 3:
-				return;
+				Menu();
 			}
 		} while (option != 3);
 	}
@@ -186,7 +192,7 @@ public class Menu {
 		System.out.println("\n\t1.To search by id number");
 		System.out.println("\n\t2.To search by name");
 		System.out.println("\n\t3.To search by surname");
-		System.out.println("\n\tIf you want to go back press 0");
+		//System.out.println("\n\tIf you want to go back press 0");
 		int option = Exceptions.checkInt();
 		Patient p = null;
 		switch (option) {
@@ -201,39 +207,40 @@ public class Menu {
 			Utilities.searchPatientBySurname();
 			p = Utilities.getPatientById();
 			break;
-		case 0:
-			break;
+		//case 0:
+			//break;
 		}
 		return p;
 	}
 
 	private static void adminMenu() {
-		System.out.println("Select what you want to do");
+		System.out.println("\nSelect what you want to do");
 		System.out.println("\n\t1.List all patients");
 		System.out.println("\n\t2.View a patient");
 		System.out.println("\n\t3.Add a new patient");
 		System.out.println("\n\t4.Appointmets");
 		System.out.println("\n\t5.Add new doctor");
-		System.out.println("\n\t6.Exit");
+		System.out.println("\n\t0.Back");
 		int option = Exceptions.checkInt();
 		switch (option) {
 		case 1:
 			Utilities.listAllPatiens();
-			break;
+			adminMenu();
 		case 2:
-			searchPatientMenu();
-			break;
+			Patient p=searchPatientMenu();
+			System.out.println(p);
+			adminMenu();
 		case 3:
 			Adds.addPatient();
-			break;
+			adminMenu();
 		case 4:
 			appointmentMenu();
 			break;
 		case 5:
 			Adds.addDoctor();
-			break;
-		case 6:
-			return;
+			adminMenu();
+		case 0:
+			Menu();
 
 		}
 	}
@@ -243,7 +250,7 @@ public class Menu {
 		System.out.println("\n\t1.Set Up a new one");
 		System.out.println("\n\t2.Modify");
 		System.out.println("\n\t3.Search appointment by date");
-		System.out.println("\n\t4.Exit");
+		System.out.println("\n\t0.Back");
 		int option = Exceptions.checkInt();
 		Patient p ;
 		switch (option) {
@@ -251,17 +258,17 @@ public class Menu {
 			System.out.println("Patient: ");
 			p = searchPatientMenu();
 			Adds.addAppointment(p);
-			break;
+			appointmentMenu();
 		case 2:
 			System.out.println("Patient: ");
 			p = searchPatientMenu();
-			break;
+			appointmentMenu();
 		case 3:
 			System.out.println("Patient: ");
 			p = searchPatientMenu();
-			break;
-		case 4:
-			return;
+			appointmentMenu();
+		case 0:
+			adminMenu();
 
 		}
 
