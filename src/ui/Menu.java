@@ -248,7 +248,7 @@ public class Menu {
 	private static void appointmentMenu() {
 		System.out.println("Select what you want to do");
 		System.out.println("\n\t1.Set Up a new one");
-		System.out.println("\n\t2.Modify");
+		System.out.println("\n\t2.Modify appointment");
 		System.out.println("\n\t3.Search appointment by date");
 		System.out.println("\n\t0.Back");
 		int option = Exceptions.checkInt();
@@ -266,6 +266,7 @@ public class Menu {
 		case 3:
 			System.out.println("Patient: ");
 			p = searchPatientMenu();
+			
 			appointmentMenu();
 		case 0:
 			adminMenu();
