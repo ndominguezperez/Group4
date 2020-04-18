@@ -213,6 +213,9 @@ public class SQLitePatientManager implements PatientManager{
 		}
 
 	}
+	public void modifyPatient(Patient patient) {
+		
+	}
 	
 }
 

@@ -12,7 +12,7 @@ public interface AdministrationManager {
 	//Treatment
 	public void addNewTreatment(Treatment treatment);
 	public Treatment viewTreatment(int id);
-	public boolean modifyTreatment(int id); 
+	public void modifyTreatment(Treatment treatment); 
 	//Appointment
 	public void addNewAppointment (Appointment appointment);
 	public List<Appointment> viewPatientSchedule(int id);
@@ -23,7 +23,6 @@ public interface AdministrationManager {
 	//Examination
 	public void addNewExamination(Examination examination);
 	public List<Examination> viewExamination(int patientId);
-	public void modifyExamination(int id); 
 
 	
 }

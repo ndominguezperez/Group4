@@ -34,18 +34,16 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 	}
 
 	@Override
-	public boolean modifyTreatment(int id) {
-		// TODO Auto-generated method stub
-		return false;
+	public void modifyTreatment(Treatment treatment) {
+		
 	}
 
 
 
 
 	@Override
-	public boolean modifyAppointment(Appointment appointment) {
-		// TODO Auto-generated method stub
-		return false;
+	public void modifyAppointment(Appointment appointment) {
+		
 	}
 
 	@Override
@@ -276,11 +274,7 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 		
 		return examinationList;
 	}
-	@Override
-	public boolean modifyExamination(int id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 
 	public void addNewTreatment(Treatment treatment) {
 		try {  
