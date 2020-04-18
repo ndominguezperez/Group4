@@ -3,12 +3,18 @@ package db.sqlite;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 
 import db.interfaces.AdministrationManager;
 import pojos.Appointment;
+import pojos.Doctor;
 import pojos.Examination;
+import pojos.Patient;
 import pojos.Treatment;
+import ui.Menu;
 
 public class SQLiteAdministrationManager implements AdministrationManager {
 	private Connection c;
@@ -31,11 +37,15 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
 
+	@Override
+	public List<Appointment> viewPatientSchedule(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	@Override
-	public List<Appointment> viewSchedule(int id) {
+	public List<Appointment> viewDoctorSchedule(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -49,14 +59,58 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 
 	@Override
 	public Appointment getAppointmentById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Appointment appointmentsList= new Appointment();
+		try {
+		String sql = "SELECT * FROM appointments WHERE id LIKE ? ";
+		PreparedStatement prep = c.prepareStatement(sql);
+		//prep.setString(1, "%" + date + "%");
+		prep.setInt(1, id);
+		ResultSet rs = prep.executeQuery();
+		while(rs.next()) {
+			String type = rs.getString("type");
+			Date date = rs.getDate("date");
+			String speciality = rs.getString("speciality");
+			float time = rs.getFloat("time");
+			int doctorId = rs.getInt("doctorId");
+			int patientId = rs.getInt("patientId");
+			Doctor doctor = Menu.doctorManager.getDoctorById(doctorId);
+			Patient patient = Menu.patientManager.getPatient(patientId);
+			Appointment newAppointment= new Appointment(id,type,date,time,speciality,doctor,patient);
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return appointmentsList;
 	}
 
 	@Override
-	public List<Appointment> searchAppoitmentByDate(Date date) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Appointment> searchAppointmentByDate(Date date) {
+		List <Appointment> appointmentsList= new ArrayList <Appointment>();
+		try {
+		String sql = "SELECT * FROM appointments WHERE date LIKE ? ";
+		PreparedStatement prep = c.prepareStatement(sql);
+		//prep.setString(1, "%" + date + "%");
+		prep.setDate(1, date);
+		//prep.setString(2, "%" + patient.getId() + "%");
+		//prep.setInt(2, patient.getId() );
+		ResultSet rs = prep.executeQuery();
+		while(rs.next()) {
+			
+			int id = rs.getInt("id");
+			String type = rs.getString("type");
+			String speciality = rs.getString("speciality");
+			float time = rs.getFloat("time");
+			int doctorId = rs.getInt("doctorId");
+			int patientId = rs.getInt("patientId");
+			Doctor doctor = Menu.doctorManager.getDoctorById(doctorId);
+			Patient patient = Menu.patientManager.getPatientById(patientId);
+			Appointment newAppointment= new Appointment(id,type,date,time,speciality,doctor,patient);
+			appointmentsList.add(newAppointment);
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return appointmentsList;
 	}
 
 	@Override
@@ -132,4 +186,5 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 		e.printStackTrace();
 	}
 	}
+
 }	

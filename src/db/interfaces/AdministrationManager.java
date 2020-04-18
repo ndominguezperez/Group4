@@ -15,10 +15,11 @@ public interface AdministrationManager {
 	public boolean modifyTreatment(int id); 
 	//Appointment
 	public void addNewAppointment (Appointment appointment);
-	public List<Appointment> viewSchedule(int id);
+	public List<Appointment> viewPatientSchedule(int id);
+	public List<Appointment> viewDoctorSchedule(int id);
 	public boolean modifyAppointment (Appointment appointment);
 	public Appointment getAppointmentById(int id);
-	public List<Appointment> searchAppoitmentByDate(Date date);
+	public List<Appointment> searchAppointmentByDate(Date date);
 	//Examination
 	public void addNewExamination(Examination examination);
 	public Examination viewExamination(int id);

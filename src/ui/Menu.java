@@ -70,6 +70,7 @@ public class Menu {
 			doctor = Utilities.getDoctortById();
 		}catch (NullPointerException e) {
 			System.out.println("\n\n\tID not founded");
+			doctor=null;
 			return;
 		}
 		if (doctor == null) {
@@ -90,11 +91,8 @@ public class Menu {
 			option = Exceptions.checkInt();
 			switch (option) {
 			case 1: // View schedule
-				System.out.println("\n\n\tYour schedule Doctor:%d \n" + doctor.getId());
 				Utilities.getDoctorSchedule(doctor.getId());
-				System.out.println("\n\n\tPulse intro to go back to your menu");
-				Utilities.read();
-				break;
+				doctorSubMenu(doctor);
 			case 2:
 				Utilities.listAllPatientsOfDoctor(doctor.getId());
 				break;
@@ -112,6 +110,8 @@ public class Menu {
 	}
 
 	private static void doctorPatientMenu(Patient patient, Doctor doctor) {
+		int option;
+		do {
 		System.out.println("Select what you want to do");
 		System.out.println("\n\t1.Create Examinations");
 		System.out.println("\n\t2.See Examinations");
@@ -120,15 +120,14 @@ public class Menu {
 		System.out.println("\n\t5.Modify Treatment");
 		System.out.println("\n\t6.View Treatment");
 		System.out.println("\n\t0.Back");
-		int option;
-		do {
+		
 			option = Exceptions.checkInt();
 			switch (option) {
 			case 1:
 				Adds.addExamination(patient, doctor);
 				break;
 			case 2:
-				// funcion en utilities con sets
+				administrationManager.viewExamination(patient.getId());
 				break;
 			case 3:
 				// fucnicon
@@ -172,7 +171,7 @@ public class Menu {
 			System.out.println("Select what you want to do");
 			System.out.println("\n\t1.Schedule");
 			System.out.println("\n\t2.See examinations");
-			System.out.println("\n\t3.Go back");
+			System.out.println("\n\t3.Back");
 			option = Exceptions.checkInt();
 			switch (option) {
 			case 1:
@@ -264,9 +263,7 @@ public class Menu {
 			p = searchPatientMenu();
 			appointmentMenu();
 		case 3:
-			System.out.println("Patient: ");
-			p = searchPatientMenu();
-			
+			ui.utilities.Utilities.searchAppointmentByDate();
 			appointmentMenu();
 		case 0:
 			adminMenu();

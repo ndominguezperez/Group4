@@ -66,7 +66,6 @@ public class Utilities {
 		doctor = Menu.doctorManager.getDoctorById(doctorId);
 		return doctor;
 	}
-	
 	public static Doctor getDoctortByIdPassingInt(int doctorId) {
 		//int doctorId = askForId();
 		Doctor doctor ;
@@ -76,7 +75,6 @@ public class Utilities {
 	
 	public static void searchPatientByName() {
 		String name = null;
-		int i;
 		System.out.println("What is the name of the patient your looking for?");
 		name = read();
 		List<Patient> patients = Menu.patientManager.searchByName(name);
@@ -87,8 +85,7 @@ public class Utilities {
 
 	public static void searchPatientBySurname() {
 		String name = null;
-		int i;
-		System.out.println("What is the name of the patient your looking for?");
+		System.out.println("What is the name of the patient you are looking for?");
 		name = read();
 		List<Patient> patients = Menu.patientManager.searchBySurname(name);
 		for (Patient patient : patients) {
@@ -97,14 +94,14 @@ public class Utilities {
 	}
 
 	public static void getPatientSchedule(int a) {
-		List<Appointment> schedule = Menu.administrationManager.viewSchedule(a);
+		List<Appointment> schedule = Menu.administrationManager.viewPatientSchedule(a);
 		for (Appointment appointment : schedule) {
 			System.out.println(appointment);
 		}
 	}
 
 	public static void getDoctorSchedule(int a) {
-		List<Appointment> schedule = Menu.administrationManager.viewSchedule(a);
+		List<Appointment> schedule = Menu.administrationManager.viewDoctorSchedule(a);
 		for (Appointment appointment : schedule) {
 			System.out.println(appointment);
 		}
@@ -125,6 +122,16 @@ public class Utilities {
 
 	public static void modifyAppointment(Patient p) {
 		p.getSchedule();
+	}
+	
+	public static void searchAppointmentByDate() {
+		Date date = null;
+		System.out.println("What is the date of the appointment you are looking for?");
+		date = Exceptions.checkDate();
+		List<Appointment> appointmentsList = Menu.administrationManager.searchAppointmentByDate(date);
+		for (Appointment appointment : appointmentsList) {
+			System.out.println(appointment);
+		}
 	}
 	
 

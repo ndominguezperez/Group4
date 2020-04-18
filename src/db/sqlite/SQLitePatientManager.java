@@ -177,6 +177,28 @@ public class SQLitePatientManager implements PatientManager{
 		return newPatient;
 		}
 	
+	public Patient getPatientById (int patientId) {
+		Patient newPatient=null;
+		try {
+		String sql = "SELECT * FROM patients WHERE id LIKE ?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setString(1, "%" + patientId + "%");
+		ResultSet rs = prep.executeQuery();
+		while(rs.next()) {
+			String patientName = rs.getString("name");
+			String patientSurname = rs.getString("surname");
+			Date patientDob = rs.getDate("dob");
+			String gender = rs.getString("gender");
+			newPatient= new Patient(patientId,patientName,patientSurname,patientDob,gender);
+			
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return newPatient;
+		
+	}
+	
 	public void assign(int doctorId, int patientId) {
 		try {
 			String sql = "INSERT INTO doctorsPatients (doctorId, patientId) "
