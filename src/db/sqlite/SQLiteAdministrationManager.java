@@ -35,7 +35,24 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 
 	@Override
 	public void modifyTreatment(Treatment treatment) {
-		
+
+		{
+			try {
+
+				String sql = "UPDATE treatments SET disease=?, drug=?, finishDate=?  WHERE id=?";
+				PreparedStatement s = c.prepareStatement(sql);
+				s.setString(1, treatment.getDisease());
+				s.setString(2, treatment.getDrug());
+				s.setDate(3, treatment.getFinishDate());
+				
+				s.setInt(4, treatment.getId());
+				s.executeUpdate();
+				s.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 

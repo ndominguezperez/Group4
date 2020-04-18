@@ -11,4 +11,5 @@ public interface DoctorManager {
 	public Doctor getDoctorById(int id);
 	public List<Doctor> listAllDoctors();	
 	public List<Treatment> viewTreatment(int patientId);
+	
 }
