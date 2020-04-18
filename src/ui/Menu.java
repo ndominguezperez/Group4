@@ -261,7 +261,7 @@ public class Menu {
 		case 2:
 			System.out.println("From what patient do you want to modify the appointment: ");
 			p = searchPatientMenu();
-			ui.utilities.Sets.setAppointment(p);
+			ui.utilities.Sets.modifyAppointment(p);
 			appointmentMenu();
 		case 3:
 			ui.utilities.Utilities.searchAppointmentByDate();

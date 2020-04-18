@@ -43,7 +43,21 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 
 	@Override
 	public void modifyAppointment(Appointment appointment) {
-		
+		try {
+			// Update every aspect of a particular appointment
+			String sql = "UPDATE appointments SET type=?, date=?, speciality=?, time=?, doctorId=?, WHERE id=?";
+			PreparedStatement s = c.prepareStatement(sql);
+			s.setString(1, appointment.getType());
+			s.setDate(2, appointment.getDate());
+			s.setString(3, appointment.getSpeciality());
+			s.setFloat(4, appointment.getTime());
+			s.setInt(5, appointment.getDoctor().getId());
+			s.setInt(6, appointment.getId());
+			s.executeUpdate();
+			s.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
