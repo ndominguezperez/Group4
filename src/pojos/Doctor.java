@@ -49,7 +49,12 @@ public class Doctor implements Serializable{
 		this.speciality = speciality;
 		this.dob = dob;
 		this.start_date = startDate;
+		this.treatments = new ArrayList<Treatment>();
+		this.schedule = new ArrayList<Appointment>();
+		this.examinations = new ArrayList<Examination>();
+		this.patients = new ArrayList<Patient>();
 	}
+	
 	
 	public Doctor(int id, String name) {
 		super();
@@ -62,7 +67,7 @@ public class Doctor implements Serializable{
 	    this.name=name;
 	    this.speciality=speciality;
 	}
-	public Doctor() {
+	public Doctor(int pId, String name2, String speciality2, float salary2, Date dob2, Date startDate) {
 		super();
 	}
 
@@ -79,6 +84,21 @@ public class Doctor implements Serializable{
 		this.examinations = new ArrayList<Examination>();
 		this.patients = new ArrayList<Patient>();
 
+	}
+	
+
+	public Doctor(int id, String name, float salary, String speciality, Date dob, Date start_date) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.salary = salary;
+		this.speciality = speciality;
+		this.dob = dob;
+		this.start_date = start_date;
+	}
+
+	public Doctor() {
+		super();
 	}
 
 	public List<Treatment> getTreatments() {
