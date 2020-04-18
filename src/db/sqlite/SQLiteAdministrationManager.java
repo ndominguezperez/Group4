@@ -39,17 +39,7 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 		return false;
 	}
 
-	@Override
-	public List<Appointment> viewPatientSchedule(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@Override
-	public List<Appointment> viewDoctorSchedule(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 
 	@Override
@@ -137,6 +127,104 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 			} 
 		}
 
+	public List<Appointment> viewPatientSchedule (int patientId) {
+		List<Appointment> appointmentList = new ArrayList<Appointment>();
+		Patient newPatient = null;
+		try {
+			String sql = "SELECT * FROM patients AS p JOIN appointments AS a ON p.id = a.patientId"
+					+"JOIN doctors AS d on a.doctorId = d.id"
+					+ " WHERE p.id = ?"; 
+			Appointment newAppointment = null;
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, patientId);
+			ResultSet rs = p.executeQuery();
+			
+			boolean patientCreated = false;
+			while (rs.next()) {
+				if (!patientCreated) {
+					int pId = rs.getInt(1);
+					String name = rs.getString(2);
+					String surname = rs.getString(3);
+					Date dob = rs.getDate(4);
+					String medicalChart = rs.getString(5);
+					String gender = rs.getString(6);
+					newPatient = new Patient(pId, name, surname, dob, medicalChart, gender);
+					patientCreated = true;
+				}
+					
+				int appointmentId = rs.getInt(7);
+				String type =rs.getString(8);
+				String apSpeciality =rs.getString(9);
+				Date date =rs.getDate(10);
+				Float time =rs.getFloat(11);
+				int doctorId = rs.getInt(12);
+				Doctor newDoctor2 = new Doctor();
+				newDoctor2 = ui.utilities.Utilities.getDoctortByIdPassingInt(doctorId) ;
+				newAppointment = new Appointment(appointmentId, type, apSpeciality, date, time,newDoctor2);
+				appointmentList.add(newAppointment);			
+				
+			}
+			newPatient.setSchedule(appointmentList);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return appointmentList;
+		}
+	
+	
+	public List<Appointment> viewDoctorSchedule (int doctorId) {
+		List<Appointment> appointmentList = new ArrayList<Appointment>();
+		Doctor newDoctor = null;
+		try {
+			String sql = "SELECT * FROM doctors AS d JOIN appointments AS a ON d.id = a.patientId"
+					+"JOIN patients AS p on a.patientId = p.id"
+					+ " WHERE p.id = ?"; 
+			Appointment newAppointment = null;
+			Patient newPatient = null;
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, doctorId);
+			ResultSet rs = p.executeQuery();
+			
+			boolean doctorCreated = false;
+			while (rs.next()) {
+				if (!doctorCreated) {
+					int pId = rs.getInt(1);
+					String name = rs.getString(2);
+					String speciality = rs.getString(3);
+					float salary = rs.getFloat(4);
+					Date dob = rs.getDate(5);
+					Date startDate = rs.getDate(6);				
+					newDoctor = new Doctor(pId, name,salary, dob,speciality, startDate);
+					doctorCreated = true;
+				}
+					
+				int appointmentId = rs.getInt(7);
+				String type =rs.getString(8);
+				String apSpeciality =rs.getString(9);
+				Date date =rs.getDate(10);
+				Float time =rs.getFloat(11);
+				int patientId = rs.getInt(13);
+				
+				String patientName =rs.getString("name");
+				String patientSurname =rs.getString("surname");
+				Date patientDob =rs.getDate("dob");
+				String patientMedicalChart =rs.getString("medicalChart");
+				String gender = rs.getString("gender");
+				
+				
+				//newPatient = ui.utilities.Utilities.se
+				
+				newAppointment = new Appointment(appointmentId, type, apSpeciality, date, time,newDoctor);
+				newPatient = new Patient(patientId, patientName, patientSurname, patientDob, patientMedicalChart, gender);
+				appointmentList.add(newAppointment);			
+				
+			}
+			newPatient.setSchedule(appointmentList);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return appointmentList;
+		}
 	
 	@Override
 	public List<Examination> viewExamination(int patientId) { 

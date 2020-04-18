@@ -163,6 +163,9 @@ public class Appointment implements Serializable{
 				+ ", patient=" + patient + ", speciality=" + speciality + "]";
 	}
 	
-
+	public String toStringDoctorName(Doctor doctor) {
+		return "Appointment [id=" + id + ", type=" + type + ", date=" + date + ", time=" + time + ", doctor=" + doctor
+				+ ", patient=" + patient + ", speciality=" + speciality + "], Doctor = " + doctor.getName();
+	}
 	
 }
