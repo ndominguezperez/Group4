@@ -14,9 +14,10 @@ public class Appointment implements Serializable{
 	String type;
 	Date date;
 	Float time; 
+	String speciality;
 	Doctor doctor;  
 	Patient patient;
-	String speciality;
+	
 	
 
 

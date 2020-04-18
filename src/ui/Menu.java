@@ -224,7 +224,6 @@ public class Menu {
 			searchPatientMenu();
 			break;
 		case 3:
-		
 			Adds.addPatient();
 			break;
 		case 4:
@@ -240,24 +239,26 @@ public class Menu {
 	}
 
 	private static void appointmentMenu() {
-		System.out.println("Patient: ");
-		Patient p = searchPatientMenu();
 		System.out.println("Select what you want to do");
 		System.out.println("\n\t1.Set Up a new one");
 		System.out.println("\n\t2.Modify");
 		System.out.println("\n\t3.Search appointment by date");
 		System.out.println("\n\t4.Exit");
 		int option = Exceptions.checkInt();
-		List<Patient> patientsList = patientManager.listAllPatients();
-		List<Doctor> doctorsList = doctorManager.listAllDoctors();
+		Patient p ;
 		switch (option) {
 		case 1:
+			System.out.println("Patient: ");
+			p = searchPatientMenu();
 			Adds.addAppointment(p);
 			break;
 		case 2:
+			System.out.println("Patient: ");
+			p = searchPatientMenu();
 			break;
 		case 3:
-			
+			System.out.println("Patient: ");
+			p = searchPatientMenu();
 			break;
 		case 4:
 			return;
