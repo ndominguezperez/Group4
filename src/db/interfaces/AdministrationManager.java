@@ -22,7 +22,7 @@ public interface AdministrationManager {
 	public List<Appointment> searchAppointmentByDate(Date date);
 	//Examination
 	public void addNewExamination(Examination examination);
-	public Examination viewExamination(int id);
+	public List<Examination> viewExamination(int patientId);
 	public boolean modifyExamination(int id); 
 
 	

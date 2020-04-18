@@ -10,6 +10,7 @@ import pojos.Patient;
 import pojos.Treatment;
 import ui.Menu;
 
+
 public class Adds {
 	
 	public static void addExamination(Patient patient, Doctor doctor) {
