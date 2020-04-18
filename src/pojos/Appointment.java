@@ -86,6 +86,17 @@ public class Appointment implements Serializable{
 		this.doctor=newDoctor2;
 		//this.patient=patient;
 	}
+	public Appointment(int id2, String type2, String speciality2, Date date2, float time2, int doctorId,
+			int patientId) {
+		super();
+		this.id = id2;
+		this.type = type2;
+		this.date = date2;
+		this.time = time2;
+		this.speciality = speciality2;
+		this.doctor.id= doctorId;
+		this.patient.id = patientId;
+	}
 	public int getId() {
 		return id;
 	}

@@ -20,9 +20,11 @@ public interface AdministrationManager {
 	public void modifyAppointment (Appointment appointment);
 	public Appointment getAppointmentById(int id);
 	public List<Appointment> searchAppointmentByDate(Date date);
+	public List<Appointment> listAllAppointments();
 	//Examination
 	public void addNewExamination(Examination examination);
 	public List<Examination> viewExamination(int patientId);
+	
 
 	
 }

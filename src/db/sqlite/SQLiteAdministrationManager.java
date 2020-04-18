@@ -47,6 +47,30 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 	}
 
 	@Override
+	public List<Appointment> listAllAppointments() {
+		List <Appointment> appointmentsList= new ArrayList <Appointment>();
+		try {
+		String sql = "SELECT * FROM appointments ";
+		PreparedStatement prep = c.prepareStatement(sql);
+		ResultSet rs = prep.executeQuery();
+		while(rs.next()) {	
+			int id = rs.getInt("id");
+			String type = rs.getString("type");
+			String speciality = rs.getString("speciality");
+			Date date = rs.getDate("date");
+			float time = rs.getFloat("time");
+			int doctorId = rs.getInt("doctorId");
+			int patientId = rs.getInt("patientId");
+			Appointment newAppointment= new Appointment(id,type,speciality,date,time,doctorId,patientId);
+			appointmentsList.add(newAppointment);
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return appointmentsList;
+	}
+	
+	@Override
 	public Appointment getAppointmentById(int id) {
 		Appointment appointmentsList= new Appointment();
 		try {
