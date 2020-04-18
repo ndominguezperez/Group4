@@ -13,6 +13,7 @@ import ui.Menu;
 public class Sets {
 
 	public static void modifyTreatment(Patient patient, Doctor doctor) {
+		
 		System.out.print("Which treatmet do you want to change?: ");
 		// listar todos los treatments
 		int id = Utilities.askForId();
