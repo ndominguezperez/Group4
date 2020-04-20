@@ -230,9 +230,9 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 		List<Appointment> appointmentList = new ArrayList<Appointment>();
 		Doctor newDoctor = null;
 		try {
-			String sql = "SELECT * FROM doctors AS d JOIN appointments AS a ON d.id = a.patientId"
-					+"JOIN patients AS p on a.patientId = p.id"
-					+ " WHERE p.id = ?"; 
+			String sql = "SELECT * FROM doctors AS d JOIN appointments AS a ON d.id = a.doctorId"
+					+" JOIN patients AS p on a.patientId = p.id"
+					+ " WHERE d.id = ?"; 
 			Appointment newAppointment = null;
 			Patient newPatient = null;
 			PreparedStatement p = c.prepareStatement(sql);
@@ -259,11 +259,11 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 				Float time =rs.getFloat(11);
 				int patientId = rs.getInt(13);
 				
-				String patientName =rs.getString("name");
-				String patientSurname =rs.getString("surname");
-				Date patientDob =rs.getDate("dob");
-				String patientMedicalChart =rs.getString("medicalChart");
-				String gender = rs.getString("gender");
+				String patientName =rs.getString(15);
+				String patientSurname =rs.getString(16);
+				Date patientDob =rs.getDate(17);
+				String patientMedicalChart =rs.getString(18);
+				String gender = rs.getString(19);
 				
 				
 				//newPatient = ui.utilities.Utilities.se
