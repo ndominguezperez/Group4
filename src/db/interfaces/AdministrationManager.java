@@ -14,6 +14,7 @@ public interface AdministrationManager {
 	public void modifyTreatment(Treatment treatment); 
 	public Treatment getTreatmentById(int id);
 	public List<Treatment> viewTreatment (int id);
+	public void deleteTreatment(Treatment treatment);
 	
 	//Appointment
 	public void addNewAppointment (Appointment appointment);
@@ -23,6 +24,7 @@ public interface AdministrationManager {
 	public Appointment getAppointmentById(int id);
 	public List<Appointment> searchAppointmentByDate(Date date);
 	public List<Appointment> listAllAppointments();
+	public void deleteAppointment(Appointment appointment);
 	//Examination
 	public void addNewExamination(Examination examination);
 	public List<Examination> viewExamination(int patientId);

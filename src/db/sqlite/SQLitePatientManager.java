@@ -124,7 +124,7 @@ public class SQLitePatientManager implements PatientManager{
 		try {
 			String sql = "SELECT * FROM patients AS p JOIN doctorsPatients AS dp ON p.id = dp.patientId"
 					+ " JOIN doctors AS d ON dp.doctorId = d.id" 
-			        + " JOIN  appointments AS a ON p.id=a.patientId"
+			       // + " JOIN  appointments AS a ON p.id=a.patientId"
 					//+ " JOIN  treatments AS t ON p.id=t.patientId"
 			        
 					+ " WHERE p.id = ?"; //AND a.doctor_id = d.id";
@@ -157,7 +157,7 @@ public class SQLitePatientManager implements PatientManager{
 				}
 				
 				
-				int appointmentId = rs.getInt(15);
+				/*int appointmentId = rs.getInt(15);
 				String type =rs.getString(16);
 				String apSpeciality =rs.getString(17);
 				Date date =rs.getDate(18);
@@ -166,18 +166,20 @@ public class SQLitePatientManager implements PatientManager{
 				Doctor newDoctor2 = new Doctor();
 				newDoctor2 = ui.utilities.Utilities.getDoctortByIdPassingInt(doctorId) ;
 				Appointment newAppointment = new Appointment(appointmentId, type, apSpeciality, date, time,newDoctor2);
-				appointmentList.add(newAppointment);
+				appointmentList.add(newAppointment);*/
 				
-			}try{
+			}
+
+			try{
 				newPatient.setDoctors(doctorList);
 			}catch(NullPointerException n) {
 				System.out.println("This patient doesn't have any doctor");
 			}
-			try {
+			/*try {
 				newPatient.setSchedule(appointmentList);
 			}catch(NullPointerException n){
 				System.out.println("This patient doesn't have any appointments");
-			}
+			}*/
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -222,6 +224,22 @@ public class SQLitePatientManager implements PatientManager{
 
 	}
 	public void modifyPatient(Patient patient) {
+		
+	}
+	
+	@Override
+	public void deletePatient(Patient patient) {
+		try {
+			System.out.println(patient);
+			String sql = "DELETE ON CASCADE FROM patients WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, patient.getId());
+			prep.executeUpdate();
+			prep.close();
+			System.out.println("Deleted success");
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
 		
 	}
 	

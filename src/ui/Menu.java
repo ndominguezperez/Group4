@@ -4,6 +4,7 @@ import pojos.*;
 import pojos.users.Role;
 import pojos.users.User;
 import ui.utilities.Adds;
+import ui.utilities.Delete;
 import ui.utilities.Exceptions;
 import ui.utilities.Sets;
 import ui.utilities.Utilities;
@@ -187,7 +188,8 @@ public class Menu {
 		System.out.println("\n\t2.See Examinations");
 		System.out.println("\n\t3.Create Treatment");
 		System.out.println("\n\t4.Modify Treatment");
-		System.out.println("\n\t5.View Treatment");
+		System.out.println("\n\t5.Delete Treatment");
+		System.out.println("\n\t6.View Treatment");
 		System.out.println("\n\t0.Back");
 		
 			option = Exceptions.checkInt();
@@ -205,6 +207,9 @@ public class Menu {
 				Sets.modifyTreatment(patient, doctor);
 				break;
 			case 5:
+				Delete.deleteTreatment(patient, doctor);
+				break;
+			case 6:
 				administrationManager.viewTreatment(patient.getId());
 				break;
 			case 0:
@@ -289,9 +294,10 @@ public class Menu {
 		System.out.println("\nSelect what you want to do");
 		System.out.println("\n\t1.List all patients");
 		System.out.println("\n\t2.View a patient");
-		System.out.println("\n\t3.Add a new patient");
-		System.out.println("\n\t4.Appointments");
-		System.out.println("\n\t5.Add new doctor");
+		System.out.println("\n\t3.Delete a patient");
+		System.out.println("\n\t4.Add a new patient");
+		System.out.println("\n\t5.Appointments");
+		System.out.println("\n\t6.Add new doctor");
 		System.out.println("\n\t0.Back");
 		int option = Exceptions.checkInt();
 		switch (option) {
@@ -299,16 +305,20 @@ public class Menu {
 			Utilities.listAllPatiens();
 			adminMenu();
 		case 2:
-			Patient p=searchPatientMenu();
-			System.out.println(p);
+			Patient p1=searchPatientMenu();
+			System.out.println(p1);
 			adminMenu();
 		case 3:
-			Adds.addPatient();
+			Patient p2=searchPatientMenu();
+			Delete.deletePatient(p2);
 			adminMenu();
 		case 4:
+			Adds.addPatient();
+			adminMenu();
+		case 5:
 			appointmentMenu();
 			break;
-		case 5:
+		case 6:
 			Adds.addDoctor();
 			adminMenu();
 		case 0:
@@ -322,6 +332,7 @@ public class Menu {
 		System.out.println("\n\t1.Set Up a new one");
 		System.out.println("\n\t2.Modify appointment");
 		System.out.println("\n\t3.Search appointment by date");
+		System.out.println("\n\t4.Delete appointment ");
 		System.out.println("\n\t0.Back");
 		int option = Exceptions.checkInt();
 		Patient p ;
@@ -334,10 +345,15 @@ public class Menu {
 		case 2:
 			System.out.println("From what patient do you want to modify the appointment: ");
 			p = searchPatientMenu();
-			ui.utilities.Sets.modifyAppointment(p);
+			Sets.modifyAppointment(p);
 			appointmentMenu();
 		case 3:
-			ui.utilities.Utilities.searchAppointmentByDate();
+			Utilities.searchAppointmentByDate();
+			appointmentMenu();
+		case 4:
+			System.out.println("From what patient do you want to delete the appointment: ");
+			p = searchPatientMenu();
+			Delete.deleteAppointment(p);
 			appointmentMenu();
 		case 0:
 			adminMenu();

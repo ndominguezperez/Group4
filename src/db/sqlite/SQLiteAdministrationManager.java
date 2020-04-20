@@ -28,23 +28,20 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 
 	@Override
 	public void modifyTreatment(Treatment treatment) {
+		try {
 
-		{
-			try {
-
-				String sql = "UPDATE treatments SET disease=?, drug=?, finishDate=?  WHERE id=?";
-				PreparedStatement s = c.prepareStatement(sql);
-				s.setString(1, treatment.getDisease());
-				s.setString(2, treatment.getDrug());
-				s.setDate(3, treatment.getFinishDate());
+			String sql = "UPDATE treatments SET disease=?, drug=?, finishDate=?  WHERE id=?";
+			PreparedStatement s = c.prepareStatement(sql);
+			s.setString(1, treatment.getDisease());
+			s.setString(2, treatment.getDrug());
+			s.setDate(3, treatment.getFinishDate());
 				
-				s.setInt(4, treatment.getId());
-				s.executeUpdate();
-				s.close();
-			} catch (Exception e) {
-				e.printStackTrace();
+			s.setInt(4, treatment.getId());
+			s.executeUpdate();
+			s.close();
+		} catch (Exception e) {
+			e.printStackTrace();
 			}
-		}
 	}
 
 	@Override
@@ -377,7 +374,7 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 			int patientId = rs.getInt("patientId");
 			Doctor doctor = Menu.doctorManager.getDoctorById(doctorId);
 			Patient patient = Menu.patientManager.getPatient(patientId);
-			treatment= new Treatment(disease,drug,finishDate,patient,doctor);
+			treatment= new Treatment(id,disease,drug,finishDate,patient,doctor);
 		}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -435,13 +432,41 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 			e.printStackTrace();
 		}
 	 
-		
-		
-		
 		return treatmentList;
-		
-	
-	
 	}
 
-}	
+
+
+	@Override
+	public void deleteTreatment(Treatment treatment) {
+		try {
+			String sql = "DELETE FROM treatments WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			System.out.println(treatment.getId());
+			prep.setInt(1, treatment.getId());
+			prep.executeUpdate();
+			prep.close();
+			System.out.println("Deleted success");
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
+	}
+
+
+
+	@Override
+	public void deleteAppointment(Appointment appointment) {
+		try {
+			String sql = "DELETE FROM appointments WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			System.out.println(appointment.getId());
+			prep.setInt(1, appointment.getId());
+			prep.executeUpdate();
+			prep.close();
+			System.out.println("Deleted success");
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
+		
+	}
+}
