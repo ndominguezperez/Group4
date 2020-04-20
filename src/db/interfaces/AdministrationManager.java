@@ -13,6 +13,7 @@ public interface AdministrationManager {
 	public void addNewTreatment(Treatment treatment);
 	public Treatment viewTreatment(int id);
 	public void modifyTreatment(Treatment treatment); 
+	public Treatment getTreatmentById(int id);
 	//Appointment
 	public void addNewAppointment (Appointment appointment);
 	public List<Appointment> viewPatientSchedule(int id);
