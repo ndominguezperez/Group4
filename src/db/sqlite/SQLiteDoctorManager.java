@@ -107,7 +107,7 @@ public class SQLiteDoctorManager implements DoctorManager {
 		prep.setInt(1, patientId);
 		ResultSet rs = prep.executeQuery();
 		boolean treatmentCreated= false;
-		boolean patientCreated= false;
+		boolean patientCreated= false; 
 		Patient newPatient= new Patient();
 		
 		boolean doctorCreated=false;
