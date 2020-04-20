@@ -162,7 +162,7 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 		// TODO Auto-generated method stub
 			try { 
 				
-				String sql = "INSERT INTO examinations (temperature, breathingRate, heartRate , bloodPresure, oxygenSaturation, observations, patientId, doctorId) "
+				String sql = "INSERT INTO examinations (temperature, breathingRate, heartRate , bloodPressure, oxygenSaturations, observations, patientId, doctorId) "
 						+ "VALUES (?,?,?,?,?,?,?,?);";
 				PreparedStatement prep = c.prepareStatement(sql);
 				prep.setFloat(1, examination.getTemperature());
@@ -179,6 +179,7 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 				e.printStackTrace();
 			} 
 		}
+
 
 	public List<Appointment> viewPatientSchedule (int patientId) {
 		List<Appointment> appointmentList = new ArrayList<Appointment>();
