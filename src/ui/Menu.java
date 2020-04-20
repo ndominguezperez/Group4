@@ -266,18 +266,26 @@ public class Menu {
 		switch (option) {
 		case 1:
 			p = Utilities.getPatientById();
+			if(p==null) {
+				System.out.println("This patient do not exit");
+			}
 			break;
 		case 2:
 			Utilities.searchPatientByName();
 			p = Utilities.getPatientById();
+			if(p==null) {
+				System.out.println("This patient do not exit");
+			}
 			break;
 		case 3:
 			Utilities.searchPatientBySurname();
 			p = Utilities.getPatientById();
+			if(p==null) {
+				System.out.println("This patient do not exit");
+			}
 			break;
-		//case 0:
-			//break;
 		}
+	
 		return p;
 	}
 

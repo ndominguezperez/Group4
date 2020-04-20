@@ -56,7 +56,12 @@ public class Utilities {
 
 	public static Patient getPatientById() {
 		int patientId = askForId();
-		Patient patient = Menu.patientManager.getPatient(patientId);
+		Patient patient = null;
+		//try {
+		patient = Menu.patientManager.getPatient(patientId);
+		//}catch() {
+			
+		//}
 		return patient;
 	}
 	
