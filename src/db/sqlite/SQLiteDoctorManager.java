@@ -99,7 +99,7 @@ public class SQLiteDoctorManager implements DoctorManager {
 		try {
 	  
 		String sql = "SELECT * FROM patients AS p JOIN treatments AS t ON p.id = t.patientId "
-				 + " JOIN doctors AS d ON e.doctorId = d.id "
+				 + " JOIN doctors AS d ON t.doctorId = d.id "
 				 + " WHERE p.id = ? ";
 				
 
