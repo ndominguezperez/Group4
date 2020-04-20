@@ -1,16 +1,20 @@
 package ui;
 
 import pojos.*;
+import pojos.users.Role;
+import pojos.users.User;
 import ui.utilities.Adds;
 import ui.utilities.Exceptions;
 import ui.utilities.Utilities;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.security.MessageDigest;
 import java.sql.Date;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import db.interfaces.*;
+import db.jpa.JPAUserManager;
 import db.sqlite.SQLiteDoctorManager;
 import db.sqlite.SQLiteManager;
 
@@ -20,51 +24,116 @@ public class Menu {
 	public static DoctorManager doctorManager;
 	public static AdministrationManager administrationManager;
 	public static DBManager dbManager;
+	public static UserManager userManager;
 
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 
 		dbManager = new SQLiteManager();
 		dbManager.connect();
 		patientManager = dbManager.getPatientManager();
 		doctorManager = dbManager.getDoctorManager();
 		administrationManager= dbManager.getAdministrationManager();
-		System.out.println("Welcome!");
+		
+		userManager = new JPAUserManager();
+		userManager.connect();
+		
 		dbManager.createTables();
+		
+		System.out.println("Welcome!");
 
 		Menu();
 		
 	}
 
-	private static void Menu() {
+	private static void Menu() throws Exception {
 		int option;
 		do {
-			System.out.println("Select who you are");
-			System.out.println("\n\t1.Doctor");
-			System.out.println("\n\t2.Patient");
-			System.out.println("\n\t3.Admin Staff");
+			System.out.println("What do you want to do?  ");
+			System.out.println("\n\t1.Create a new role");
+			System.out.println("\n\t2.Create a new user");
+			System.out.println("\n\t3.Login");
 			System.out.println("\n\t0.Exit");
 			option = Exceptions.checkInt();
 			switch (option) {
 			case 1:
-				doctorMenu();
+				newRole();
 				break;
 			case 2:
-				patientMenu();
+				newUser();
 				break;
 			case 3:
-				adminMenu();
+				login();
 				break;
 			case 0:
+				dbManager.disconnect();
+				userManager.disconnect();
 				System.exit(0);
 			}
 		} while (option != 4);
 	}
 	
-	// Esto seria con la contraseña y eso supongo....
+	private static void newRole() throws Exception {
+		System.out.println("Please type the new role information: ");
+		System.out.println("Role name ");
+		String roleName = Utilities.read();
+		Role role= new Role (roleName);
+		userManager.createRole(role);
+	}
 	
-	private static void doctorMenu() {
+	private static void newUser() throws Exception {
+		System.out.println("Please type the user information: ");
+		System.out.println("Username: ");
+		String username = Utilities.read();
+		System.out.println("password: ");
+		String password = Utilities.read();
+		// Create the hash for password
+		MessageDigest md= MessageDigest.getInstance("MD5");
+		md.update(password.getBytes());
+		byte[] hashPassword = md.digest();
+		// Show all the roles available so the user choose
+		List<Role> roles = userManager.getRoles();
+		for(Role role : roles) {
+			System.out.println(role);
+		}
+		System.out.println("Type the choosen id: ");
+		int roleId= Exceptions.checkInt();
+		//get the role
+		Role choosenRole= userManager.getRole(roleId);
+		//create user
+		User user = new User(username, hashPassword, choosenRole);
+		//store user
+		userManager.createUser(user);
+
+	}
+	
+	private static void login() throws Exception {
+		System.out.println("Please input your credentials: ");
+		System.out.println("Username: ");
+		String username = Utilities.read();
+		System.out.println("password: ");
+		String password = Utilities.read();
+		User user = userManager.checkPassword(username, password);
+		if (user==null) {
+			System.out.println("Wrong credentials, please try again!");
+		}else if(user.getRole().getRole().equalsIgnoreCase("doctor")){
+			System.out.println("Welcome doctor"+"username"+"!");
+			doctorMenu();
+		}else if (user.getRole().getRole().equalsIgnoreCase("patient")) {
+			System.out.println("Welcome"+"username"+"!");
+			patientMenu();
+		}else if (user.getRole().getRole().equalsIgnoreCase("admin staff")) {
+			System.out.println("Welcome "+"username"+"!");
+			adminMenu();
+		}else {
+			System.out.println("Invalid role.");
+		}
+	}
+	
+	
+	
+	private static void doctorMenu() throws Exception {
 		Doctor doctor = null;
 		try {
 			doctor = Utilities.getDoctortById();
@@ -80,7 +149,7 @@ public class Menu {
 		}
 	}
 
-	private static void doctorSubMenu(Doctor doctor) {
+	private static void doctorSubMenu(Doctor doctor) throws Exception {
 		int option;
 		do {
 			System.out.println("Select what you want to do");
@@ -109,7 +178,7 @@ public class Menu {
 
 	}
 
-	private static void doctorPatientMenu(Patient patient, Doctor doctor) {
+	private static void doctorPatientMenu(Patient patient, Doctor doctor) throws Exception {
 		int option;
 		do {
 		System.out.println("Select what you want to do");
@@ -149,7 +218,7 @@ public class Menu {
 
 	}
 
-	private static void patientMenu() {
+	private static void patientMenu() throws Exception {
 		Patient patient = null;
 		try {
 			patient = Utilities.getPatientById();
@@ -165,7 +234,7 @@ public class Menu {
 		}
 	}
 
-	private static void patientSubMenu(Patient patient) {
+	private static void patientSubMenu(Patient patient) throws Exception {
 		int option;
 		do {
 			System.out.println("Select what you want to do");
@@ -212,7 +281,7 @@ public class Menu {
 		return p;
 	}
 
-	private static void adminMenu() {
+	private static void adminMenu() throws Exception {
 		System.out.println("\nSelect what you want to do");
 		System.out.println("\n\t1.List all patients");
 		System.out.println("\n\t2.View a patient");
@@ -244,7 +313,7 @@ public class Menu {
 		}
 	}
 
-	private static void appointmentMenu() {
+	private static void appointmentMenu() throws Exception {
 		System.out.println("Select what you want to do");
 		System.out.println("\n\t1.Set Up a new one");
 		System.out.println("\n\t2.Modify appointment");
