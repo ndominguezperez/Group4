@@ -168,9 +168,17 @@ public class SQLitePatientManager implements PatientManager{
 				Appointment newAppointment = new Appointment(appointmentId, type, apSpeciality, date, time,newDoctor2);
 				appointmentList.add(newAppointment);
 				
+			}try{
+				newPatient.setDoctors(doctorList);
+			}catch(NullPointerException n) {
+				System.out.println("This patient doesn't have any doctor");
 			}
-			newPatient.setDoctors(doctorList);
-			newPatient.setSchedule(appointmentList);
+			try {
+				newPatient.setSchedule(appointmentList);
+			}catch(NullPointerException n){
+				System.out.println("This patient doesn't have any appointments");
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

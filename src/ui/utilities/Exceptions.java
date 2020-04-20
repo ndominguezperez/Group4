@@ -139,11 +139,11 @@ public class Exceptions {
 	  while(i==0) {
 		  System.out.println("Yes or No (Y/N)");
 		  String confirm = Utilities.read();
-		  if(confirm.equals("Y")) {
+		  if(confirm.equalsIgnoreCase("Y")) {
 			  i=1;
 			  yes=true;
 		  }
-		  if(confirm.equals("N")) {
+		  if(confirm.equalsIgnoreCase("N")) {
 			  i=1;
 			  yes=false;
 		  }

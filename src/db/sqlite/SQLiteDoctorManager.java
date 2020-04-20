@@ -94,64 +94,7 @@ public class SQLiteDoctorManager implements DoctorManager {
 				return doctorsList;
 	}
 	
-	public List<Treatment> viewTreatment(int patientId) {
-		List <Treatment> treatmentList = new ArrayList<Treatment>();
-		try {
-	  
-		String sql = "SELECT * FROM patients AS p JOIN treatments AS t ON p.id = t.patientId "
-				 + " JOIN doctors AS d ON t.doctorId = d.id "
-				 + " WHERE p.id = ? ";
-				
-
-		PreparedStatement prep = c.prepareStatement(sql);
-		prep.setInt(1, patientId);
-		ResultSet rs = prep.executeQuery();
-		boolean treatmentCreated= false;
-		boolean patientCreated= false; 
-		Patient newPatient= new Patient();
-		
-		boolean doctorCreated=false;
-		while (rs.next()) {
-			if (!patientCreated) {
-			int pId = rs.getInt(1);
-			String name = rs.getString(2);
-			String surname = rs.getString(3);
-			Date dob = rs.getDate(4);
-			String medicalChart = rs.getString(5);
-			String gender = rs.getString(6);
-			newPatient = new Patient(pId, name, surname, dob, medicalChart, gender);
-			patientCreated = true;}
-		
-			int treatmentId = rs.getInt(7);
-			String disease =rs.getString(8);
-			String drug =rs.getString(9);
-			Date finishDate =rs.getDate(10);
-			
-			int doctorId= rs.getInt(13);
-			String doctorName = rs.getString(14);
-			String speciality =rs.getString(15);
-			Doctor doctor= new Doctor(doctorId,doctorName, speciality );
-			
-			Treatment newTreatment = new Treatment(treatmentId,disease,drug,finishDate,newPatient,doctor);
-			System.out.println(newTreatment);
-		
-			if(!treatmentCreated) {
-				treatmentList.add(newTreatment);
-			}
-				}
-		
-		 }catch (SQLException e) {
-			e.printStackTrace();
-		}
-	 
-		
-		
-		
-		return treatmentList;
-		
 	
-	
-	}
 	
 
 }

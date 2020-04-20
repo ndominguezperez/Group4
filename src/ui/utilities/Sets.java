@@ -14,13 +14,13 @@ public class Sets {
 
 	public static void modifyTreatment(Patient patient, Doctor doctor) {
 		
-		System.out.print("Which treatmet do you want to change?: ");
-		// listar todos los treatments
+		System.out.println("Which treatmet do you want to change?: \n");
+		Menu.administrationManager.viewTreatment(patient.getId());
 		int id = Utilities.askForId();
 		boolean question;
-		Treatment treatment = patient.getTreatments().get(id);
-		System.out.print("Do you want to change the disease: ");
-		System.out.println("The disease is %s"+treatment.getDisease());
+		Treatment treatment = Menu.administrationManager.getTreatmentById(id);
+		System.out.println("Do you want to change the disease: ");
+		System.out.println("The disease is "+treatment.getDisease());
 		String disease;
 		question = Exceptions.checkConfirmation();
 		if (question) {
@@ -31,7 +31,7 @@ public class Sets {
 		}
 		System.out.print("Do you want to change the drug: ");
 		String drug;
-		System.out.println("The drug is %s"+treatment.getDrug());
+		System.out.println("The drug is "+treatment.getDrug());
 		question = Exceptions.checkConfirmation();
 		if (question) {
 			System.out.print("Introduce the new drug: ");
@@ -41,7 +41,7 @@ public class Sets {
 		}
 		System.out.print("Do you want to change the finish date: ");
 		Date finishDate;
-		System.out.println("The date is %d"+treatment.getFinishDate());
+		System.out.println("The date is "+treatment.getFinishDate());
 		question = Exceptions.checkConfirmation();
 		if (question) {
 			System.out.print("Introduce the new finish date(yyyy-MM-dd):  ");
@@ -49,20 +49,20 @@ public class Sets {
 		} else {
 			finishDate = treatment.getFinishDate();
 		}
-		Treatment treatment1 = new Treatment(disease, drug, finishDate, patient, doctor);
-		
+		Treatment treatment1 = new Treatment(id,disease, drug, finishDate, patient, doctor);
+		System.out.print(treatment1);
 		Menu.administrationManager.modifyTreatment(treatment1);
 	}
 
 	public static void modifyAppointment(Patient patient) {
-		System.out.print("Which appointment do you want to change?: ");
-		// listar todos los treatments o que se haya pasado ya el appointment no se
+		System.out.print("Which appointment do you want to change?: \n");
+		Menu.administrationManager.viewPatientSchedule(patient.getId());
 		int id = Utilities.askForId();
 		boolean question;
-		Appointment appointment = patient.getSchedule().get(id);
-		System.out.print("Do you want to change the type: ");
+		Appointment appointment = Menu.administrationManager.getAppointmentById(id);
+		System.out.println("Do you want to change the type: ");
 		String type;
-		System.out.println("The type is %s"+appointment.getType());
+		System.out.println("The type is "+appointment.getType());
 		question = Exceptions.checkConfirmation();
 		if (question) {
 			System.out.print("Introduce the new type: ");
@@ -71,9 +71,9 @@ public class Sets {
 			type = appointment.getType();
 		}
 
-		System.out.print("Do you want to change the day: ");
+		System.out.println("Do you want to change the day: ");
 		Date day;
-		System.out.println("The day is %d"+appointment.getDate());
+		System.out.println("The day is "+appointment.getDate());
 		question = Exceptions.checkConfirmation();
 		if (question) {
 			System.out.print("Introduce the new  date(yyyy-MM-dd):: ");
@@ -82,9 +82,9 @@ public class Sets {
 			day = appointment.getDate();
 		}
 
-		System.out.print("Do you want to change the time: ");
+		System.out.println("Do you want to change the time: ");
 		Float time;
-		System.out.println("The time is %f"+appointment.getTime());
+		System.out.println("The time is "+appointment.getTime());
 		question = Exceptions.checkConfirmation();
 		if (question) {
 			System.out.print("Introduce the new time: ");
@@ -93,7 +93,7 @@ public class Sets {
 			time = appointment.getTime();
 		}
 
-		System.out.print("Do you want to change the doctor: ");
+		System.out.println("Do you want to change the doctor: ");
 		System.out.println("The docor is:"+ appointment.getDoctor());
 		question = Exceptions.checkConfirmation();
 		Doctor doctor;
@@ -106,14 +106,14 @@ public class Sets {
 			doctor = appointment.getDoctor();
 		}
 		String speciality = doctor.getSpeciality();
-		Appointment appointment1 = new Appointment(type, day, time, speciality, doctor, patient);
+		Appointment appointment1 = new Appointment(id, type, day, time, speciality, doctor, patient);
 		System.out.println(appointment1);
-		// Menu.administrationManager.setAppointment(appointment1);
+		Menu.administrationManager.modifyAppointment(appointment1);
 	}
 
 	public static void modifyPatient(Patient patient) {
 		boolean question;
-		System.out.print("Do you want to change the medical chart?: ");
+		System.out.println("Do you want to change the medical chart?: ");
 		String medicalChart;
 		question = Exceptions.checkConfirmation();
 		if (question) {
@@ -128,7 +128,7 @@ public class Sets {
 
 	public static void modifyDoctor(Doctor doctor) {
 		boolean question;
-		System.out.print("Do you want to change the name?: ");
+		System.out.println("Do you want to change the name?: ");
 		String name;
 		question = Exceptions.checkConfirmation();
 		if (question) {
@@ -137,7 +137,7 @@ public class Sets {
 		} else {
 			name = doctor.getName();
 		}
-		System.out.print("Do you want to change the salary?: ");
+		System.out.println("Do you want to change the salary?: ");
 		Float salary;
 		question = Exceptions.checkConfirmation();
 		if (question) {
@@ -146,7 +146,7 @@ public class Sets {
 		} else {
 			salary = doctor.getSalary();
 		}
-		System.out.print("Do you want to change the speciality?: ");
+		System.out.println("Do you want to change the speciality?: ");
 		String speciality;
 		question = Exceptions.checkConfirmation();
 		if (question) {
@@ -155,7 +155,7 @@ public class Sets {
 		} else {
 			speciality = doctor.getSpeciality();
 		}
-		System.out.print("Do you want to change the date of birth?: ");
+		System.out.println("Do you want to change the date of birth?: ");
 		Date dob;
 		question = Exceptions.checkConfirmation();
 		if (question) {
@@ -164,7 +164,7 @@ public class Sets {
 		} else {
 			dob = doctor.getDob();
 		}
-		System.out.print("Do you want to change the start date?: ");
+		System.out.println("Do you want to change the start date?: ");
 		Date date;
 		question = Exceptions.checkConfirmation();
 		if (question) {

@@ -5,6 +5,7 @@ import pojos.users.Role;
 import pojos.users.User;
 import ui.utilities.Adds;
 import ui.utilities.Exceptions;
+import ui.utilities.Sets;
 import ui.utilities.Utilities;
 
 import java.io.BufferedReader;
@@ -86,7 +87,7 @@ public class Menu {
 		System.out.println("Please type the user information: ");
 		System.out.println("Username: ");
 		String username = Utilities.read();
-		System.out.println("password: ");
+		System.out.println("Password: ");
 		String password = Utilities.read();
 		// Create the hash for password
 		MessageDigest md= MessageDigest.getInstance("MD5");
@@ -112,7 +113,7 @@ public class Menu {
 		System.out.println("Please input your credentials: ");
 		System.out.println("Username: ");
 		String username = Utilities.read();
-		System.out.println("password: ");
+		System.out.println("Password: ");
 		String password = Utilities.read();
 		User user = userManager.checkPassword(username, password);
 		if (user==null) {
@@ -184,10 +185,9 @@ public class Menu {
 		System.out.println("Select what you want to do");
 		System.out.println("\n\t1.Create Examinations");
 		System.out.println("\n\t2.See Examinations");
-		System.out.println("\n\t3.Modify Examination");
-		System.out.println("\n\t4.Create Treatment");
-		System.out.println("\n\t5.Modify Treatment");
-		System.out.println("\n\t6.View Treatment");
+		System.out.println("\n\t3.Create Treatment");
+		System.out.println("\n\t4.Modify Treatment");
+		System.out.println("\n\t5.View Treatment");
 		System.out.println("\n\t0.Back");
 		
 			option = Exceptions.checkInt();
@@ -199,22 +199,18 @@ public class Menu {
 				administrationManager.viewExamination(patient.getId());
 				break;
 			case 3:
-				// fucnicon
-				break;
-			case 4:
 				Adds.addTreatment(patient, doctor);
 				break;
-			case 5:
-				// function con
-				// patient.getTreatments();
+			case 4:
+				Sets.modifyTreatment(patient, doctor);
 				break;
-			case 6:
-				doctorManager.viewTreatment(patient.getId());
+			case 5:
+				administrationManager.viewTreatment(patient.getId());
 				break;
 			case 0:
 				doctorSubMenu(doctor);
 			}
-		} while (option != 6);
+		} while (option != 5);
 
 	}
 
@@ -294,7 +290,7 @@ public class Menu {
 		System.out.println("\n\t1.List all patients");
 		System.out.println("\n\t2.View a patient");
 		System.out.println("\n\t3.Add a new patient");
-		System.out.println("\n\t4.Appointmets");
+		System.out.println("\n\t4.Appointments");
 		System.out.println("\n\t5.Add new doctor");
 		System.out.println("\n\t0.Back");
 		int option = Exceptions.checkInt();

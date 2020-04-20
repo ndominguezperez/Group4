@@ -26,13 +26,6 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 
 	
 
-
-	@Override
-	public Treatment viewTreatment(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
 	public void modifyTreatment(Treatment treatment) {
 
@@ -52,17 +45,13 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 				e.printStackTrace();
 			}
 		}
-
 	}
-
-
-
 
 	@Override
 	public void modifyAppointment(Appointment appointment) {
 		try {
 			// Update every aspect of a particular appointment
-			String sql = "UPDATE appointments SET type=?, date=?, speciality=?, time=?, doctorId=?, WHERE id=?";
+			String sql = "UPDATE appointments SET type=?, date=?, speciality=?, time=?, doctorId=? WHERE id=?";
 			PreparedStatement s = c.prepareStatement(sql);
 			s.setString(1, appointment.getType());
 			s.setDate(2, appointment.getDate());
@@ -103,7 +92,7 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 	
 	@Override
 	public Appointment getAppointmentById(int id) {
-		Appointment appointmentsList= new Appointment();
+		Appointment newAppointment= new Appointment();
 		try {
 		String sql = "SELECT * FROM appointments WHERE id LIKE ? ";
 		PreparedStatement prep = c.prepareStatement(sql);
@@ -119,12 +108,12 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 			int patientId = rs.getInt("patientId");
 			Doctor doctor = Menu.doctorManager.getDoctorById(doctorId);
 			Patient patient = Menu.patientManager.getPatient(patientId);
-			Appointment newAppointment= new Appointment(id,type,date,time,speciality,doctor,patient);
+			newAppointment= new Appointment(id,type,date,time,speciality,doctor,patient);
 		}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return appointmentsList;
+		return newAppointment;
 	}
 
 	@Override
@@ -185,8 +174,8 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 		List<Appointment> appointmentList = new ArrayList<Appointment>();
 		Patient newPatient = null;
 		try {
-			String sql = "SELECT * FROM patients AS p JOIN appointments AS a ON p.id = a.patientId"
-					+"JOIN doctors AS d on a.doctorId = d.id"
+			String sql = "SELECT * FROM patients AS p JOIN appointments AS a ON p.id = a.patientId "
+					+" JOIN doctors AS d on a.doctorId = d.id"
 					+ " WHERE p.id = ?"; 
 			Appointment newAppointment = null;
 			PreparedStatement p = c.prepareStatement(sql);
@@ -215,7 +204,8 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 				Doctor newDoctor2 = new Doctor();
 				newDoctor2 = ui.utilities.Utilities.getDoctortByIdPassingInt(doctorId) ;
 				newAppointment = new Appointment(appointmentId, type, apSpeciality, date, time,newDoctor2);
-				appointmentList.add(newAppointment);			
+				appointmentList.add(newAppointment);	
+				System.out.println(newAppointment);
 				
 			}
 			newPatient.setSchedule(appointmentList);
@@ -368,6 +358,90 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
+	}
+
+	@Override
+	public Treatment getTreatmentById(int id) {
+		Treatment treatment= new Treatment();
+		try {
+		String sql = "SELECT * FROM treatments WHERE id LIKE ? ";
+		PreparedStatement prep = c.prepareStatement(sql);
+		//prep.setString(1, "%" + date + "%");
+		prep.setInt(1, id);
+		ResultSet rs = prep.executeQuery();
+		while(rs.next()) {
+			String disease = rs.getString("disease");
+			String drug = rs.getString("drug");
+			Date finishDate = rs.getDate("finishDate");
+			int doctorId = rs.getInt("doctorId");
+			int patientId = rs.getInt("patientId");
+			Doctor doctor = Menu.doctorManager.getDoctorById(doctorId);
+			Patient patient = Menu.patientManager.getPatient(patientId);
+			treatment= new Treatment(disease,drug,finishDate,patient,doctor);
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return treatment;
+	}
+	
+	public List<Treatment> viewTreatment(int patientId) {
+		List <Treatment> treatmentList = new ArrayList<Treatment>();
+		try {
+	  
+		String sql = "SELECT * FROM patients AS p JOIN treatments AS t ON p.id = t.patientId "
+				 + " JOIN doctors AS d ON t.doctorId = d.id "
+				 + " WHERE p.id = ? ";
+				
+
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1, patientId);
+		ResultSet rs = prep.executeQuery();
+		boolean treatmentCreated= false;
+		boolean patientCreated= false; 
+		Patient newPatient= new Patient();
+		
+		boolean doctorCreated=false;
+		while (rs.next()) {
+			if (!patientCreated) {
+			int pId = rs.getInt(1);
+			String name = rs.getString(2);
+			String surname = rs.getString(3);
+			Date dob = rs.getDate(4);
+			String medicalChart = rs.getString(5);
+			String gender = rs.getString(6);
+			newPatient = new Patient(pId, name, surname, dob, medicalChart, gender);
+			patientCreated = true;}
+		
+			int treatmentId = rs.getInt(7);
+			String disease =rs.getString(8);
+			String drug =rs.getString(9);
+			Date finishDate =rs.getDate(10);
+			
+			int doctorId= rs.getInt(13);
+			String doctorName = rs.getString(14);
+			String speciality =rs.getString(15);
+			Doctor doctor= new Doctor(doctorId,doctorName, speciality );
+			
+			Treatment newTreatment = new Treatment(treatmentId,disease,drug,finishDate,newPatient,doctor);
+			System.out.println(newTreatment);
+		
+			if(!treatmentCreated) {
+				treatmentList.add(newTreatment);
+			}
+				}
+		
+		 }catch (SQLException e) {
+			e.printStackTrace();
+		}
+	 
+		
+		
+		
+		return treatmentList;
+		
+	
+	
 	}
 
 }	

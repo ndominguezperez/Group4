@@ -11,9 +11,10 @@ import pojos.Treatment;
 public interface AdministrationManager {
 	//Treatment
 	public void addNewTreatment(Treatment treatment);
-	public Treatment viewTreatment(int id);
 	public void modifyTreatment(Treatment treatment); 
 	public Treatment getTreatmentById(int id);
+	public List<Treatment> viewTreatment (int id);
+	
 	//Appointment
 	public void addNewAppointment (Appointment appointment);
 	public List<Appointment> viewPatientSchedule(int id);
