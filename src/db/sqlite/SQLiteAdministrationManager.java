@@ -15,6 +15,8 @@ import pojos.Doctor;
 import pojos.Examination;
 import pojos.Patient;
 import pojos.Treatment;
+import pojos.users.Role;
+import pojos.users.User;
 import ui.Menu;
 
 public class SQLiteAdministrationManager implements AdministrationManager {
@@ -145,7 +147,6 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 
 	@Override
 	public void addNewExamination(Examination examination) {
-		// TODO Auto-generated method stub
 			try { 
 				
 				String sql = "INSERT INTO examinations (temperature, breathingRate, heartRate , bloodPressure, oxygenSaturations, observations, patientId, doctorId) "
@@ -469,4 +470,23 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 		}
 		
 	}
+	
+	@Override
+	public Role getRoleById(int id) {
+		Role role= new Role();
+		try {
+		String sql = "SELECT * FROM roles WHERE id LIKE ? ";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1, id);
+		ResultSet rs = prep.executeQuery();
+		while(rs.next()) {
+			String roleName = rs.getString("role");
+			role= new Role(id,roleName);
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return role;
+	}
+
 }

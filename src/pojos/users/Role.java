@@ -40,6 +40,12 @@ public class Role implements Serializable {
 		this.users = new ArrayList<User>();
 	}
 	
+	
+	public Role(Integer id, String role) {
+		super();
+		this.id = id;
+		this.role = role;
+	}
 	public Integer getId() {
 		return id;
 	}

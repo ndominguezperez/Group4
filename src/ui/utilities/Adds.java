@@ -8,6 +8,7 @@ import pojos.Doctor;
 import pojos.Examination;
 import pojos.Patient;
 import pojos.Treatment;
+import pojos.users.User;
 import ui.Menu;
 
 
@@ -62,7 +63,7 @@ public class Adds {
 		Menu.administrationManager.addNewAppointment(appointment1);
 	}
 	
-	public static void addPatient() {
+	public static void addPatient(User user) {
 		boolean p=true; 
 		int id=0;
 		System.out.print("ID Number: ");
@@ -96,12 +97,12 @@ public class Adds {
 		System.out.print("Choose a doctor: \n");
 		Utilities.listAllDoctors();
 		Doctor doctor= Utilities.getDoctortById();
-		Patient patient = new Patient(id, name, surname, date, medicalChart,gender);
+		Patient patient = new Patient(id, name, surname, date, medicalChart,gender,user);
 		Menu.patientManager.addNewPatient(patient, doctor);
 		System.out.println(patient);
 		}
 	
-	public static void addDoctor() {
+	public static void addDoctor(User user) {
 		System.out.print("Hole Name: ");
 		String name = Utilities.read();
 		System.out.print("Salary: ");
@@ -112,7 +113,7 @@ public class Adds {
 		Date dob = Exceptions.checkDate();
 		System.out.print("Start date(yyyy-MM-dd): ");
 		Date startDate = Exceptions.checkDate();
-		Doctor doctor = new Doctor(name, salary, speciality, dob, startDate);
+		Doctor doctor = new Doctor(name, salary, speciality, dob, startDate,user);
 		Menu.doctorManager.addNewDoctor(doctor);
 	}
 }

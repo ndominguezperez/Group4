@@ -10,5 +10,6 @@ public interface DoctorManager {
 	public void addNewDoctor(Doctor doctor);
 	public Doctor getDoctorById(int id);
 	public List<Doctor> listAllDoctors();	
+	public Doctor getDoctorByUsername(String username);
 	
 }

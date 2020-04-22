@@ -15,4 +15,5 @@ public interface PatientManager {
 	public void assign (int doctorId,int patientId);
 	public void modifyPatient(Patient patient);
 	public void deletePatient(Patient patient);
+	public Patient getPatientByUsername(String username);
 }

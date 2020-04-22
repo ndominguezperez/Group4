@@ -242,6 +242,11 @@ public class SQLitePatientManager implements PatientManager{
 		}
 		
 	}
+	@Override
+	public Patient getPatientByUsername(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
 

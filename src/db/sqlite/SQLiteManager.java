@@ -54,41 +54,64 @@ public class SQLiteManager implements DBManager {
 	public void createTables() {
 		
 		try {
+			
+			Statement stmt;
+			stmt = c.createStatement();
+			String sql = "CREATE TABLE users " + "(id INTEGER  PRIMARY KEY AUTOINCREMENT,"
+					+ " username   TEXT   NOT NULL, " + " password  TEXT   NOT NULL, "
+					+ " roleId INTEGER REFERENCES roles(id) ON UPDATE CASCADE ON DELETE CASCADE)";
+			stmt.executeUpdate(sql);
+			stmt.close();
+			
+			Statement stmt0;
+			stmt0 = c.createStatement();
+			String sql0 = "CREATE TABLE roles " + "(id INTEGER  PRIMARY KEY AUTOINCREMENT,"
+					+ " role   TEXT   NOT NULL)";
+			
+			Statement stmt8;
+			stmt8 = c.createStatement();
+			String sql8 = "ISERT INTO roles (role) VALUES ('Doctor')";
+			stmt8.executeUpdate(sql8);
+			stmt8.close();
+			
+			Statement stmt9;
+			stmt9 = c.createStatement();
+			String sql9 = "ISERT INTO roles (role) VALUES ('Patient')";
+			stmt9.executeUpdate(sql9);
+			stmt9.close();
+			
+			Statement stmt10;
+			stmt10 = c.createStatement();
+			String sql10 = "ISERT INTO roles (role) VALUES ('Admin')";
+			stmt10.executeUpdate(sql10);
+			stmt10.close();
+			
 			Statement stmt1;
 			stmt1 = c.createStatement();
 			String sql1 = "CREATE TABLE doctors " + "(id     INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					+ " name   TEXT   NOT NULL, " + " speciality  TEXT   NOT NULL, " + " salary FLOAT  NOT NULL, "
-					+ "dob DATE NOT NULL, " + " startDate DATE   NOT NULL)";
+					+ " dob DATE NOT NULL, " + " startDate DATE   NOT NULL," 
+					+ " userId INTEGER REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE)";
 			stmt1.executeUpdate(sql1);
 			stmt1.close();
 			
 			Statement stmt2;
 			stmt2 = c.createStatement();
 			String sql2 = "CREATE TABLE patients " + "(id     INTEGER  PRIMARY KEY,"
-					+ " name   TEXT   NOT NULL," + " surname  TEXT   NOT NULL, " + "dob DATE NOT NULL, " 
-					+ "medicalChart TEXT NOT NULL, " + " gender TEXT   NOT NULL )";
+					+ " name   TEXT   NOT NULL," + " surname  TEXT   NOT NULL, " + "dob DATE NOT NULL," 
+					+ " medicalChart TEXT NOT NULL, " + " gender TEXT   NOT NULL,"
+					+ " userId INTEGER REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE)";
 			stmt2.executeUpdate(sql2);
 			stmt2.close();
 			
 			Statement stmt3;
 			stmt3 = c.createStatement();
 			String sql3 = "CREATE TABLE appointments " + "(id     INTEGER  PRIMARY KEY AUTOINCREMENT,"
-					+ "type TEXT   NOT NULL," + " speciality  TEXT   NOT NULL, " 
-					+ "date DATE NOT NULL," + "time FLOAT NOT NULL," 
-					+ "doctorId INTEGER REFERENCES doctors(id)ON UPDATE CASCADE ON DELETE CASCADE,"
-					+ "patientId INTEGER REFERENCES patients(id)ON UPDATE CASCADE ON DELETE CASCADE)";
+					+ " type TEXT   NOT NULL," + " speciality  TEXT   NOT NULL," 
+					+ " date DATE NOT NULL," + "time FLOAT NOT NULL," 
+					+ " doctorId INTEGER REFERENCES doctors(id) ON UPDATE CASCADE ON DELETE CASCADE,"
+					+ " patientId INTEGER REFERENCES patients(id) ON UPDATE CASCADE ON DELETE CASCADE)";
 					
-					
-			//+ "doctorId INTEGER ,"
-			//+ "patientId INTEGER, "
-			//+ "FOREIGN KEY (doctorId) REFERENCES doctors(id), " 
-			//+ "FOREIGN KEY (patientId) REFERENCES patients(id))";
-			
-			//+ "doctorId INTEGER REFERENCES doctors(id)ON UPDATE CASCADE ON DELETE SET NULL,"
-			//+ "patientId INTEGER REFERENCES patients(id)ON UPDATE CASCADE ON DELETE SET NULL)";
-			
-			//+ "doctor_id INTEGER FOREIGN KEY(doctor_id) REFERENCES doctors(id),"
-			//+ "patient_id INTEGER FOREIGN KEY(patient_id) REFERENCES patients(id))";
 			stmt3.executeUpdate(sql3);
 			stmt3.close();
 			
@@ -98,11 +121,9 @@ public class SQLiteManager implements DBManager {
 					+ "observations   TEXT   NOT NULL,"+ "temperature FLOAT NOT NULL," 
 					+ "breathingRate INTEGER NOT NULL," + "heartRate INTEGER NOT NULL,"
 					+ "bloodPressure FLOAT NOT NULL," + "oxygenSaturations FLOAT NOT NULL," 
-					+ "doctorId INTEGER REFERENCES doctors(id)ON UPDATE CASCADE ON DELETE CASCADE,"
-					+ "patientId INTEGER REFERENCES patients(id)ON UPDATE CASCADE ON DELETE CASCADE )";
+					+ "doctorId INTEGER REFERENCES doctors(id) ON UPDATE CASCADE ON DELETE CASCADE,"
+					+ "patientId INTEGER REFERENCES patients(id) ON UPDATE CASCADE ON DELETE CASCADE )";
 
-			//+ "doctor_id INTEGER FOREIGN KEY(doctor_id) REFERENCES doctors(id),"
-			//+ "patient_id INTEGER FOREIGN KEY(patient_id) REFERENCES patients(id))";
 			stmt4.executeUpdate(sql4);
 			stmt4.close();
 
@@ -114,8 +135,7 @@ public class SQLiteManager implements DBManager {
 					+ "doctorId INTEGER REFERENCES doctors(id) ON UPDATE CASCADE ON DELETE CASCADE,"
 					+ "patientId INTEGER REFERENCES patients(id) ON UPDATE CASCADE ON DELETE CASCADE)";
 			
-			//+ "doctor_id INTEGER FOREIGN KEY(doctor_id) REFERENCES doctors(id),"
-			//+ "patient_id INTEGER FOREIGN KEY(patient_id) REFERENCES patients(id))";
+
 			stmt6.executeUpdate(sql6);
 			stmt6.close();
 			
@@ -129,7 +149,7 @@ public class SQLiteManager implements DBManager {
 			
 			
 		} catch (SQLException e) {
-			if (e.getMessage().contains("already exists")) {
+			if (e.getMessage().contains("Already exists")) {
 			} else {
 				e.printStackTrace();
 			}

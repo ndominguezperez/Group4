@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import pojos.users.User;
+
 
 public class Patient implements Serializable {
 	
@@ -22,6 +24,7 @@ public class Patient implements Serializable {
 	Date dob;
 	String medical_chart;
 	String gender;
+	User user;
 	List<Treatment>treatments;
 	List<Doctor> doctors;
 	List<Appointment> schedule;
@@ -46,7 +49,22 @@ public class Patient implements Serializable {
 			
 	}
 	
-    public Patient(int id, String name, String surname, Date dob, String gender) {
+	
+	
+    public Patient(Integer id, String name, String surname, Date dob, String medical_chart, String gender, User user) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.dob = dob;
+		this.medical_chart = medical_chart;
+		this.gender = gender;
+		this.user = user;
+	}
+
+
+
+	public Patient(int id, String name, String surname, Date dob, String gender) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -62,8 +80,7 @@ public class Patient implements Serializable {
     	this.surname=surname;
     	this.dob = dob;
     }
-    
-    
+     
 
 	public Patient(Integer id, String name, String surname, Date dob, String medical_chart, String gender,
 			List <Treatment>treatments, List<Doctor> doctors, List<Appointment> schedule
@@ -172,7 +189,15 @@ public class Patient implements Serializable {
 	public void setExaminations(List<Examination> examinations) {
 		this.examinations = examinations;
 	}
-
+	
+	public User getUser() {
+		return user;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -198,16 +223,12 @@ public class Patient implements Serializable {
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Patient [id=" + id + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", medical_chart="
-				+ medical_chart + ", gender=" + gender + ", treatment=" + treatments + ", doctors=" + doctors
-				+ ", schedule=" + schedule +  ", examinations=" + examinations + "]";
+				+ medical_chart + ", gender=" + gender + ", user=" + user + ", treatments=" + treatments + ", doctors="
+				+ doctors + ", schedule=" + schedule + ", examinations=" + examinations + "]";
 	}
-
-
-
 
 
 

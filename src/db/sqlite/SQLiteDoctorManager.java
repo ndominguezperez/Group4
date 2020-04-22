@@ -13,6 +13,9 @@ import pojos.Doctor;
 
 import pojos.Patient;
 import pojos.Treatment;
+import pojos.users.Role;
+import pojos.users.User;
+import ui.Menu;
 
 public class SQLiteDoctorManager implements DoctorManager {
 	private Connection c;
@@ -92,6 +95,45 @@ public class SQLiteDoctorManager implements DoctorManager {
 				}
 				// Return the list
 				return doctorsList;
+	}
+	@Override
+	public Doctor getDoctorByUsername(String username) {
+		try {
+			  
+			String sql = "SELECT * FROM users AS u JOIN doctors AS d ON u.id = d.userId  "
+					 + " WHERE u.username = ? ";
+					
+
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, username);
+			ResultSet rs = prep.executeQuery();
+			Doctor doctor = new Doctor();
+			User newUser = new User();
+			boolean doctorCreated=false;
+			while (rs.next()) {
+				if (!doctorCreated) {
+				int userId = rs.getInt(1);
+				byte[] password = rs.getBytes(3);
+				int roleId = rs.getInt(4);
+				Role role = Menu.administrationManager.getRoleById(roleId);
+				newUser = User(userId, username, password, role);
+			
+				int doctorId= rs.getInt(5);
+				String doctorName = rs.getString(6);
+				String speciality =rs.getString(7);
+				float salary = rs.getFloat(8);
+				Date dob = rs.getDate(9);
+				Date startDate =rs.getDate(10);
+				doctor= Doctor(doctorId,doctorName,salary,dob,speciality,startDate,newUser);
+				}
+				
+					}
+			
+			 }catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		return doctor;
 	}
 	
 	

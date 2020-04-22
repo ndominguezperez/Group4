@@ -7,6 +7,7 @@ import pojos.Appointment;
 import pojos.Examination;
 import pojos.Patient;
 import pojos.Treatment;
+import pojos.users.Role;
 
 public interface AdministrationManager {
 	//Treatment
@@ -28,6 +29,8 @@ public interface AdministrationManager {
 	//Examination
 	public void addNewExamination(Examination examination);
 	public List<Examination> viewExamination(int patientId);
+	
+	public Role getRoleById(int roleId);
 	
 
 	

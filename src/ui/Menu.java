@@ -38,6 +38,7 @@ public class Menu {
 		doctorManager = dbManager.getDoctorManager();
 		administrationManager= dbManager.getAdministrationManager();
 		
+		//dbManager.createTables();
 		userManager = new JPAUserManager();
 		userManager.connect();
 		
@@ -46,26 +47,21 @@ public class Menu {
 		System.out.println("\n\n\n\n\n\n\n\nWelcome!");
 
 		Menu();
-		
 	}
 
 	private static void Menu() throws Exception {
 		int option;
 		do {
 			System.out.println("What do you want to do?  ");
-			System.out.println("\n\t1.Create a new role");
-			System.out.println("\n\t2.Create a new user");
-			System.out.println("\n\t3.Login");
+			System.out.println("\n\t1.Create a new user");
+			System.out.println("\n\t2.Login");
 			System.out.println("\n\t0.Exit");
 			option = Exceptions.checkInt();
 			switch (option) {
 			case 1:
-				newRole();
-				break;
-			case 2:
 				newUser();
 				break;
-			case 3:
+			case 2:
 				login();
 				break;
 			case 0:
@@ -73,40 +69,96 @@ public class Menu {
 				userManager.disconnect();
 				System.exit(0);
 			}
-		} while (option != 4);
-	}
-	
-	private static void newRole() throws Exception {
-		System.out.println("Please type the new role information: ");
-		System.out.println("Role name ");
-		String roleName = Utilities.read();
-		Role role = new Role (roleName);
-		userManager.createRole(role);
+		} while (option != 2);
 	}
 	
 	private static void newUser() throws Exception {
-		System.out.println("Please type the user information: ");
-		System.out.println("Username: ");
-		String username = Utilities.read();
-		System.out.println("Password: ");
-		String password = Utilities.read();
-		// Create the hash for password
-		MessageDigest md= MessageDigest.getInstance("MD5");
-		md.update(password.getBytes());
-		byte[] hashPassword = md.digest();
-		// Show all the roles available so the user choose
-		List<Role> roles = userManager.getRoles();
-		for(Role role : roles) {
-			System.out.println(role);
-		}
-		System.out.println("Type the choosen id: ");
-		int roleId= Exceptions.checkInt();
-		//get the role
-		Role choosenRole= userManager.getRole(roleId);
-		//create user
-		User user = new User(username, hashPassword, choosenRole);
-		//store user
-		userManager.createUser(user);
+		System.out.println("\nWhat role?");
+		System.out.println("\n\t1.Doctor");
+		System.out.println("\n\t2.Patient");
+		System.out.println("\n\t3.Admin Staff");
+		System.out.println("\n\t0.Back");
+		int option = Exceptions.checkInt();
+
+			switch (option) {
+			case 1:
+				System.out.println("Please type the user information: ");
+				System.out.println("Username: ");
+				String usernameDoctor = Utilities.read();
+				System.out.println("Password: ");
+				String passwordDoctor = Utilities.read();
+				// Create the hash for password
+				MessageDigest mdDoctor = MessageDigest.getInstance("MD5");
+				mdDoctor.update(passwordDoctor.getBytes());
+				byte[] hashPasswordDoctor = mdDoctor.digest();
+				// Show all the roles available so the user choose
+				List<Role> rolesDoctor = userManager.getRoles();
+				for(Role role : rolesDoctor) {
+					System.out.println(role);
+				}
+				System.out.println("Type the choosen id: ");
+				int roleIdDoctor= Exceptions.checkInt();
+				//get the role
+				Role choosenRoleDoctor= userManager.getRole(roleIdDoctor);
+				//create user
+				User userDoctor = new User(usernameDoctor, hashPasswordDoctor, choosenRoleDoctor);
+				//store user
+				userManager.createUser(userDoctor);
+				Adds.addDoctor(userDoctor);
+				break;
+			case 2:
+				System.out.println("Please type the user information: ");
+				System.out.println("Username: ");
+				String usernamePatient = Utilities.read();
+				System.out.println("Password: ");
+				String passwordPatient = Utilities.read();
+				// Create the hash for password
+				MessageDigest mdPatient= MessageDigest.getInstance("MD5");
+				mdPatient.update(passwordPatient.getBytes());
+				byte[] hashPasswordPatient = mdPatient.digest();
+				// Show all the roles available so the user choose
+				List<Role> rolesPatient = userManager.getRoles();
+				for(Role role : rolesPatient) {
+					System.out.println(role);
+				}
+				System.out.println("Type the choosen id: ");
+				int roleIdPatient= Exceptions.checkInt();
+				//get the role
+				Role choosenRolePatient= userManager.getRole(roleIdPatient);
+				//create user
+				User userPatient = new User(usernamePatient, hashPasswordPatient, choosenRolePatient);
+				//store user
+				userManager.createUser(userPatient);
+				Adds.addPatient(userPatient);
+				break;
+			case 3:
+				System.out.println("Please type the user information: ");
+				System.out.println("Username: ");
+				String usernameAdmin = Utilities.read();
+				System.out.println("Password: ");
+				String passwordAdmin = Utilities.read();
+				// Create the hash for password
+				MessageDigest mdAdmin= MessageDigest.getInstance("MD5");
+				mdAdmin.update(passwordAdmin.getBytes());
+				byte[] hashPasswordAdmin = mdAdmin.digest();
+				// Show all the roles available so the user choose
+				List<Role> rolesAdmin = userManager.getRoles();
+				for(Role role : rolesAdmin) {
+					System.out.println(role);
+				}
+				System.out.println("Type the choosen id: ");
+				int roleIdAdmin= Exceptions.checkInt();
+				//get the role
+				Role choosenRoleAdmin= userManager.getRole(roleIdAdmin);
+				//create user
+				User userAdmin = new User(usernameAdmin, hashPasswordAdmin, choosenRoleAdmin);
+				//store user
+				userManager.createUser(userAdmin);
+				break;
+			case 0:
+				Menu();
+			}
+		
 
 	}
 	
@@ -120,11 +172,13 @@ public class Menu {
 		if (user==null) {
 			System.out.println("Wrong credentials, please try again!");
 		}else if(user.getRole().getRole().equalsIgnoreCase("doctor")){
+			Doctor  doctor = doctorManager.getDoctorByUsername(username);
+			doctorSubMenu(doctor);
 			System.out.println("Welcome doctor "+username+"!");
-			doctorMenu();
 		}else if (user.getRole().getRole().equalsIgnoreCase("patient")) {
+			Patient  patient = patientManager.getPatientByUsername(username);
+			patientSubMenu(patient);
 			System.out.println("Welcome "+username+"!");
-			patientMenu();
 		}else if (user.getRole().getRole().equalsIgnoreCase("admin staff")) {
 			System.out.println("Welcome "+username+"!");
 			adminMenu();
@@ -135,7 +189,7 @@ public class Menu {
 	
 	
 	
-	private static void doctorMenu() throws Exception {
+	/*private static void doctorMenu() throws Exception {
 		Doctor doctor = null;
 		try {
 			doctor = Utilities.getDoctortById();
@@ -149,7 +203,7 @@ public class Menu {
 		} else {
 			doctorSubMenu(doctor);
 		}
-	}
+	}*/
 
 	private static void doctorSubMenu(Doctor doctor) throws Exception {
 		int option;
@@ -219,7 +273,7 @@ public class Menu {
 
 	}
 
-	private static void patientMenu() throws Exception {
+/*	private static void patientMenu() throws Exception {
 		Patient patient = null;
 		try {
 			patient = Utilities.getPatientById();
@@ -233,7 +287,7 @@ public class Menu {
 		} else {
 			patientSubMenu(patient);
 		}
-	}
+	}*/
 
 	private static void patientSubMenu(Patient patient) throws Exception {
 		int option;

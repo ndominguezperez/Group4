@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import pojos.users.User;
+
 
 public class Doctor implements Serializable{
 
@@ -22,6 +24,7 @@ public class Doctor implements Serializable{
 	List <Patient> patients;
 	List<Examination> examinations;
 	List<Appointment> schedule;
+	User user;
 	
 
 	
@@ -55,7 +58,29 @@ public class Doctor implements Serializable{
 		this.patients = new ArrayList<Patient>();
 	}
 	
+	public Doctor(String name, float salary, String speciality, Date dob, Date start_date, User user) {
+		super();
+		this.name = name;
+		this.salary = salary;
+		this.speciality = speciality;
+		this.dob = dob;
+		this.start_date = start_date;
+		this.user = user;
+	}
 	
+	
+
+	public Doctor(int id, String name, float salary, String speciality, Date dob, Date start_date, User user) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.salary = salary;
+		this.speciality = speciality;
+		this.dob = dob;
+		this.start_date = start_date;
+		this.user = user;
+	}
+
 	public Doctor(int id, String name) {
 		super();
 		this.id=id;
@@ -180,7 +205,14 @@ public class Doctor implements Serializable{
 	public void setSchedule(List<Appointment> schedule) {
 		this.schedule = schedule;
 	}
+	
+	public User getUser() {
+		return user;
+	}
 
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	@Override
 	public int hashCode() {
@@ -207,8 +239,9 @@ public class Doctor implements Serializable{
 	@Override
 	public String toString() {
 		return "Doctor [id=" + id + ", name=" + name + ", salary=" + salary + ", speciality=" + speciality + ", dob="
-				+ dob + ", start_date=" + start_date + ", patients=" + patients + ", examinations=" + examinations 
-				+ ", schedule=" + schedule + ", treatments" + treatments + "]";
+				+ dob + ", start_date=" + start_date + ", treatments=" + treatments + ", patients=" + patients
+				+ ", examinations=" + examinations + ", schedule=" + schedule + ", user=" + user + "]";
 	}
-		
+
+
 }
