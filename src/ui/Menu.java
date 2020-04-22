@@ -120,10 +120,10 @@ public class Menu {
 		if (user==null) {
 			System.out.println("Wrong credentials, please try again!");
 		}else if(user.getRole().getRole().equalsIgnoreCase("doctor")){
-			System.out.println("Welcome doctor"+username+"!");
+			System.out.println("Welcome doctor "+username+"!");
 			doctorMenu();
 		}else if (user.getRole().getRole().equalsIgnoreCase("patient")) {
-			System.out.println("Welcome"+username+"!");
+			System.out.println("Welcome "+username+"!");
 			patientMenu();
 		}else if (user.getRole().getRole().equalsIgnoreCase("admin staff")) {
 			System.out.println("Welcome "+username+"!");

@@ -111,8 +111,8 @@ public class SQLiteManager implements DBManager {
 			String sql6=  "CREATE TABLE treatments " + "(id     INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					+ "disease   TEXT   NOT NULL,"+ "drug TEXT NOT NULL," 
 					+ "finishDate DATE NOT NULL," 
-					+ "doctorId INTEGER REFERENCES doctors(id)ON UPDATE CASCADE ON DELETE CASCADE,"
-					+ "patientId INTEGER REFERENCES patients(id)ON UPDATE CASCADE ON DELETE CASCADE)";
+					+ "doctorId INTEGER REFERENCES doctors(id) ON UPDATE CASCADE ON DELETE CASCADE,"
+					+ "patientId INTEGER REFERENCES patients(id) ON UPDATE CASCADE ON DELETE CASCADE)";
 			
 			//+ "doctor_id INTEGER FOREIGN KEY(doctor_id) REFERENCES doctors(id),"
 			//+ "patient_id INTEGER FOREIGN KEY(patient_id) REFERENCES patients(id))";
@@ -121,8 +121,9 @@ public class SQLiteManager implements DBManager {
 			
 			Statement stmt7;
 			stmt7= c.createStatement();//many to many relation between doctor and patient 
-			String sql7 = "CREATE TABLE doctorsPatients " + "(doctorId     INTEGER  REFERENCES doctors(id), "
-					+ "patientId  INTEGER  REFERENCES patients(id), " + "PRIMARY KEY(doctorId,patientId))";
+			String sql7 = "CREATE TABLE doctorsPatients " + "(doctorId INTEGER  REFERENCES doctors(id) ON UPDATE CASCADE ON DELETE CASCADE, "
+					+ "patientId  INTEGER  REFERENCES patients(id) ON UPDATE CASCADE ON DELETE CASCADE, " 
+					+ "PRIMARY KEY(doctorId,patientId) )";
 			stmt7.executeUpdate(sql7);
 			stmt7.close();
 			
