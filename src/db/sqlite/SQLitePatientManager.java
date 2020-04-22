@@ -231,7 +231,7 @@ public class SQLitePatientManager implements PatientManager{
 	public void deletePatient(Patient patient) {
 		try {
 			System.out.println(patient);
-			String sql = "DELETE ON CASCADE FROM patients WHERE id = ?";
+			String sql = "DELETE FROM patients WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, patient.getId());
 			prep.executeUpdate();

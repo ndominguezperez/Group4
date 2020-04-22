@@ -80,7 +80,7 @@ public class Menu {
 		System.out.println("Please type the new role information: ");
 		System.out.println("Role name ");
 		String roleName = Utilities.read();
-		Role role= new Role (roleName);
+		Role role = new Role (roleName);
 		userManager.createRole(role);
 	}
 	
