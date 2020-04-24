@@ -61,17 +61,17 @@ public class Utilities {
 
     public static boolean searchPatientByName() {
     	String name = null;
+    	System.out.println("Type the name: ");
     	name = read();
     	List<Patient> patients = Menu.patientManager.searchByName(name);
     	boolean yes = false;
         if(patients.size()>0) {
-    	System.out.println("What is the name of the patient your looking for?");
         for (Patient patient : patients) {
                  System.out.println(patient);
           }
         yes=true;
         }else {
-        	System.out.println("You don't have any patients");
+        	System.out.println("You don't have any patients called "+name);
         	yes=false;
         }
         return yes;
@@ -79,17 +79,17 @@ public class Utilities {
 
     public static boolean searchPatientBySurname() {
     	String surname = null;
+    	System.out.println("Type the surname: ");
     	surname = read();
     	List<Patient> patients = Menu.patientManager.searchBySurname(surname);
     	boolean yes = false;
         if(patients.size()>0) {
-    	System.out.println("What is the name of the patient your looking for?");
         for (Patient patient : patients) {
                  System.out.println(patient);
           }
         yes=true;
         }else {
-        	System.out.println("You don't have any patients");
+        	System.out.println("You don't have any patients which surname is "+surname);
         	yes=false;
         }
         return yes;

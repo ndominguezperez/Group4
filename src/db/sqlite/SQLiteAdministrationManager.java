@@ -180,16 +180,18 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 					Date dob = rs.getDate(4);
 					String medicalChart = rs.getString(5);
 					String gender = rs.getString(6);
+					//int userId =  rs.getInt(7);
+					//User user = Menu.administrationManager.get
 					newPatient = new Patient(pId, name, surname, dob, medicalChart, gender);
 					patientCreated = true;
 				}
 
-				int appointmentId = rs.getInt(7);
-				String type = rs.getString(8);
-				String apSpeciality = rs.getString(9);
-				Date date = rs.getDate(10);
-				Float time = rs.getFloat(11);
-				int doctorId = rs.getInt(12);
+				int appointmentId = rs.getInt(8);
+				String type = rs.getString(9);
+				String apSpeciality = rs.getString(10);
+				Date date = rs.getDate(11);
+				Float time = rs.getFloat(12);
+				int doctorId = rs.getInt(13);
 				Doctor newDoctor2 = new Doctor();
 				newDoctor2 = ui.utilities.Utilities.getDoctortByIdPassingInt(doctorId);
 				newAppointment = new Appointment(appointmentId, type, apSpeciality, date, time, newDoctor2);

@@ -10,6 +10,8 @@ import db.interfaces.PatientManager;
 import pojos.Appointment;
 import pojos.Doctor;
 import pojos.Patient;
+import pojos.users.Role;
+import pojos.users.User;
 import ui.Menu;
 import ui.utilities.Utilities;
 
@@ -242,8 +244,40 @@ public class SQLitePatientManager implements PatientManager{
 	}
 	@Override
 	public Patient getPatientByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		Patient patient = null;
+		try {
+			  
+			String sql = "SELECT * FROM users AS u JOIN patients AS p ON u.id = p.userId  "
+					 + " WHERE u.username = ? ";
+			
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, username);
+			ResultSet rs = prep.executeQuery();
+			User newUser = null;
+			boolean patientCreated=false;
+			while (rs.next()) {
+				if (!patientCreated) {
+				int userId = rs.getInt(1);
+				byte[] password = rs.getBytes(3);
+				int roleId = rs.getInt(4);
+				Role role = Menu.administrationManager.getRoleById(roleId);
+				newUser = new User(userId, username, password, role);
+				}
+				int patientId= rs.getInt(5);
+				String patientName = rs.getString(6);
+				String patientSurname = rs.getString(7);
+				Date dob = rs.getDate(8);
+				String medicalChart =rs.getString(9);
+				String gender =rs.getString(10);
+				
+				patient= new Patient(patientId,patientName,patientSurname,dob,medicalChart,gender,newUser);
+				}
+			
+			 }catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		return patient;
 	}
 	
 }

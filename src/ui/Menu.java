@@ -157,6 +157,7 @@ public class Menu {
 		}else if (user.getRole().getRole().equalsIgnoreCase("patient")) {
 			System.out.println("Welcome "+ username +"!");
 			Patient  patient = patientManager.getPatientByUsername(username);
+			System.out.println("Welcome "+ username +"!");
 			patientSubMenu(patient);
 		}else if (user.getRole().getRole().equalsIgnoreCase("admin staff")) {
 			System.out.println("Welcome "+ username +"!");
@@ -188,8 +189,6 @@ public class Menu {
 				Patient patient = searchPatientMenu();
 				if(patient!=null) {
 					doctorPatientMenu(patient, doctor);
-				}else {
-					System.out.println("This patient doesn't exist");
 				}
 				doctorSubMenu(doctor);
 			case 0:
