@@ -26,8 +26,8 @@ public class SQLitePatientManager implements PatientManager{
 	}
 	public void addNewPatient(Patient patient, Doctor doctor) {
 		try {  
-			String sql = "INSERT INTO patients (id, name, surname , dob, medicalChart, gender) "
-					+ "VALUES (?,?,?,?,?,?);";
+			String sql = "INSERT INTO patients (id, name, surname , dob, medicalChart, gender, userId) "
+					+ "VALUES (?,?,?,?,?,?,?);";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, patient.getId());
 			prep.setString(2, patient.getName());
@@ -35,6 +35,7 @@ public class SQLitePatientManager implements PatientManager{
 			prep.setDate(4,patient.getDob());
 	        prep.setString(5, patient.getMedical_chart());
 			prep.setString(6, patient.getGender()); 
+			prep.setInt(7, patient.getUser().getId());
 			prep.executeUpdate();
 			prep.close();
 		    assign(doctor.getId(), patient.getId());
@@ -93,6 +94,7 @@ public class SQLitePatientManager implements PatientManager{
 		}
 		return patientList;
 	}
+	
 	@Override
 	public List<Patient> searchBySurname(String surname) {
 		List <Patient> patientList= new ArrayList <Patient>();
@@ -115,10 +117,7 @@ public class SQLitePatientManager implements PatientManager{
 		return patientList;
 
 	}
-
 	
-	
-
 	public Patient getPatient (int patientId) {
 		Patient newPatient = null;
 		try {
@@ -173,7 +172,6 @@ public class SQLitePatientManager implements PatientManager{
 			try{
 				newPatient.setDoctors(doctorList);
 			}catch(NullPointerException n) {
-				System.out.println("This patient doesn't have any doctor");
 			}
 			/*try {
 				newPatient.setSchedule(appointmentList);

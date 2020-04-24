@@ -26,14 +26,15 @@ public class SQLiteDoctorManager implements DoctorManager {
 	public void addNewDoctor(Doctor doctor) {
 		
 		try {  
-			String sql = "INSERT INTO doctors (name, salary , speciality, dob, startDate) "
-					+ "VALUES (?,?,?,?,?);";
+			String sql = "INSERT INTO doctors (name, salary , speciality, dob, startDate, userId) "
+					+ "VALUES (?,?,?,?,?,?);";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, doctor.getName());
 			prep.setFloat(2, doctor.getSalary());
 			prep.setString(3, doctor.getSpeciality());
 			prep.setDate(4, doctor.getDob());
 			prep.setDate(5, doctor.getStart_date());
+			prep.setInt(6,doctor.getUser().getId());
 			
 			prep.executeUpdate();
 			prep.close();
@@ -98,17 +99,16 @@ public class SQLiteDoctorManager implements DoctorManager {
 	}
 	@Override
 	public Doctor getDoctorByUsername(String username) {
+		Doctor doctor = null;
 		try {
 			  
 			String sql = "SELECT * FROM users AS u JOIN doctors AS d ON u.id = d.userId  "
 					 + " WHERE u.username = ? ";
-					
-
+			
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, username);
 			ResultSet rs = prep.executeQuery();
-			Doctor doctor = new Doctor();
-			User newUser = new User();
+			User newUser = null;
 			boolean doctorCreated=false;
 			while (rs.next()) {
 				if (!doctorCreated) {
@@ -116,18 +116,16 @@ public class SQLiteDoctorManager implements DoctorManager {
 				byte[] password = rs.getBytes(3);
 				int roleId = rs.getInt(4);
 				Role role = Menu.administrationManager.getRoleById(roleId);
-				newUser = User(userId, username, password, role);
-			
+				newUser = new User(userId, username, password, role);
+				}
 				int doctorId= rs.getInt(5);
 				String doctorName = rs.getString(6);
 				String speciality =rs.getString(7);
 				float salary = rs.getFloat(8);
 				Date dob = rs.getDate(9);
 				Date startDate =rs.getDate(10);
-				doctor= Doctor(doctorId,doctorName,salary,dob,speciality,startDate,newUser);
+				doctor= new Doctor(doctorId,doctorName,salary,speciality,dob,startDate,newUser);
 				}
-				
-					}
 			
 			 }catch (SQLException e) {
 				e.printStackTrace();
@@ -136,7 +134,33 @@ public class SQLiteDoctorManager implements DoctorManager {
 		return doctor;
 	}
 	
-	
+	@Override
+    public List<Patient> listAllPatientsOfDoctor(int docId) {
+          List<Patient> patientsList = new ArrayList<Patient>();
+          try {
+                 String sql = " SELECT * FROM doctors AS d JOIN doctorsPatients AS dp ON d.id= dp.doctorId"
+                              +" JOIN patients AS p ON dp.patientId = p.id"
+                               +" WHERE d.id= ? ";
+
+                 PreparedStatement prep = c.prepareStatement(sql);
+                 prep.setInt(1, docId);
+                 ResultSet rs = prep.executeQuery();
+                 while (rs.next()) {
+                        int id = rs.getInt(9);
+                        String patientName = rs.getString(10);
+                        String patientSurname = rs.getString(11);
+                        Date patientDob = rs.getDate(12);
+                        String patientMedicalChart = rs.getString(13);
+                        String patientGender = rs.getString(14);
+                        Patient newPatient = new Patient (id, patientName, patientSurname, patientDob, patientMedicalChart, patientGender);
+                        patientsList.add(newPatient);
+                 }
+          } catch (Exception e) {
+                 e.printStackTrace();
+          }
+          return patientsList;
+    }
+
 	
 
 }

@@ -15,53 +15,55 @@ import ui.Menu;
 public class Adds {
 	
 	public static void addExamination(Patient patient, Doctor doctor) {
-		
-		System.out.println("Introduce the temperature");
-		Float temperature = Exceptions.checkFloat();
-		System.out.println("Introduce the breathing rate");
-		int breathingRate = Exceptions.checkInt();
-		System.out.println("Introduce the heart rate");
-		int heartRate = Exceptions.checkInt();
-		System.out.println("Introduce the blood presure");
-		Float bloodPreasure = Exceptions.checkFloat();
-		System.out.println("Introduce the oxygen saturation");
-		Float oxygenSaturation= Exceptions.checkFloat();
-		System.out.println("Introduce the observations");
-		String observations = Utilities.read();
-		Examination examination = new Examination(observations, temperature,breathingRate,heartRate, bloodPreasure, oxygenSaturation, doctor, patient );
-		System.out.println(examination);
-		Menu.administrationManager.addNewExamination(examination);
-	}
-	
-	public static void addTreatment(Patient patient, Doctor doctor) {
-		System.out.print("Disease: ");
-		String disease = Utilities.read();
-		System.out.print("Drug: ");
-		String drug = Utilities.read();
-		System.out.print("Finish date(yyyy-MM-dd): ");
-		Date finishDate = Exceptions.checkDate();
-		Treatment treatment = new Treatment(disease, drug, finishDate, patient, doctor);
-		Menu.administrationManager.addNewTreatment(treatment);
-	}
+        
+        System.out.println("Introduce the temperature");
+        Float temperature = Exceptions.checkFloat();
+        System.out.println("Introduce the breathing rate");
+        int breathingRate = Exceptions.checkInt();
+        System.out.println("Introduce the heart rate");
+        int heartRate = Exceptions.checkInt();
+        System.out.println("Introduce the blood presure");
+        Float bloodPreasure = Exceptions.checkFloat();
+        System.out.println("Introduce the oxygen saturation");
+        Float oxygenSaturation= Exceptions.checkFloat();
+        System.out.println("Introduce the observations");
+        String observations = Utilities.read();
+        Examination examination = new Examination(observations, temperature,breathingRate,heartRate, bloodPreasure, oxygenSaturation, doctor, patient );
+        System.out.println(examination);
+        Menu.administrationManager.addNewExamination(examination);
+  }
+ 
+  public static void addTreatment(Patient patient, Doctor doctor) {
+        System.out.print("Disease: ");
+        String disease = Utilities.read();
+        System.out.print("Drug: ");
+        String drug = Utilities.read();
+        System.out.print("Finish date(yyyy-MM-dd): ");
+        Date finishDate = Exceptions.checkDate();
+        Treatment treatment = new Treatment(disease, drug, finishDate, patient, doctor);
+        Menu.administrationManager.addNewTreatment(treatment);
+  }
 
 
-	
-	public static void addAppointment(Patient patient) {
-		
-		System.out.print("Introduce the type: ");
-		String type = Utilities.read();
-		System.out.print("Date (yyyy-MM-dd): ");
-		Date date = Exceptions.checkDate();
-		System.out.print("Time: ");
-		Float time = Exceptions.checkFloat();
-		Utilities.listAllDoctors();
-		System.out.print("Id: ");
-		Doctor doctor= Utilities.getDoctortById();
-		String speciality = doctor.getSpeciality();
-		Appointment appointment1 = new Appointment(type,date,time,speciality,doctor,patient);
-		System.out.println(appointment1);
-		Menu.administrationManager.addNewAppointment(appointment1);
-	}
+ 
+  public static void addAppointment(Patient patient) {
+        System.out.println("\n\nIntroduce the type: ");
+        String type = Utilities.read();
+        System.out.println("Date (yyyy-MM-dd): ");
+        Date date = Exceptions.checkDate();
+        System.out.println("Time: ");
+        Float time = Exceptions.checkFloat();
+        Utilities.listAllDoctors();
+        System.out.println("Id: ");
+        Doctor doctor=null;
+        while(doctor==null) {
+        doctor= Exceptions.checkDoctor();
+        };
+        String speciality = doctor.getSpeciality();
+        Appointment appointment1 = new Appointment(type,date,time,speciality,doctor,patient);
+        System.out.println(appointment1);
+        Menu.administrationManager.addNewAppointment(appointment1);
+        }
 	
 	public static void addPatient(User user) {
 		boolean p=true; 
@@ -96,7 +98,7 @@ public class Adds {
 		String medicalChart = Utilities.read();
 		System.out.print("Choose a doctor: \n");
 		Utilities.listAllDoctors();
-		Doctor doctor= Utilities.getDoctortById();
+		Doctor doctor= Exceptions.checkDoctor();
 		Patient patient = new Patient(id, name, surname, date, medicalChart,gender,user);
 		Menu.patientManager.addNewPatient(patient, doctor);
 		System.out.println(patient);

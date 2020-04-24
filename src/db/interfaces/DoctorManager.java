@@ -11,5 +11,6 @@ public interface DoctorManager {
 	public Doctor getDoctorById(int id);
 	public List<Doctor> listAllDoctors();	
 	public Doctor getDoctorByUsername(String username);
+	public List<Patient> listAllPatientsOfDoctor(int id);
 	
 }

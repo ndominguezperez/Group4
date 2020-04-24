@@ -38,11 +38,11 @@ public class Menu {
 		doctorManager = dbManager.getDoctorManager();
 		administrationManager= dbManager.getAdministrationManager();
 		
-		//dbManager.createTables();
+		dbManager.createTables();
 		userManager = new JPAUserManager();
 		userManager.connect();
 		
-		dbManager.createTables();
+		//dbManager.createTables();
 		
 		System.out.println("\n\n\n\n\n\n\n\nWelcome!");
 
@@ -69,7 +69,7 @@ public class Menu {
 				userManager.disconnect();
 				System.exit(0);
 			}
-		} while (option != 2);
+		} while (option != 0);
 	}
 	
 	private static void newUser() throws Exception {
@@ -91,20 +91,13 @@ public class Menu {
 				MessageDigest mdDoctor = MessageDigest.getInstance("MD5");
 				mdDoctor.update(passwordDoctor.getBytes());
 				byte[] hashPasswordDoctor = mdDoctor.digest();
-				// Show all the roles available so the user choose
-				List<Role> rolesDoctor = userManager.getRoles();
-				for(Role role : rolesDoctor) {
-					System.out.println(role);
-				}
-				System.out.println("Type the choosen id: ");
-				int roleIdDoctor= Exceptions.checkInt();
-				//get the role
-				Role choosenRoleDoctor= userManager.getRole(roleIdDoctor);
+				Role choosenRoleDoctor= userManager.getRole(1);
 				//create user
 				User userDoctor = new User(usernameDoctor, hashPasswordDoctor, choosenRoleDoctor);
 				//store user
 				userManager.createUser(userDoctor);
 				Adds.addDoctor(userDoctor);
+				System.out.println("\nUser created!\n");
 				break;
 			case 2:
 				System.out.println("Please type the user information: ");
@@ -116,20 +109,13 @@ public class Menu {
 				MessageDigest mdPatient= MessageDigest.getInstance("MD5");
 				mdPatient.update(passwordPatient.getBytes());
 				byte[] hashPasswordPatient = mdPatient.digest();
-				// Show all the roles available so the user choose
-				List<Role> rolesPatient = userManager.getRoles();
-				for(Role role : rolesPatient) {
-					System.out.println(role);
-				}
-				System.out.println("Type the choosen id: ");
-				int roleIdPatient= Exceptions.checkInt();
-				//get the role
-				Role choosenRolePatient= userManager.getRole(roleIdPatient);
+				Role choosenRolePatient= userManager.getRole(2);
 				//create user
 				User userPatient = new User(usernamePatient, hashPasswordPatient, choosenRolePatient);
 				//store user
 				userManager.createUser(userPatient);
 				Adds.addPatient(userPatient);
+				System.out.println("\nUser created!\n");
 				break;
 			case 3:
 				System.out.println("Please type the user information: ");
@@ -141,19 +127,12 @@ public class Menu {
 				MessageDigest mdAdmin= MessageDigest.getInstance("MD5");
 				mdAdmin.update(passwordAdmin.getBytes());
 				byte[] hashPasswordAdmin = mdAdmin.digest();
-				// Show all the roles available so the user choose
-				List<Role> rolesAdmin = userManager.getRoles();
-				for(Role role : rolesAdmin) {
-					System.out.println(role);
-				}
-				System.out.println("Type the choosen id: ");
-				int roleIdAdmin= Exceptions.checkInt();
-				//get the role
-				Role choosenRoleAdmin= userManager.getRole(roleIdAdmin);
+				Role choosenRoleAdmin= userManager.getRole(3);
 				//create user
 				User userAdmin = new User(usernameAdmin, hashPasswordAdmin, choosenRoleAdmin);
 				//store user
 				userManager.createUser(userAdmin);
+				System.out.println("\nUser created!\n");
 				break;
 			case 0:
 				Menu();
@@ -172,38 +151,20 @@ public class Menu {
 		if (user==null) {
 			System.out.println("Wrong credentials, please try again!");
 		}else if(user.getRole().getRole().equalsIgnoreCase("doctor")){
+			System.out.println("Welcome doctor "+ username +"!");
 			Doctor  doctor = doctorManager.getDoctorByUsername(username);
 			doctorSubMenu(doctor);
-			System.out.println("Welcome doctor "+username+"!");
 		}else if (user.getRole().getRole().equalsIgnoreCase("patient")) {
+			System.out.println("Welcome "+ username +"!");
 			Patient  patient = patientManager.getPatientByUsername(username);
 			patientSubMenu(patient);
-			System.out.println("Welcome "+username+"!");
 		}else if (user.getRole().getRole().equalsIgnoreCase("admin staff")) {
-			System.out.println("Welcome "+username+"!");
-			adminMenu();
+			System.out.println("Welcome "+ username +"!");
+			adminMenu(); 
 		}else {
 			System.out.println("Invalid role.");
 		}
 	}
-	
-	
-	
-	/*private static void doctorMenu() throws Exception {
-		Doctor doctor = null;
-		try {
-			doctor = Utilities.getDoctortById();
-		}catch (NullPointerException e) {
-			System.out.println("\n\n\tID not founded");
-			doctor=null;
-			return;
-		}
-		if (doctor == null) {
-			return;
-		} else {
-			doctorSubMenu(doctor);
-		}
-	}*/
 
 	private static void doctorSubMenu(Doctor doctor) throws Exception {
 		int option;
@@ -218,19 +179,25 @@ public class Menu {
 			case 1: // View schedule
 				Utilities.getDoctorSchedule(doctor.getId());
 				doctorSubMenu(doctor);
+				break;
 			case 2:
-				Utilities.listAllPatientsOfDoctor(doctor.getId());
+				Utilities.listAllPatientsOfDoctor(doctor);
+				doctorSubMenu(doctor);
 				break;
 			case 3: // Patient
 				Patient patient = searchPatientMenu();
-				doctorPatientMenu(patient, doctor);
-				break;
+				if(patient!=null) {
+					doctorPatientMenu(patient, doctor);
+				}else {
+					System.out.println("This patient doesn't exist");
+				}
+				doctorSubMenu(doctor);
 			case 0:
 				Menu();
 
 			}
 
-		} while (option != 3);
+		} while (option != 0);
 
 	}
 
@@ -245,49 +212,38 @@ public class Menu {
 		System.out.println("\n\t5.Delete Treatment");
 		System.out.println("\n\t6.View Treatment");
 		System.out.println("\n\t0.Back");
-		
 			option = Exceptions.checkInt();
 			switch (option) {
 			case 1:
 				Adds.addExamination(patient, doctor);
+				doctorPatientMenu(patient,doctor);
 				break;
 			case 2:
 				administrationManager.viewExamination(patient.getId());
+				doctorPatientMenu(patient,doctor);
 				break;
 			case 3:
 				Adds.addTreatment(patient, doctor);
+				doctorPatientMenu(patient,doctor);
 				break;
 			case 4:
 				Sets.modifyTreatment(patient, doctor);
+				doctorPatientMenu(patient,doctor);
 				break;
 			case 5:
 				Delete.deleteTreatment(patient, doctor);
+				doctorPatientMenu(patient,doctor);
 				break;
 			case 6:
 				administrationManager.viewTreatment(patient.getId());
+				doctorPatientMenu(patient,doctor);
 				break;
 			case 0:
 				doctorSubMenu(doctor);
 			}
-		} while (option != 5);
+		} while (option != 0);
 
 	}
-
-/*	private static void patientMenu() throws Exception {
-		Patient patient = null;
-		try {
-			patient = Utilities.getPatientById();
-			 System.out.print(patient);
-		} catch (NullPointerException e) {
-			System.out.println("\n\n\tID not founded");
-			return;
-		}
-		if (patient == null) {
-			return;
-		} else {
-			patientSubMenu(patient);
-		}
-	}*/
 
 	private static void patientSubMenu(Patient patient) throws Exception {
 		int option;
@@ -300,47 +256,44 @@ public class Menu {
 			switch (option) {
 			case 1:
 				Utilities.getPatientSchedule(patient.getId());
+				patientSubMenu(patient);
 				break;
 			case 2:
-				// Uitlizar la funcion creada con doctorPatientMenu
 				List<Examination> a = patient.getExaminations();
+				patientSubMenu(patient);
 				break;
 			case 0:
 				Menu();
 			}
-		} while (option != 3);
+		} while (option != 0);
 	}
 
 	private static Patient searchPatientMenu() {
 		System.out.println("\n\t1.To search by id number");
 		System.out.println("\n\t2.To search by name");
 		System.out.println("\n\t3.To search by surname");
-		//System.out.println("\n\tIf you want to go back press 0");
 		int option = Exceptions.checkInt();
 		Patient p = null;
+		boolean yes=false;
 		switch (option) {
 		case 1:
-			p = Utilities.getPatientById();
-			if(p==null) {
-				System.out.println("This patient do not exit");
-			}
+			p = Exceptions.checkPatient();
 			break;
 		case 2:
-			Utilities.searchPatientByName();
-			p = Utilities.getPatientById();
-			if(p==null) {
-				System.out.println("This patient do not exit");
+			yes = Utilities.searchPatientByName();
+			if(yes) {
+				p = Exceptions.checkPatient();
 			}
 			break;
 		case 3:
-			Utilities.searchPatientBySurname();
-			p = Utilities.getPatientById();
-			if(p==null) {
-				System.out.println("This patient do not exit");
+			yes = Utilities.searchPatientBySurname();
+			if(yes) {
+				p = Exceptions.checkPatient();
 			}
 			break;
+		case 0:
+			return  p ;
 		}
-	
 		return p;
 	}
 
@@ -349,9 +302,8 @@ public class Menu {
 		System.out.println("\n\t1.List all patients");
 		System.out.println("\n\t2.View a patient");
 		System.out.println("\n\t3.Delete a patient");
-		System.out.println("\n\t4.Add a new patient");
-		System.out.println("\n\t5.Appointments");
-		System.out.println("\n\t6.Add new doctor");
+		System.out.println("\n\t4.Appointments");
+		//System.out.println("\n\t5.Add a new patient");
 		System.out.println("\n\t0.Back");
 		int option = Exceptions.checkInt();
 		switch (option) {
@@ -360,21 +312,26 @@ public class Menu {
 			adminMenu();
 		case 2:
 			Patient p1=searchPatientMenu();
-			System.out.println(p1);
+			if(p1!=null) {
+				System.out.println(p1);
+			}else {
+				System.out.println("This patient doesn't exist");
+			}
 			adminMenu();
 		case 3:
 			Patient p2=searchPatientMenu();
-			Delete.deletePatient(p2);
+			if(p2!=null) {
+				Delete.deletePatient(p2);
+			}else {
+				System.out.println("This patient doesn't exist");
+			}
 			adminMenu();
 		case 4:
-			Adds.addPatient();
-			adminMenu();
-		case 5:
 			appointmentMenu();
 			break;
-		case 6:
-			Adds.addDoctor();
-			adminMenu();
+		//case 5:
+		//	Adds.addPatient();
+		//	adminMenu();
 		case 0:
 			Menu();
 
@@ -394,12 +351,20 @@ public class Menu {
 		case 1:
 			System.out.println("Patient: ");
 			p = searchPatientMenu();
-			Adds.addAppointment(p);
+			if(p!=null) {
+				Adds.addAppointment(p);
+			}else {
+				System.out.println("This patient doesn't exist");
+			}
 			appointmentMenu();
 		case 2:
 			System.out.println("From what patient do you want to modify the appointment: ");
 			p = searchPatientMenu();
-			Sets.modifyAppointment(p);
+			if(p!=null) {
+				Sets.modifyAppointment(p);
+			}else {
+				System.out.println("This patient doesn't exist");
+			}
 			appointmentMenu();
 		case 3:
 			Utilities.searchAppointmentByDate();
@@ -407,14 +372,15 @@ public class Menu {
 		case 4:
 			System.out.println("From what patient do you want to delete the appointment: ");
 			p = searchPatientMenu();
-			Delete.deleteAppointment(p);
+			if(p!=null) {
+				Delete.deleteAppointment(p);
+			}else {
+				System.out.println("This patient doesn't exist");
+			}
 			appointmentMenu();
 		case 0:
 			adminMenu();
 
 		}
-
 	}
-
-	
 }

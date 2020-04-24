@@ -67,22 +67,24 @@ public class SQLiteManager implements DBManager {
 			stmt0 = c.createStatement();
 			String sql0 = "CREATE TABLE roles " + "(id INTEGER  PRIMARY KEY AUTOINCREMENT,"
 					+ " role   TEXT   NOT NULL)";
+			stmt0.executeUpdate(sql0);
+			stmt0.close();
 			
 			Statement stmt8;
 			stmt8 = c.createStatement();
-			String sql8 = "ISERT INTO roles (role) VALUES ('Doctor')";
+			String sql8 = "INSERT INTO roles (role) VALUES ('Doctor')";
 			stmt8.executeUpdate(sql8);
 			stmt8.close();
 			
 			Statement stmt9;
 			stmt9 = c.createStatement();
-			String sql9 = "ISERT INTO roles (role) VALUES ('Patient')";
+			String sql9 = "INSERT INTO roles (role) VALUES ('Patient')";
 			stmt9.executeUpdate(sql9);
 			stmt9.close();
 			
 			Statement stmt10;
 			stmt10 = c.createStatement();
-			String sql10 = "ISERT INTO roles (role) VALUES ('Admin')";
+			String sql10 = "INSERT INTO roles (role) VALUES ('Admin')";
 			stmt10.executeUpdate(sql10);
 			stmt10.close();
 			
@@ -149,7 +151,7 @@ public class SQLiteManager implements DBManager {
 			
 			
 		} catch (SQLException e) {
-			if (e.getMessage().contains("Already exists")) {
+			if (e.getMessage().contains("already exists")) {
 			} else {
 				e.printStackTrace();
 			}
