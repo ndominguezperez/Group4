@@ -231,18 +231,18 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 					doctorCreated = true;
 				}
 
-				int appointmentId = rs.getInt(7);
-				String type = rs.getString(8);
-				String apSpeciality = rs.getString(9);
-				Date date = rs.getDate(10);
-				Float time = rs.getFloat(11);
-				int patientId = rs.getInt(13);
-
-				String patientName = rs.getString(15);
-				String patientSurname = rs.getString(16);
-				Date patientDob = rs.getDate(17);
-				String patientMedicalChart = rs.getString(18);
-				String gender = rs.getString(19);
+				int appointmentId = rs.getInt(8);
+				String type = rs.getString(9);
+				String apSpeciality = rs.getString(10);
+				Date date = rs.getDate(11);
+				Float time = rs.getFloat(12);
+				
+				int patientId = rs.getInt(15);
+				String patientName = rs.getString(16);
+				String patientSurname = rs.getString(17);
+				Date patientDob = rs.getDate(18);
+				String patientMedicalChart = rs.getString(19);
+				String gender = rs.getString(20);
 
 				newAppointment = new Appointment(appointmentId, type, apSpeciality, date, time, newDoctor);
 				newPatient = new Patient(patientId, patientName, patientSurname, patientDob, patientMedicalChart,
