@@ -281,17 +281,17 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 					newPatient = new Patient(pId, name, surname, dob, medicalChart, gender);
 					patientCreated = true;
 				}
-				int examinationId = rs.getInt(7);
-				String observations = rs.getString(8);
-				Float temperature = rs.getFloat(9);
-				int breathingRate = rs.getInt(10);
-				int heartRate = rs.getInt(11);
-				Float bloodPressure = rs.getFloat(12);
-				Float oxygenSaturations = rs.getFloat(13);
+				int examinationId = rs.getInt(8);
+				String observations = rs.getString(9);
+				Float temperature = rs.getFloat(10);
+				int breathingRate = rs.getInt(11);
+				int heartRate = rs.getInt(12);
+				Float bloodPressure = rs.getFloat(13);
+				Float oxygenSaturations = rs.getFloat(14);
 
-				int doctorId = rs.getInt(16);
-				String doctorName = rs.getString(17);
-				String speciality = rs.getString(18);
+				int doctorId = rs.getInt(17);
+				String doctorName = rs.getString(18);
+				String speciality = rs.getString(19);
 				Doctor doctor = new Doctor(doctorId, doctorName, speciality);
 				Examination newExamination = new Examination(examinationId, observations, temperature, breathingRate,
 						heartRate, bloodPressure, oxygenSaturations, doctor, newPatient);
