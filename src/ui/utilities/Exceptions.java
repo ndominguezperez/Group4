@@ -19,7 +19,7 @@ public class Exceptions {
 		int day = 0;
 		do {
 			day = checkInt();
-			comprobation = true;
+			comprobation = true; 
 			try {
 				if (day < 0) {
 					throw new RuntimeException("NEGATIVE NUMBERS DO NOT EXIT");
