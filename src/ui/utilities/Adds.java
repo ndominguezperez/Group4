@@ -47,18 +47,18 @@ public class Adds {
 
  
   public static void addAppointment(Patient patient) {
-        System.out.println("\n\nIntroduce the type: ");
+        System.out.println("\n\nType of appointment: ");
         String type = Utilities.read();
         System.out.println("Date (yyyy-MM-dd): ");
         Date date = Exceptions.checkDate();
         System.out.println("Time: ");
         Float time = Exceptions.checkFloat();
         Utilities.listAllDoctors();
-        System.out.println("Id: ");
+        //System.out.println("Id: ");
         Doctor doctor=null;
         while(doctor==null) {
-        doctor= Exceptions.checkDoctor();
-        };
+        	doctor= Exceptions.checkDoctor();
+        }
         String speciality = doctor.getSpeciality();
         Appointment appointment1 = new Appointment(type,date,time,speciality,doctor,patient);
         System.out.println(appointment1);

@@ -396,14 +396,14 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 					patientCreated = true;
 				}
 
-				int treatmentId = rs.getInt(7);
-				String disease = rs.getString(8);
-				String drug = rs.getString(9);
-				Date finishDate = rs.getDate(10);
+				int treatmentId = rs.getInt(8);
+				String disease = rs.getString(9);
+				String drug = rs.getString(10);
+				Date finishDate = rs.getDate(11);
 
-				int doctorId = rs.getInt(13);
-				String doctorName = rs.getString(14);
-				String speciality = rs.getString(15);
+				int doctorId = rs.getInt(14);
+				String doctorName = rs.getString(15);
+				String speciality = rs.getString(16);
 				Doctor doctor = new Doctor(doctorId, doctorName, speciality);
 
 				Treatment newTreatment = new Treatment(treatmentId, disease, drug, finishDate, newPatient, doctor);
@@ -417,7 +417,6 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return treatmentList;
 	}
 
@@ -468,6 +467,30 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 			e.printStackTrace();
 		}
 		return role;
+	}
+
+	@Override
+	public User getUserbyId(int userId) {
+		User user = new User();
+		try {
+			String sql = "SELECT * FROM users "
+					//+ "AS u JOIN roles AS r ON u.roleId = r.id "
+					+ "WHERE id LIKE ? ";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, userId);
+			ResultSet rs = prep.executeQuery();
+			while (rs.next()) {
+				String username = rs.getString("username");
+				byte[] password = rs.getBytes("password");
+				//int roleId=rs.getInt("roleId");
+				//Role role = getRoleById(roleId);
+				//user = new User(username,password,role);
+				user = new User(username,password);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return user;
 	}
 
 }

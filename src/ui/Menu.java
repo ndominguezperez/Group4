@@ -157,9 +157,8 @@ public class Menu {
 		}else if (user.getRole().getRole().equalsIgnoreCase("patient")) {
 			System.out.println("Welcome "+ username +"!");
 			Patient  patient = patientManager.getPatientByUsername(username);
-			System.out.println("Welcome "+ username +"!");
 			patientSubMenu(patient);
-		}else if (user.getRole().getRole().equalsIgnoreCase("admin staff")) {
+		}else if (user.getRole().getRole().equalsIgnoreCase("admin")) {
 			System.out.println("Welcome "+ username +"!");
 			adminMenu(); 
 		}else {
@@ -259,6 +258,9 @@ public class Menu {
 				break;
 			case 2:
 				List<Examination> a = patient.getExaminations();
+				if(a==null) {
+					System.out.println("You don't have examinations yet");
+				}
 				patientSubMenu(patient);
 				break;
 			case 0:

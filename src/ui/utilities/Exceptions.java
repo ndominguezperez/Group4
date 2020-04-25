@@ -199,7 +199,7 @@ public class Exceptions {
 		Doctor doctor = null;
 		try {
 			doctor = Menu.doctorManager.getDoctorById(id);
-			System.out.print(doctor);
+			//System.out.print(doctor);
 		} catch (NullPointerException e) {
 			System.out.println("\n\n\tID not founded");
 			doctor = null;

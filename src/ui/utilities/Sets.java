@@ -20,7 +20,6 @@ public class Sets {
           }
           if (j > 0) {
                  boolean question;
-                 System.out.println("Which treatment do you want to change?: \n");
                  Treatment treatment = Exceptions.checkTreatment();
                  if (treatment != null) {
                         int id = treatment.getId();

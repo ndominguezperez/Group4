@@ -146,13 +146,15 @@ public class SQLiteDoctorManager implements DoctorManager {
                  prep.setInt(1, docId);
                  ResultSet rs = prep.executeQuery();
                  while (rs.next()) {
-                        int id = rs.getInt(9);
-                        String patientName = rs.getString(10);
-                        String patientSurname = rs.getString(11);
-                        Date patientDob = rs.getDate(12);
-                        String patientMedicalChart = rs.getString(13);
-                        String patientGender = rs.getString(14);
-                        Patient newPatient = new Patient (id, patientName, patientSurname, patientDob, patientMedicalChart, patientGender);
+                        int id = rs.getInt(10);
+                        String patientName = rs.getString(11);
+                        String patientSurname = rs.getString(12);
+                        Date patientDob = rs.getDate(13);
+                        String patientMedicalChart = rs.getString(14);
+                        String patientGender = rs.getString(15);
+                        int userId=rs.getInt(16);
+                        User user = Menu.administrationManager.getUserbyId(userId);
+                        Patient newPatient = new Patient (id, patientName, patientSurname, patientDob, patientMedicalChart, patientGender,user);
                         patientsList.add(newPatient);
                  }
           } catch (Exception e) {
