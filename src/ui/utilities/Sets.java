@@ -87,7 +87,9 @@ public class Sets {
                  Appointment appointment = null;
                  do {
                         appointment = Exceptions.checkAppointment();
+                        if(appointment!=null) {
                         System.out.println("The ap is:" + appointment);
+                        }
                  } while (appointment == null);
                  int id = appointment.getId();
                  System.out.println("Do you want to change the type: ");

@@ -3,6 +3,7 @@ package ui;
 import pojos.*;
 import pojos.users.Role;
 import pojos.users.User;
+import ui.utilities.Action;
 import ui.utilities.Adds;
 import ui.utilities.Delete;
 import ui.utilities.Exceptions;
@@ -28,7 +29,6 @@ public class Menu {
 	public static DBManager dbManager;
 	public static UserManager userManager;
 
-	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 	public static void main(String[] args) throws Exception {
 
@@ -153,19 +153,19 @@ public class Menu {
 		}else if(user.getRole().getRole().equalsIgnoreCase("doctor")){
 			System.out.println("Welcome doctor "+ username +"!");
 			Doctor  doctor = doctorManager.getDoctorByUsername(username);
-			doctorSubMenu(doctor);
+			Action.doctorSubMenu(doctor);
 		}else if (user.getRole().getRole().equalsIgnoreCase("patient")) {
 			System.out.println("Welcome "+ username +"!");
 			Patient  patient = patientManager.getPatientByUsername(username);
-			patientSubMenu(patient);
+			Action.patientSubMenu(patient);
 		}else if (user.getRole().getRole().equalsIgnoreCase("admin")) {
 			System.out.println("Welcome "+ username +"!");
-			adminMenu(); 
+			Action.adminMenu(); 
 		}else {
 			System.out.println("Invalid role.");
 		}
 	}
-
+/*
 	private static void doctorSubMenu(Doctor doctor) throws Exception {
 		int option;
 		do {
@@ -192,7 +192,6 @@ public class Menu {
 				doctorSubMenu(doctor);
 			case 0:
 				Menu();
-
 			}
 
 		} while (option != 0);
@@ -383,5 +382,5 @@ public class Menu {
 			adminMenu();
 
 		}
-	}
+	}*/
 }
