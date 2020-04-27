@@ -105,7 +105,7 @@ public class Adds {
 		}
 	
 	public static void addDoctor(User user) {
-		System.out.print("Hole Name: ");
+		System.out.print("Full Name: ");
 		String name = Utilities.read();
 		System.out.print("Salary: ");
 		Float salary = Exceptions.checkFloat();

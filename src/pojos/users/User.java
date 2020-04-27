@@ -47,7 +47,11 @@ public class User implements Serializable {
 		this.username = username;
 		this.password = password;
 	}
-
+    
+	public User(int id) {
+		super();
+		this.id=id;
+	}
 
 
 	public User(String username, byte[] password, Role role) {

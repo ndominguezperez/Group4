@@ -82,4 +82,11 @@ public class JPAUserManager implements UserManager {
 		}
 		return user;
 	}
+	@Override
+	public User getUser(String username) {
+		Query q = em.createNativeQuery("SELECT * FROM users WHERE username = ?", User.class);
+		q.setParameter(1, username);
+		User user = (User) q.getSingleResult();
+		return user;
+	}
 }

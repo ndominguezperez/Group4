@@ -135,6 +135,32 @@ public class Utilities {
                  System.out.println(appointment);
           }
     }
+    public static List<Examination> viewExaminations(Patient patient) {
+    	List<Examination> examinationList = Menu.administrationManager.viewExamination(patient.getId());
+    	if(examinationList==null) {
+			System.out.println("You don't have examinations yet");
+		}else{
+		for(Examination examination: examinationList) {
+			System.out.println(examination);
+		}
+		}
+    	return examinationList;
+    }
+    public static List<Treatment> viewTreatments(Patient patient) {
+    	List<Treatment> treatmentList = Menu.administrationManager.viewTreatment(patient.getId());
+    	int j=0;
+    	for(Treatment treatment: treatmentList) {
+			j++;
+		}
+    	if(treatmentList==null) {
+			System.out.println("You don't have treatments yet");
+		}else{
+		for(Treatment treatment: treatmentList) {
+			System.out.println(treatment);
+		}
+		}
+    	return treatmentList;
+    }
 
 }
 	

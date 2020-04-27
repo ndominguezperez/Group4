@@ -5,10 +5,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import javax.persistence.NoResultException;
+
 import pojos.Appointment;
 import pojos.Doctor;
 import pojos.Patient;
 import pojos.Treatment;
+import pojos.users.User;
 import ui.Menu;
 
 public class Exceptions {
@@ -154,5 +157,15 @@ public class Exceptions {
 			treatment = null;
 		}
 		return treatment;
+	}
+	public static boolean checkUsername(String username) {
+		boolean exist;
+		try {
+		User user= Menu.userManager.getUser(username);
+		exist=true;
+		}catch(NoResultException e) {
+			exist=false;
+		}
+		return exist;
 	}
 }

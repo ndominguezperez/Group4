@@ -33,7 +33,7 @@ public class Action {
 				}
 				doctorSubMenu(doctor);
 			case 0:
-			     break;
+			     Menu.Menu();
 
 			}
 
@@ -46,7 +46,7 @@ public class Action {
 		do {
 		System.out.println("Select what you want to do");
 		System.out.println("\n\t1.Create Examinations");
-		System.out.println("\n\t2.See Examinations");
+		System.out.println("\n\t2.View Examinations");
 		System.out.println("\n\t3.Create Treatment");
 		System.out.println("\n\t4.Modify Treatment");
 		System.out.println("\n\t5.Delete Treatment");
@@ -59,7 +59,7 @@ public class Action {
 				doctorPatientMenu(patient,doctor);
 				break;
 			case 2:
-				Menu.administrationManager.viewExamination(patient.getId());
+				Utilities.viewExaminations(patient);
 				doctorPatientMenu(patient,doctor);
 				break;
 			case 3:
@@ -75,7 +75,7 @@ public class Action {
 				doctorPatientMenu(patient,doctor);
 				break;
 			case 6:
-				Menu.administrationManager.viewTreatment(patient.getId());
+				Utilities.viewTreatments(patient);
 				doctorPatientMenu(patient,doctor);
 				break;
 			case 0:
@@ -99,14 +99,11 @@ public class Action {
 				patientSubMenu(patient);
 				break;
 			case 2:
-				List<Examination> a = patient.getExaminations();
-				if(a==null) {
-					System.out.println("You don't have examinations yet");
-				}
+				Utilities.viewExaminations(patient);
 				patientSubMenu(patient);
 				break;
 			case 0:
-				break;
+				Menu.Menu();
 			}
 		} while (option != 0);
 	}
@@ -121,6 +118,9 @@ public class Action {
 		switch (option) {
 		case 1:
 			p = Exceptions.checkPatient();
+			if(p==null) {
+				System.out.println("This patient doesn't exist");
+			}
 			break;
 		case 2:
 			yes = Utilities.searchPatientByName();
@@ -146,7 +146,6 @@ public class Action {
 		System.out.println("\n\t2.View a patient");
 		System.out.println("\n\t3.Delete a patient");
 		System.out.println("\n\t4.Appointments");
-		//System.out.println("\n\t5.Add a new patient");
 		System.out.println("\n\t0.Back");
 		int option = Exceptions.checkInt();
 		switch (option) {
@@ -156,9 +155,7 @@ public class Action {
 		case 2:
 			Patient p1=searchPatientMenu();
 			if(p1!=null) {
-				System.out.println(p1);
-			}else {
-				System.out.println("This patient doesn't exist");
+			System.out.println(p1);
 			}
 			adminMenu();
 		case 3:
@@ -172,11 +169,8 @@ public class Action {
 		case 4:
 			appointmentMenu();
 			break;
-		//case 5:
-		//	Adds.addPatient();
-		//	adminMenu();
 		case 0:
-			break;
+			Menu.Menu();
 
 		}
 	}

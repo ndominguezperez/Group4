@@ -49,7 +49,7 @@ public class Menu {
 		Menu();
 	}
 
-	private static void Menu() throws Exception {
+	public static void Menu() throws Exception {
 		int option;
 		do {
 			System.out.println("What do you want to do?  ");
@@ -79,12 +79,15 @@ public class Menu {
 		System.out.println("\n\t3.Admin Staff");
 		System.out.println("\n\t0.Back");
 		int option = Exceptions.checkInt();
+		boolean exist;
 
 			switch (option) {
 			case 1:
 				System.out.println("Please type the user information: ");
 				System.out.println("Username: ");
 				String usernameDoctor = Utilities.read();
+			    exist= Exceptions.checkUsername(usernameDoctor);
+			    if(!exist) {
 				System.out.println("Password: ");
 				String passwordDoctor = Utilities.read();
 				// Create the hash for password
@@ -98,11 +101,18 @@ public class Menu {
 				userManager.createUser(userDoctor);
 				Adds.addDoctor(userDoctor);
 				System.out.println("\nUser created!\n");
+			    }else {
+			    	System.out.println("This username already exist!");
+			    }
 				break;
 			case 2:
+				String usernamePatient =null;
+				if(doctorManager.listAllDoctors().size()>0) {
 				System.out.println("Please type the user information: ");
 				System.out.println("Username: ");
-				String usernamePatient = Utilities.read();
+			    usernamePatient = Utilities.read();
+			    exist= Exceptions.checkUsername(usernamePatient);
+			    if(!exist) {
 				System.out.println("Password: ");
 				String passwordPatient = Utilities.read();
 				// Create the hash for password
@@ -116,11 +126,19 @@ public class Menu {
 				userManager.createUser(userPatient);
 				Adds.addPatient(userPatient);
 				System.out.println("\nUser created!\n");
+			    }else {
+			    	System.out.println("This username already exist!");
+			    }
+				}else {
+					System.out.println("You can't be a patient if there are no doctors");
+				}
 				break;
 			case 3:
 				System.out.println("Please type the user information: ");
 				System.out.println("Username: ");
 				String usernameAdmin = Utilities.read();
+				exist= Exceptions.checkUsername(usernameAdmin);
+			    if(!exist) {
 				System.out.println("Password: ");
 				String passwordAdmin = Utilities.read();
 				// Create the hash for password
@@ -133,6 +151,9 @@ public class Menu {
 				//store user
 				userManager.createUser(userAdmin);
 				System.out.println("\nUser created!\n");
+			    }else {
+			    	System.out.println("This username already exist!");
+			    }
 				break;
 			case 0:
 				Menu();

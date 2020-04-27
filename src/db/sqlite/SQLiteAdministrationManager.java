@@ -180,8 +180,6 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 					Date dob = rs.getDate(4);
 					String medicalChart = rs.getString(5);
 					String gender = rs.getString(6);
-					//int userId =  rs.getInt(7);
-					//User user = Menu.administrationManager.get
 					newPatient = new Patient(pId, name, surname, dob, medicalChart, gender);
 					patientCreated = true;
 				}
@@ -196,7 +194,6 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 				newDoctor2 = ui.utilities.Utilities.getDoctortByIdPassingInt(doctorId);
 				newAppointment = new Appointment(appointmentId, type, apSpeciality, date, time, newDoctor2);
 				appointmentList.add(newAppointment);
-				System.out.println(newAppointment);
 
 			}
 			newPatient.setSchedule(appointmentList);
@@ -295,7 +292,6 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 				Doctor doctor = new Doctor(doctorId, doctorName, speciality);
 				Examination newExamination = new Examination(examinationId, observations, temperature, breathingRate,
 						heartRate, bloodPressure, oxygenSaturations, doctor, newPatient);
-				System.out.println(newExamination);
 				if (!examinationCreated) {
 					examinationList.add(newExamination);
 				}
@@ -407,8 +403,6 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 				Doctor doctor = new Doctor(doctorId, doctorName, speciality);
 
 				Treatment newTreatment = new Treatment(treatmentId, disease, drug, finishDate, newPatient, doctor);
-				System.out.println(newTreatment);
-
 				if (!treatmentCreated) {
 					treatmentList.add(newTreatment);
 				}

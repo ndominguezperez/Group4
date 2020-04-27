@@ -12,12 +12,8 @@ import ui.Menu;
 public class Delete {
 	 
     public static void deleteTreatment(Patient patient, Doctor doctor) {
-          List<Treatment> treatmentList = Menu.administrationManager.viewTreatment(patient.getId());
-          int i, j = 0;
-          for (i = 0; i < treatmentList.size(); i++) {
-                 j++;
-          }
-          if (j > 0) {
+          List<Treatment> treatments=Utilities.viewTreatments(patient);
+          if (treatments!=null) {
                  System.out.println("Which treatmet do you want to delete?: \n");
                  Treatment treatment = Exceptions.checkTreatment();
                  if (treatment != null) {

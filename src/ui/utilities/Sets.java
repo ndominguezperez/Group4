@@ -13,12 +13,8 @@ import ui.Menu;
 public class Sets {
 	 
     public static void modifyTreatment(Patient patient, Doctor doctor) {
-          List<Treatment> treatmentList = Menu.administrationManager.viewTreatment(patient.getId());
-          int i, j = 0;
-          for (i = 0; i < treatmentList.size(); i++) {
-                 j++;
-          }
-          if (j > 0) {
+        List<Treatment> treatments=Utilities.viewTreatments(patient);
+        if (treatments!=null) {
                  boolean question;
                  Treatment treatment = Exceptions.checkTreatment();
                  if (treatment != null) {
