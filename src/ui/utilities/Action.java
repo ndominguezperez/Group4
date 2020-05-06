@@ -5,6 +5,7 @@ import java.util.List;
 import pojos.Doctor;
 import pojos.Examination;
 import pojos.Patient;
+import pojos.users.User;
 import ui.Menu;
 
 public class Action {
@@ -15,6 +16,7 @@ public class Action {
 			System.out.println("\n\t1.See Your schedule");
 			System.out.println("\n\t2.List all your patients");
 			System.out.println("\n\t3.Patient");
+			System.out.println("\n\t4.Settings");
 			System.out.println("\n\t0.Back");
 			option = Exceptions.checkInt();
 			switch (option) {
@@ -32,6 +34,10 @@ public class Action {
 					doctorPatientMenu(patient, doctor);
 				}
 				doctorSubMenu(doctor);
+			case 4: 
+				String username=doctor.getUser().getUsername();
+				User user=Menu.userManager.getUser(username);
+				settingsMenu(user);
 			case 0:
 			     Menu.Menu();
 
@@ -91,6 +97,7 @@ public class Action {
 			System.out.println("Select what you want to do");
 			System.out.println("\n\t1.Schedule");
 			System.out.println("\n\t2.See examinations");
+			System.out.println("\n\t3.Settings");
 			System.out.println("\n\t0.Back");
 			option = Exceptions.checkInt();
 			switch (option) {
@@ -102,6 +109,10 @@ public class Action {
 				Utilities.viewExaminations(patient);
 				patientSubMenu(patient);
 				break;
+			case 3:
+				String username=patient.getUser().getUsername();
+				User user=Menu.userManager.getUser(username);
+				settingsMenu(user);
 			case 0:
 				Menu.Menu();
 			}
@@ -140,24 +151,25 @@ public class Action {
 		return p;
 	}
 
-	public static void adminMenu() throws Exception {
+	public static void adminMenu(User user) throws Exception {
 		System.out.println("\nSelect what you want to do");
 		System.out.println("\n\t1.List all patients");
 		System.out.println("\n\t2.View a patient");
 		System.out.println("\n\t3.Delete a patient");
 		System.out.println("\n\t4.Appointments");
+		System.out.println("\n\t5.Settings");
 		System.out.println("\n\t0.Back");
 		int option = Exceptions.checkInt();
 		switch (option) {
 		case 1:
 			Utilities.listAllPatiens();
-			adminMenu();
+			adminMenu(user);
 		case 2:
 			Patient p1=searchPatientMenu();
 			if(p1!=null) {
 			System.out.println(p1);
 			}
-			adminMenu();
+			adminMenu(user);
 		case 3:
 			Patient p2=searchPatientMenu();
 			if(p2!=null) {
@@ -165,9 +177,12 @@ public class Action {
 			}else {
 				System.out.println("This patient doesn't exist");
 			}
-			adminMenu();
+			adminMenu(user);
 		case 4:
-			appointmentMenu();
+			appointmentMenu(user);
+			break;
+		case 5:
+			settingsMenu(user);
 			break;
 		case 0:
 			Menu.Menu();
@@ -175,7 +190,7 @@ public class Action {
 		}
 	}
 
-	private static void appointmentMenu() throws Exception {
+	private static void appointmentMenu(User user) throws Exception {
 		System.out.println("Select what you want to do");
 		System.out.println("\n\t1.Set Up a new one");
 		System.out.println("\n\t2.Modify appointment");
@@ -193,7 +208,7 @@ public class Action {
 			}else {
 				System.out.println("This patient doesn't exist");
 			}
-			appointmentMenu();
+			appointmentMenu(user);
 		case 2:
 			System.out.println("From what patient do you want to modify the appointment: ");
 			p = searchPatientMenu();
@@ -202,10 +217,10 @@ public class Action {
 			}else {
 				System.out.println("This patient doesn't exist");
 			}
-			appointmentMenu();
+			appointmentMenu(user);
 		case 3:
 			Utilities.searchAppointmentByDate();
-			appointmentMenu();
+			appointmentMenu(user);
 		case 4:
 			System.out.println("From what patient do you want to delete the appointment: ");
 			p = searchPatientMenu();
@@ -214,9 +229,61 @@ public class Action {
 			}else {
 				System.out.println("This patient doesn't exist");
 			}
-			appointmentMenu();
+			appointmentMenu(user);
 		case 0:
-			adminMenu();
+			adminMenu(user);
+
+		}
+	}
+	
+	private static void settingsMenu(User user) {
+		System.out.println("\n\t1.Delete user");
+		System.out.println("\n\t2.Modify password");
+		System.out.println("\n\t0.Back");
+		int option = Exceptions.checkInt();
+		Patient p ;
+		switch (option) {
+		case 1:
+				String username=null;
+				int n =user.getRole().getId();
+				boolean sure=false;
+				switch(n) {
+					case 1:
+						System.out.println("A doctor can not be deleted");
+						settingsMenu(user);
+					case 2: 
+						
+						username=user.getUsername();
+						Patient patient = Menu.patientManager.getPatientByUsername(username);
+						sure=Delete.deletePatient(patient);
+						if(sure) {
+						Menu.userManager.deleteUser(user);
+						System.out.println("\nDeleted succed");
+						}else {
+							settingsMenu(user);
+						}
+						break;
+					case 3:
+						sure=Exceptions.reconfirmation();
+						if(sure) {
+						Menu.userManager.deleteUser(user);
+						System.out.println("\nDeleted succed");
+						}else {
+							settingsMenu(user);
+						}
+						break;
+					}	
+				try {
+					Menu.Menu();
+				} catch (Exception e) {
+					System.out.println("\nSomething went wrong");
+					e.printStackTrace();
+				}
+			break;
+		case 2:
+
+		case 0:
+			return;
 
 		}
 	}

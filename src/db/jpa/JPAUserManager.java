@@ -38,6 +38,12 @@ public class JPAUserManager implements UserManager {
 		em.persist(user);
 		em.getTransaction().commit();
 	}
+	@Override
+	public void deleteUser(User user) {
+		em.getTransaction().begin();
+		em.remove(user);
+		em.getTransaction().commit();
+	}
 
 	@Override
 	public void createRole(Role role) {
@@ -89,4 +95,6 @@ public class JPAUserManager implements UserManager {
 		User user = (User) q.getSingleResult();
 		return user;
 	}
+
+
 }

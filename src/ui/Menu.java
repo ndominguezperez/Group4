@@ -181,7 +181,7 @@ public class Menu {
 			Action.patientSubMenu(patient);
 		}else if (user.getRole().getRole().equalsIgnoreCase("admin")) {
 			System.out.println("Welcome "+ username +"!");
-			Action.adminMenu(); 
+			Action.adminMenu(user); 
 		}else {
 			System.out.println("Invalid role.");
 		}

@@ -43,15 +43,18 @@ public class Delete {
                         }
                  }
           } else {
-                 System.out.println("\n\nThere's no appointements");
+                 System.out.println("\n\nThere's no appointments");
           }
     }
 
-    public static void deletePatient(Patient patient) {
+    public static boolean deletePatient(Patient patient) {
           boolean sure = Exceptions.reconfirmation();
+          boolean deleted=false;
           if(sure) {
           Menu.patientManager.deletePatient(patient);
+          deleted=true;
           }
+          return deleted;
     }
 
 }
