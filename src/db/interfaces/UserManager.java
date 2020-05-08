@@ -15,4 +15,5 @@ public interface UserManager {
 	public List<Role> getRoles();
 	public User checkPassword(String username, String password);
 	User getUser(String username);
+	public void modifyPassword(User user);
 }

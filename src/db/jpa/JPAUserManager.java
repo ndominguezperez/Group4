@@ -96,5 +96,11 @@ public class JPAUserManager implements UserManager {
 		return user;
 	}
 
+	@Override
+	public void modifyPassword(User user) {
+		
+		
+	}
+
 
 }
