@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.sql.Date;
 
 
+import xml.utils.SQLDateAdapter;
+
+
 public class Appointment implements Serializable{
 	 
 	/**

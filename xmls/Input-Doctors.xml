@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!DOCTYPE doctor [
+	<!ELEMENT doctor (speciality, dob, start_date, schedule?)>
+	<!ATTLIST doctor id CDATA #REQUIRED name CDATA #REQUIRED>
+	<!ELEMENT speciality (#PCDATA)>
+	<!ELEMENT dob (#PCDATA)>
+	<!ELEMENT start_date (#PCDATA)>
+	
+]>
+
+<doctor name="Maria" id="1">
+    <speciality>Cardiology</speciality>
+    <dob>1996-02-02</dob>
+    <start_date>2018-03-15</start_date>
+</doctor>

@@ -157,7 +157,8 @@ public class Action {
 		System.out.println("\n\t2.View a patient");
 		System.out.println("\n\t3.Delete a patient");
 		System.out.println("\n\t4.Appointments");
-		System.out.println("\n\t5.Settings");
+		System.out.println("\n\t5.View a list of doctors in XML");
+		System.out.println("\n\t6.Settings");
 		System.out.println("\n\t0.Back");
 		int option = Exceptions.checkInt();
 		switch (option) {
@@ -182,6 +183,9 @@ public class Action {
 			appointmentMenu(user);
 			break;
 		case 5:
+			
+			break;
+		case 6:
 			settingsMenu(user);
 			break;
 		case 0:
@@ -281,7 +285,8 @@ public class Action {
 				}
 			break;
 		case 2:
-
+			Menu.userManager.modifyPassword(user);
+			break;
 		case 0:
 			return;
 

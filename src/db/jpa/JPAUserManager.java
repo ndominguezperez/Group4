@@ -12,6 +12,7 @@ import javax.persistence.Query;
 import db.interfaces.UserManager;
 import pojos.users.Role;
 import pojos.users.User;
+import ui.utilities.Utilities;
 
 public class JPAUserManager implements UserManager {
 	
@@ -98,7 +99,24 @@ public class JPAUserManager implements UserManager {
 
 	@Override
 	public void modifyPassword(User user) {
-		
+		byte[] passwordCodify=null;
+		try {
+			System.out.print("Type your new password:");
+			String newPassword = Utilities.read();
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(newPassword.getBytes());
+			passwordCodify = md.digest();
+			
+			}catch (NoSuchAlgorithmException e) {
+		e.printStackTrace();
+		}	
+		// Begin transaction
+		em.getTransaction().begin();
+		// Make changes
+		user.setPassword(passwordCodify);
+		// End transaction
+		em.getTransaction().commit();
+		System.out.println("Password changed");
 		
 	}
 

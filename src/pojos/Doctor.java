@@ -5,30 +5,48 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import pojos.users.User;
+import xml.utils.SQLDateAdapter;
 
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "doctor")
+@XmlType(propOrder = {"speciality", "dob", "start_date"})
 public class Doctor implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6886212082478015698L;
+	
+	@XmlAttribute
 	int id; 
+	@XmlAttribute
 	String name;
 	float salary;
+	@XmlElement
 	String speciality;
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	Date dob; 
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	Date start_date;
 	List <Treatment>treatments;
 	List <Patient> patients;
 	List<Examination> examinations;
+		@XmlElement(name = "appointment")
+		@XmlElementWrapper(name = "schedule")
 	List<Appointment> schedule;
 	User user;
 	
-
-	
-
 	public Doctor(int id, String name, float salary, String speciality, Date dob, Date start_date,
 			List<Patient> patients, List<Examination> examinations, List<Appointment> schedule,
 			List <Treatment>treatments) {
