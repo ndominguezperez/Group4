@@ -56,7 +56,6 @@ public class Menu {
 
 	public static void Menu() throws Exception {
 		int option;
-		generateXMLfromBeginning();
 		do {
 			System.out.println("What do you want to do?  ");
 			System.out.println("\n\t1.Create a new user");
@@ -192,30 +191,7 @@ public class Menu {
 			System.out.println("Invalid role.");
 		}
 	}
-	private static void generateXML(int doctorId) throws Exception {
-			Doctor doctor = doctorManager.getDoctorById(doctorId);
-			// Create a JAXBContext
-			JAXBContext context = JAXBContext.newInstance(Doctor.class);
-			// Get the marshaller
-			Marshaller marshal = context.createMarshaller();
-			// Pretty formatting
-			marshal.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-			// Marshall the dog to a file
-			File file = new File("./xmls/Output-Doctor.xml");
-			marshal.marshal(doctor, file);
-			// Marshall the dog to the screen
-			marshal.marshal(doctor, System.out);
-		}
-	private static void generateXMLfromBeginning() throws Exception {
-		List<Doctor> doctorsList = Menu.doctorManager.listAllDoctors();
-        if (doctorsList != null) {
-               for (Doctor doctor : doctorsList) {
-                      int id=doctor.getId();
-                      generateXML(id);
-               }
-        } 
-        System.out.print("XML created");
-	}
+	
 }	
 	
 /*

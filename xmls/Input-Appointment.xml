@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!DOCTYPE appointment [
+	<!ELEMENT appointment (date, time, speciality,doctor,patient)>
+	<!ATTLIST appointment type CDATA #REQUIRED>
+	<!ELEMENT date (#PCDATA)>
+	<!ELEMENT time (#PCDATA)>
+	<!ELEMENT speciality (#PCDATA)>
+	<!ATTLIST doctor id CDATA #REQUIRED name CDATA #IMPLIED >
+	<!ATTLIST patient id CDATA #REQUIRED name CDATA #IMPLIED>	
+]>
+<appointment type="Results">
+    <date>2018-03-10</date>
+    <time>11</time>
+    <speciality>Cardiology</speciality>
+    <doctor id="1" name ="Natalia" />
+    <patient id="1" name ="Gustavo"/>
+</appointment>

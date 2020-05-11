@@ -1,12 +1,26 @@
 package ui.utilities;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
+
+import pojos.Appointment;
 import pojos.Doctor;
 import pojos.Examination;
 import pojos.Patient;
 import pojos.users.User;
 import ui.Menu;
+import xml.utils.CustomErrorHandler;
 
 public class Action {
 	public static void doctorSubMenu(Doctor doctor) throws Exception {
@@ -22,24 +36,23 @@ public class Action {
 			switch (option) {
 			case 1: // View schedule
 				Utilities.getDoctorSchedule(doctor.getId());
-				doctorSubMenu(doctor);
 				break;
 			case 2:
 				Utilities.listAllPatientsOfDoctor(doctor);
-				doctorSubMenu(doctor);
 				break;
 			case 3: // Patient
 				Patient patient = searchPatientMenu();
 				if(patient!=null) {
 					doctorPatientMenu(patient, doctor);
 				}
-				doctorSubMenu(doctor);
+				break;
 			case 4: 
 				String username=doctor.getUser().getUsername();
 				User user=Menu.userManager.getUser(username);
 				settingsMenu(user);
+				break;
 			case 0:
-			     Menu.Menu();
+			     return;
 
 			}
 
@@ -62,30 +75,24 @@ public class Action {
 			switch (option) {
 			case 1:
 				Adds.addExamination(patient, doctor);
-				doctorPatientMenu(patient,doctor);
 				break;
 			case 2:
 				Utilities.viewExaminations(patient);
-				doctorPatientMenu(patient,doctor);
 				break;
 			case 3:
 				Adds.addTreatment(patient, doctor);
-				doctorPatientMenu(patient,doctor);
 				break;
 			case 4:
 				Sets.modifyTreatment(patient, doctor);
-				doctorPatientMenu(patient,doctor);
 				break;
 			case 5:
 				Delete.deleteTreatment(patient, doctor);
-				doctorPatientMenu(patient,doctor);
 				break;
 			case 6:
 				Utilities.viewTreatments(patient);
-				doctorPatientMenu(patient,doctor);
 				break;
 			case 0:
-				doctorSubMenu(doctor);
+				return;
 			}
 		} while (option != 0);
 
@@ -103,18 +110,17 @@ public class Action {
 			switch (option) {
 			case 1:
 				Utilities.getPatientSchedule(patient.getId());
-				patientSubMenu(patient);
 				break;
 			case 2:
 				Utilities.viewExaminations(patient);
-				patientSubMenu(patient);
 				break;
 			case 3:
 				String username=patient.getUser().getUsername();
 				User user=Menu.userManager.getUser(username);
 				settingsMenu(user);
+				break;
 			case 0:
-				Menu.Menu();
+				return;
 			}
 		} while (option != 0);
 	}
@@ -157,20 +163,21 @@ public class Action {
 		System.out.println("\n\t2.View a patient");
 		System.out.println("\n\t3.Delete a patient");
 		System.out.println("\n\t4.Appointments");
-		System.out.println("\n\t5.View a list of doctors in XML");
-		System.out.println("\n\t6.Settings");
+		System.out.println("\n\t5.Set up appointment with XML");
+		System.out.println("\n\t6.Generate XML");
+		System.out.println("\n\t7.Settings");
 		System.out.println("\n\t0.Back");
 		int option = Exceptions.checkInt();
 		switch (option) {
 		case 1:
 			Utilities.listAllPatiens();
-			adminMenu(user);
+			break;
 		case 2:
 			Patient p1=searchPatientMenu();
 			if(p1!=null) {
 			System.out.println(p1);
 			}
-			adminMenu(user);
+			break;
 		case 3:
 			Patient p2=searchPatientMenu();
 			if(p2!=null) {
@@ -178,18 +185,33 @@ public class Action {
 			}else {
 				System.out.println("This patient doesn't exist");
 			}
-			adminMenu(user);
+			break;
 		case 4:
 			appointmentMenu(user);
 			break;
 		case 5:
-			
+			setUpAppointmentByXML();
 			break;
 		case 6:
+			boolean doc= ui.utilities.Exceptions.chooseDocOPat();
+			int id;
+			if (doc) {
+				ui.utilities.Utilities.listAllDoctors();
+				Doctor doctor =ui.utilities.Exceptions.checkDoctor();
+				ui.utilities.Utilities.getDoctorSchedule(doctor.getId());
+				id=ui.utilities.Utilities.askForId();
+			}else {
+				Patient patient=searchPatientMenu();
+				ui.utilities.Utilities.getDoctorSchedule(patient.getId());
+				id=ui.utilities.Utilities.askForId();
+			}
+			generateXML(id);
+			break;
+		case 7:
 			settingsMenu(user);
 			break;
 		case 0:
-			Menu.Menu();
+			return;
 
 		}
 	}
@@ -291,5 +313,73 @@ public class Action {
 			return;
 
 		}
+	}
+	
+	private static void setUpAppointmentByXML() throws Exception {
+		// Create a JAXBContext
+		JAXBContext context = JAXBContext.newInstance(Appointment.class);
+		// Get the unmarshaller
+		Unmarshaller unmarshal = context.createUnmarshaller();
+		// Open the file
+		File file = null;
+		boolean incorrectAppointment = false;
+		do {
+			System.out.println("Type the filename for the XML document (expected in the xmls folder):");
+			String fileName = Utilities.read();
+			file = new File("./xmls/" + fileName);
+			try {
+				// Create a DocumentBuilderFactory
+				DocumentBuilderFactory dBF = DocumentBuilderFactory.newInstance();
+				// Set it up so it validates XML documents
+				dBF.setValidating(true);
+				// Create a DocumentBuilder and an ErrorHandler (to check validity)
+				DocumentBuilder builder = dBF.newDocumentBuilder();
+				CustomErrorHandler customErrorHandler = new xml.utils.CustomErrorHandler();
+				builder.setErrorHandler(customErrorHandler);
+				// Parse the XML file and print out the result
+				Document doc = builder.parse(file);
+				if (!customErrorHandler.isValid()) {
+					incorrectAppointment = true;
+				}
+			} catch (ParserConfigurationException ex) {
+				System.out.println(file + " error while parsing!");
+				incorrectAppointment = true;
+			} catch (SAXException ex) {
+				System.out.println(file + " was not well-formed!");
+				incorrectAppointment = true;
+			} catch (IOException ex) {
+				System.out.println(file + " was not accesible!");
+				incorrectAppointment = true;
+			}
+			
+		} while (incorrectAppointment);
+		// Unmarshall the dog from a file
+		Appointment appointment = (Appointment) unmarshal.unmarshal(file);
+		// Print the dog
+		System.out.println("Added to the database: " + appointment);
+		Menu.administrationManager.addNewAppointment(appointment);
+		// Get the dogId from the database because the XML file doesn't have it
+		//int dogId = dbManager.getLastId();
+		// For each medicine of the dog
+		//List<Medicine> medicines = dog.getMedicines();
+		//for (Medicine medicine : medicines) {
+			// Give the medicine to the dog
+		//	medicineManager.give(dogId, medicine.getId());
+		//}
+	}
+
+	private static void generateXML(int appId) throws Exception {
+		Appointment appointment = Menu.administrationManager.getAppointmentById(appId);
+		// Create a JAXBContext
+		JAXBContext context = JAXBContext.newInstance(Appointment.class);
+		// Get the marshaller
+		Marshaller marshal = context.createMarshaller();
+		// Pretty formatting
+		marshal.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		// Marshall the app to a file
+		File file = new File("./xmls/Output-Appointment.xml");
+		marshal.marshal(appointment, file);
+		// Marshall the app to the screen
+		marshal.marshal(appointment, System.out);
 	}
 }

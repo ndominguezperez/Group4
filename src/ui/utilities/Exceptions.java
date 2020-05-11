@@ -105,6 +105,24 @@ public class Exceptions {
 		}
 		return yes;
 	}
+	
+	public static boolean chooseDocOPat() {
+		int i = 0;
+		boolean yes = false;
+		while (i == 0) {
+			System.out.println("\nFrom doctor o patient? (D/P)");
+			String confirm = Utilities.read();
+			if (confirm.equalsIgnoreCase("D")) {
+				i = 1;
+				yes = true;
+			}
+			if (confirm.equalsIgnoreCase("P")) {
+				i = 1;
+				yes = false;
+			}
+		}
+		return yes;
+	}
 
 	public static Patient checkPatient() {
 		Patient patient = null;

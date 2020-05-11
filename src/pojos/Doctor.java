@@ -19,8 +19,7 @@ import pojos.users.User;
 import xml.utils.SQLDateAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "doctor")
-@XmlType(propOrder = {"speciality", "dob", "start_date"})
+@XmlType(propOrder = {"speciality"})
 public class Doctor implements Serializable{
 
 	/**
@@ -30,20 +29,14 @@ public class Doctor implements Serializable{
 	
 	@XmlAttribute
 	int id; 
-	@XmlAttribute
 	String name;
 	float salary;
-	@XmlElement
 	String speciality;
-	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	Date dob; 
-	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	Date start_date;
 	List <Treatment>treatments;
 	List <Patient> patients;
 	List<Examination> examinations;
-		@XmlElement(name = "appointment")
-		@XmlElementWrapper(name = "schedule")
 	List<Appointment> schedule;
 	User user;
 	
