@@ -5,25 +5,11 @@ import pojos.users.Role;
 import pojos.users.User;
 import ui.utilities.Action;
 import ui.utilities.Adds;
-import ui.utilities.Delete;
 import ui.utilities.Exceptions;
-import ui.utilities.Sets;
 import ui.utilities.Utilities;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStreamReader;
 import java.security.MessageDigest;
-import java.sql.Date;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-
 import db.interfaces.*;
 import db.jpa.JPAUserManager;
-import db.sqlite.SQLiteDoctorManager;
 import db.sqlite.SQLiteManager;
 
 public class Menu {
