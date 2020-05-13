@@ -158,62 +158,66 @@ public class Action {
 	}
 
 	public static void adminMenu(User user) throws Exception {
-		System.out.println("\nSelect what you want to do");
-		System.out.println("\n\t1.List all patients");
-		System.out.println("\n\t2.View a patient");
-		System.out.println("\n\t3.Delete a patient");
-		System.out.println("\n\t4.Appointments");
-		System.out.println("\n\t5.Set up appointment with XML");
-		System.out.println("\n\t6.Generate XML");
-		System.out.println("\n\t7.Settings");
-		System.out.println("\n\t0.Back");
-		int option = Exceptions.checkInt();
-		switch (option) {
-		case 1:
-			Utilities.listAllPatiens();
-			break;
-		case 2:
-			Patient p1=searchPatientMenu();
-			if(p1!=null) {
-			System.out.println(p1);
-			}
-			break;
-		case 3:
-			Patient p2=searchPatientMenu();
-			if(p2!=null) {
-				Delete.deletePatient(p2);
-			}else {
-				System.out.println("This patient doesn't exist");
-			}
-			break;
-		case 4:
-			appointmentMenu(user);
-			break;
-		case 5:
-			setUpAppointmentByXML();
-			break;
-		case 6:
-			boolean doc= ui.utilities.Exceptions.chooseDocOPat();
-			int id;
-			if (doc) {
-				ui.utilities.Utilities.listAllDoctors();
-				Doctor doctor =ui.utilities.Exceptions.checkDoctor();
-				ui.utilities.Utilities.getDoctorSchedule(doctor.getId());
-				id=ui.utilities.Utilities.askForId();
-			}else {
-				Patient patient=searchPatientMenu();
-				ui.utilities.Utilities.getDoctorSchedule(patient.getId());
-				id=ui.utilities.Utilities.askForId();
-			}
-			generateXML(id);
-			break;
-		case 7:
-			settingsMenu(user);
-			break;
-		case 0:
-			return;
+		int option;
+		do{
+			System.out.println("\nSelect what you want to do");
+			System.out.println("\n\t1.List all patients");
+			System.out.println("\n\t2.View a patient");
+			System.out.println("\n\t3.Delete a patient");
+			System.out.println("\n\t4.Appointments");
+			System.out.println("\n\t5.Set up appointment with XML");
+			System.out.println("\n\t6.Generate XML");
+			System.out.println("\n\t7.Settings");
+			System.out.println("\n\t0.Back");
+			option= Exceptions.checkInt();
+			switch (option) {
+			case 1:
+				Utilities.listAllPatiens();
+				break;
+			case 2:
+				Patient p1=searchPatientMenu();
+				if(p1!=null) {
+				System.out.println(p1);
+				}
+				break;
+			case 3:
+				Patient p2=searchPatientMenu();
+				if(p2!=null) {
+					Delete.deletePatient(p2);
+				}else {
+					System.out.println("This patient doesn't exist");
+				}
+				break;
+			case 4:
+				appointmentMenu(user);
+				break;
+			case 5:
+				setUpAppointmentByXML();
+				break;
+			case 6:
+				boolean doc= ui.utilities.Exceptions.chooseDocOPat();
+				int id;
+				if (doc) {
+					ui.utilities.Utilities.listAllDoctors();
+					Doctor doctor =ui.utilities.Exceptions.checkDoctor();
+					ui.utilities.Utilities.getDoctorSchedule(doctor.getId());
+					id=ui.utilities.Utilities.askForId();
+				}else {
+					Patient patient=searchPatientMenu();
+					ui.utilities.Utilities.getDoctorSchedule(patient.getId());
+					id=ui.utilities.Utilities.askForId();
+				}
+				generateXML(id);
+				break;
+			case 7:
+				settingsMenu(user);
+				break;
+			case 0:
+				return;
 
-		}
+			}
+		}while (option!=0);
+		
 	}
 
 	private static void appointmentMenu(User user) throws Exception {

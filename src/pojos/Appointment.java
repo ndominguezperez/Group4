@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -15,7 +16,7 @@ import xml.utils.SQLDateAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "appointment")
-@XmlType(propOrder = { "date", "time", "speciality","doctorId", "patientId"})
+@XmlType(propOrder = { "date", "time", "speciality","doctor", "patient"})
 
 public class Appointment implements Serializable{
 	 
@@ -23,6 +24,7 @@ public class Appointment implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 2382859282871358054L;
+	@XmlTransient
 	int id;
 	@XmlAttribute
 	String type;
@@ -32,9 +34,9 @@ public class Appointment implements Serializable{
 	Float time; 
 	@XmlElement
 	String speciality;
-	@XmlElement(name = "doctorId")
+	@XmlElement
 	Doctor doctor; 
-	@XmlElement(name = "patientId")
+	@XmlElement
 	Patient patient;
 	
 	

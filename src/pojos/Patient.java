@@ -8,11 +8,13 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import pojos.users.User;
 
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlType()
 public class Patient implements Serializable {
 	
 	/**
@@ -28,13 +30,21 @@ public class Patient implements Serializable {
 	String name;  
 	@XmlAttribute
 	String surname;
+	@XmlTransient
 	Date dob;
+	@XmlTransient
 	String medical_chart;
+	@XmlTransient
 	String gender;
+	@XmlTransient
 	User user;
+	@XmlTransient
 	List<Treatment>treatments;
+	@XmlTransient
 	List<Doctor> doctors;
+	@XmlTransient
 	List<Appointment> schedule;
+	@XmlTransient
 	List<Examination> examinations;
 	
 	
