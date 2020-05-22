@@ -1,11 +1,11 @@
 package db.interfaces;
 
 import java.sql.Date;
+
 import java.util.List;
 
 import pojos.Appointment;
 import pojos.Examination;
-import pojos.Patient;
 import pojos.Treatment;
 import pojos.users.Role;
 import pojos.users.User;

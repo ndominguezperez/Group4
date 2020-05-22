@@ -1,24 +1,10 @@
 package ui.utilities;
 
-import java.io.File;
-import java.io.IOException;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
-
-import pojos.Appointment;
 import pojos.Doctor;
 import pojos.Patient;
 import pojos.users.User;
 import ui.Menu;
-import xml.utils.CustomErrorHandler;
 
 public class Action {
 	public static void doctorSubMenu(Doctor doctor) throws Exception {
@@ -190,22 +176,22 @@ public class Action {
 				appointmentMenu(user);
 				break;
 			case 5:
-				setUpAppointmentByXML();
+				Utilities.setUpAppointmentByXML();
 				break;
 			case 6:
-				boolean doc= ui.utilities.Exceptions.chooseDocOPat();
+				boolean doc= Exceptions.chooseDocOrPat();
 				int id;
 				if (doc) {
-					ui.utilities.Utilities.listAllDoctors();
-					Doctor doctor =ui.utilities.Exceptions.checkDoctor();
-					ui.utilities.Utilities.getDoctorSchedule(doctor.getId());
-					id=ui.utilities.Utilities.askForId();
+					Utilities.listAllDoctors();
+					Doctor doctor =Exceptions.checkDoctor();
+					Utilities.getDoctorSchedule(doctor.getId());
+					id=Utilities.askForId();
 				}else {
 					Patient patient=searchPatientMenu();
-					ui.utilities.Utilities.getDoctorSchedule(patient.getId());
-					id=ui.utilities.Utilities.askForId();
+					Utilities.getDoctorSchedule(patient.getId());
+					id=Utilities.askForId();
 				}
-				generateXML(id);
+				Utilities.generateXML(id);
 				break;
 			case 7:
 				settingsMenu(user);
@@ -291,7 +277,7 @@ public class Action {
 						Menu.userManager.deleteUser(user);
 						System.out.println("\nDeleted succed");
 						try {
-							Menu.Menu();
+							Menu.Beginning();
 						} catch (Exception e) {
 							System.out.println("Something went wrong");
 							e.printStackTrace();
@@ -306,7 +292,7 @@ public class Action {
 						Menu.userManager.deleteUser(user);
 						System.out.println("\nDeleted succed");
 						try {
-							Menu.Menu();
+							Menu.Beginning();
 						} catch (Exception e) {
 							System.out.println("Something went wrong");
 							e.printStackTrace();
@@ -327,64 +313,5 @@ public class Action {
 		}while(option!=0);
 	}
 	
-	private static void setUpAppointmentByXML() throws Exception {
-		// Create a JAXBContext
-		JAXBContext context = JAXBContext.newInstance(Appointment.class);
-		// Get the unmarshaller
-		Unmarshaller unmarshal = context.createUnmarshaller();
-		// Open the file
-		File file = null;
-		boolean incorrectAppointment = false;
-		do {
-			System.out.println("Type the filename for the XML document (expected in the xmls folder):");
-			String fileName = Utilities.read();
-			file = new File("./xmls/" + fileName);
-			try {
-				// Create a DocumentBuilderFactory
-				DocumentBuilderFactory dBF = DocumentBuilderFactory.newInstance();
-				// Set it up so it validates XML documents
-				dBF.setValidating(true);
-				// Create a DocumentBuilder and an ErrorHandler (to check validity)
-				DocumentBuilder builder = dBF.newDocumentBuilder();
-				CustomErrorHandler customErrorHandler = new xml.utils.CustomErrorHandler();
-				builder.setErrorHandler(customErrorHandler);
-				// Parse the XML file and print out the result
-				Document doc = builder.parse(file);
-				if (!customErrorHandler.isValid()) {
-					incorrectAppointment = true;
-				}
-			} catch (ParserConfigurationException ex) {
-				System.out.println(file + " error while parsing!");
-				incorrectAppointment = true;
-			} catch (SAXException ex) {
-				System.out.println(file + " was not well-formed!");
-				incorrectAppointment = true;
-			} catch (IOException ex) {
-				System.out.println(file + " was not accesible!");
-				incorrectAppointment = true;
-			}
-			
-		} while (incorrectAppointment);
-		// Unmarshall the dog from a file
-		Appointment appointment = (Appointment) unmarshal.unmarshal(file);
-		// Print the dog
-		System.out.println("Added to the database: " + appointment);
-		Menu.administrationManager.addNewAppointment(appointment);
-		
-	}
 
-	private static void generateXML(int appId) throws Exception {
-		Appointment appointment = Menu.administrationManager.getAppointmentById(appId);
-		// Create a JAXBContext
-		JAXBContext context = JAXBContext.newInstance(Appointment.class);
-		// Get the marshaller
-		Marshaller marshal = context.createMarshaller();
-		// Pretty formatting
-		marshal.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		// Marshall the app to a file
-		File file = new File("./xmls/Output-Appointment.xml");
-		marshal.marshal(appointment, file);
-		// Marshall the app to the screen
-		marshal.marshal(appointment, System.out);
-	}
 }

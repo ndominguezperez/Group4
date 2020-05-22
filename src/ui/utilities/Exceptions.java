@@ -1,6 +1,7 @@
 package ui.utilities;
 
 import java.sql.Date;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -11,7 +12,6 @@ import pojos.Appointment;
 import pojos.Doctor;
 import pojos.Patient;
 import pojos.Treatment;
-import pojos.users.User;
 import ui.Menu;
 
 public class Exceptions {
@@ -106,7 +106,7 @@ public class Exceptions {
 		return yes;
 	}
 	
-	public static boolean chooseDocOPat() {
+	public static boolean chooseDocOrPat() {
 		int i = 0;
 		boolean yes = false;
 		while (i == 0) {
@@ -179,7 +179,7 @@ public class Exceptions {
 	public static boolean checkUsername(String username) {
 		boolean exist;
 		try {
-		User user= Menu.userManager.getUser(username);
+		Menu.userManager.getUser(username);
 		exist=true;
 		}catch(NoResultException e) {
 			exist=false;

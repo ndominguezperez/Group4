@@ -1,11 +1,11 @@
 package ui.utilities;
 
 import java.sql.Date;
+
 import java.util.List;
 
 import pojos.Appointment;
 import pojos.Doctor;
-import pojos.Examination;
 import pojos.Patient;
 import pojos.Treatment;
 import ui.Menu;
@@ -143,71 +143,6 @@ public class Sets {
           }
     }
 
-    public static void modifyPatient(Patient patient) {
-          boolean question;
-          System.out.println("Do you want to change the medical chart?: ");
-          String medicalChart;
-          question = Exceptions.checkConfirmation();
-          if (question) {
-                 System.out.print("Introduce the new medicalChart: ");
-                 medicalChart = Utilities.read();
-                 patient.setMedical_chart(medicalChart);
-          } else {
-                 medicalChart = patient.getMedical_chart();
-          }
-          Menu.patientManager.modifyPatient(patient);
-    }
-
-    public static void modifyDoctor(Doctor doctor) {
-          boolean question;
-          System.out.println("Do you want to change the name?: ");
-          String name;
-          question = Exceptions.checkConfirmation();
-          if (question) {
-                 System.out.print("Introduce the new name: ");
-                 name = Utilities.read();
-          } else {
-                 name = doctor.getName();
-          }
-          System.out.println("Do you want to change the salary?: ");
-          Float salary;
-          question = Exceptions.checkConfirmation();
-          if (question) {
-                 System.out.print("Introduce the new salary: ");
-                 salary = Exceptions.checkFloat();
-          } else {
-                 salary = doctor.getSalary();
-          }
-           System.out.println("Do you want to change the speciality?: ");
-          String speciality;
-          question = Exceptions.checkConfirmation();
-          if (question) {
-                 System.out.print("Introduce the new speciality: ");
-                 speciality = Utilities.read();
-          } else {
-                 speciality = doctor.getSpeciality();
-          }
-          System.out.println("Do you want to change the date of birth?: ");
-          Date dob;
-          question = Exceptions.checkConfirmation();
-          if (question) {
-                 System.out.print("Introduce the new date of birth (yyyy-MM-dd):: ");
-                 dob = Exceptions.checkDate();
-          } else {
-                 dob = doctor.getDob();
-          }
-          System.out.println("Do you want to change the start date?: ");
-          Date date;
-          question = Exceptions.checkConfirmation();
-          if (question) {
-                 System.out.print("Introduce the new start date (yyyy-MM-dd):: ");
-                 date = Exceptions.checkDate();
-          } else {
-                 date = doctor.getStart_date();
-          }
-          Doctor doctor1 = new Doctor(name, salary, speciality, dob, date);
-          // Menu.doctorManager
-    }
 }
 
 

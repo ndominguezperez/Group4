@@ -1,6 +1,5 @@
 package ui.utilities;
 
-import java.sql.Date;
 import java.util.List;
 
 import pojos.Appointment;
