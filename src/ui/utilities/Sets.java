@@ -29,7 +29,7 @@ public class Sets {
                 	 	System.out.println("2. Drug");
                 	 	System.out.println("3. Finish date");
                 	 	System.out.println("4. I have already finished with modifications");
-                	 	option = Integer.parseInt(Utilities.read());
+                	 	option = Exceptions.checkInt();
                 	 	
                 	 	switch (option) {
                 	 		case 1: 
