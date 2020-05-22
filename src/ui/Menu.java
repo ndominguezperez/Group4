@@ -70,22 +70,33 @@ public class Menu {
 		System.out.println("\n\t3.Admin Staff");
 		System.out.println("\n\t0.Back");
 		int option = Exceptions.checkInt();
+		
 		boolean exist;
 
 			switch (option) {
 			case 1:
+				String usernameDoctor=null;
+				String passwordDoctor=null;
 				System.out.println("Please type the user information: ");
-				System.out.println("Username: ");
-				String usernameDoctor = Utilities.read();
+				do{
+					System.out.println("Username: ");
+					usernameDoctor = Utilities.read();
+				}while (usernameDoctor.equals(""));
+				
 			    exist= Exceptions.checkUsername(usernameDoctor);
 			    if(!exist) {
-				System.out.println("Password: ");
-				String passwordDoctor = Utilities.read();
+				do{
+					System.out.println("Password: ");
+					passwordDoctor = Utilities.read();
+				}while (passwordDoctor.equals(""));
+				// Create the hash for password
 				MessageDigest mdDoctor = MessageDigest.getInstance("MD5");
 				mdDoctor.update(passwordDoctor.getBytes());
 				byte[] hashPasswordDoctor = mdDoctor.digest();
 				Role choosenRoleDoctor= userManager.getRole(1);
+				//create user
 				User userDoctor = new User(usernameDoctor, hashPasswordDoctor, choosenRoleDoctor);
+				//store user
 				userManager.createUser(userDoctor);
 				Adds.addDoctor(userDoctor);
 				System.out.println("\nUser created!\n");
@@ -95,19 +106,27 @@ public class Menu {
 				break;
 			case 2:
 				String usernamePatient =null;
+				String passwordPatient = null;
 				if(doctorManager.listAllDoctors().size()>0) {
 				System.out.println("Please type the user information: ");
-				System.out.println("Username: ");
-			    usernamePatient = Utilities.read();
+				do{
+					System.out.println("Username: ");
+					usernamePatient = Utilities.read();
+				}while (usernamePatient.equals(""));
 			    exist= Exceptions.checkUsername(usernamePatient);
 			    if(!exist) {
-				System.out.println("Password: ");
-				String passwordPatient = Utilities.read();
+				do{
+					System.out.println("Password: ");
+					passwordPatient = Utilities.read();
+				}while (passwordPatient.equals(""));
+				// Create the hash for password
 				MessageDigest mdPatient= MessageDigest.getInstance("MD5");
 				mdPatient.update(passwordPatient.getBytes());
 				byte[] hashPasswordPatient = mdPatient.digest();
 				Role choosenRolePatient= userManager.getRole(2);
+				//create user
 				User userPatient = new User(usernamePatient, hashPasswordPatient, choosenRolePatient);
+				//store user
 				userManager.createUser(userPatient);
 				Adds.addPatient(userPatient);
 				System.out.println("\nUser created!\n");
@@ -119,18 +138,28 @@ public class Menu {
 				}
 				break;
 			case 3:
+				String usernameAdmin = null;
+				String passwordAdmin = null;
 				System.out.println("Please type the user information: ");
-				System.out.println("Username: ");
-				String usernameAdmin = Utilities.read();
+				
+				do{
+					System.out.println("Username: ");
+					usernameAdmin = Utilities.read();
+				}while (usernameAdmin.equals(""));
 				exist= Exceptions.checkUsername(usernameAdmin);
 			    if(!exist) {
-				System.out.println("Password: ");
-				String passwordAdmin = Utilities.read();
+				do{
+					System.out.println("Password: ");
+					passwordAdmin = Utilities.read();
+				}while (passwordAdmin.equals(""));
+				// Create the hash for password
 				MessageDigest mdAdmin= MessageDigest.getInstance("MD5");
 				mdAdmin.update(passwordAdmin.getBytes());
 				byte[] hashPasswordAdmin = mdAdmin.digest();
 				Role choosenRoleAdmin= userManager.getRole(3);
+				//create user
 				User userAdmin = new User(usernameAdmin, hashPasswordAdmin, choosenRoleAdmin);
+				//store user
 				userManager.createUser(userAdmin);
 				System.out.println("\nUser created!\n");
 			    }else {
