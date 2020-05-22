@@ -71,11 +71,9 @@ public class JPAUserManager implements UserManager {
 	public User checkPassword(String username, String password) {
 		User user = null;
 		try {
-			// Create a MessageDigest
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			md.update(password.getBytes());
 			byte[] hash = md.digest();
-			// Create the query
 			Query q = em.createNativeQuery("SELECT * FROM users WHERE username = ? AND password = ?", User.class);
 			q.setParameter(1, username);
 			q.setParameter(2, hash);
@@ -83,7 +81,6 @@ public class JPAUserManager implements UserManager {
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}catch(NoResultException nre) {
-			// When no result is retrived 
 			return null;
 		}
 		return user;
@@ -109,11 +106,8 @@ public class JPAUserManager implements UserManager {
 			}catch (NoSuchAlgorithmException e) {
 		e.printStackTrace();
 		}	
-		// Begin transaction
 		em.getTransaction().begin();
-		// Make changes
 		user.setPassword(passwordCodify);
-		// End transaction
 		em.getTransaction().commit();
 		System.out.println("Password changed");
 		

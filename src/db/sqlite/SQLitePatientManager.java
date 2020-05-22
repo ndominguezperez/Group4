@@ -1,19 +1,18 @@
 package db.sqlite;
 import java.sql.PreparedStatement;
 
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import db.interfaces.PatientManager;
-import pojos.Appointment;
 import pojos.Doctor;
 import pojos.Patient;
 import pojos.users.Role;
 import pojos.users.User;
 import ui.Menu;
-import ui.utilities.Utilities;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -49,14 +48,11 @@ public class SQLitePatientManager implements PatientManager{
 
 	@Override
 	public List<Patient> listAllPatients() {
-		// Create an empty list of patients
 				List<Patient> patientsList = new ArrayList<Patient>();
-				// Search for all patients
 				try {
 					String sql = "SELECT * FROM patients";
 					PreparedStatement prep = c.prepareStatement(sql);
 					ResultSet rs = prep.executeQuery();
-					// For each result...
 					while (rs.next()) {
 						int id = rs.getInt("id");
 						String patientName = rs.getString("name");
@@ -64,15 +60,12 @@ public class SQLitePatientManager implements PatientManager{
 						Date patientDob = rs.getDate("dob");
 						String patientMedical_chart = rs.getString("medicalChart");
 						String patientGender = rs.getString("gender");
-						// Create a new dog and...
 						Patient newPatient = new Patient (id, patientName, patientSurname, patientDob, patientMedical_chart, patientGender);
-						// Add it to the list
 						patientsList.add(newPatient);
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				// Return the list
 				return patientsList;
 	}
 	@Override
@@ -124,19 +117,14 @@ public class SQLitePatientManager implements PatientManager{
 		Patient newPatient = null;
 		try {
 			String sql = "SELECT * FROM patients AS p JOIN doctorsPatients AS dp ON p.id = dp.patientId"
-					+ " JOIN doctors AS d ON dp.doctorId = d.id" 
-			       // + " JOIN  appointments AS a ON p.id=a.patientId"
-					//+ " JOIN  treatments AS t ON p.id=t.patientId"
-			        
-					+ " WHERE p.id = ?"; //AND a.doctor_id = d.id";
+					+ " JOIN doctors AS d ON dp.doctorId = d.id"
+					+ " WHERE p.id = ?"; 
 		
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setInt(1, patientId);
 			ResultSet rs = p.executeQuery();
 			List<Doctor> doctorList = new ArrayList<Doctor>();
-			List<Appointment> appointmentList = new ArrayList<Appointment>();
 			boolean patientCreated = false;
-			boolean doctorCreated = false;
 			while (rs.next()) {
 				if (!patientCreated) {
 					int pId = rs.getInt(1);
@@ -157,29 +145,12 @@ public class SQLitePatientManager implements PatientManager{
 					doctorList.add(newDoctor); 
 				}
 				
-				
-				/*int appointmentId = rs.getInt(15);
-				String type =rs.getString(16);
-				String apSpeciality =rs.getString(17);
-				Date date =rs.getDate(18);
-				Float time =rs.getFloat(19);
-				int doctorId = rs.getInt(20);
-				Doctor newDoctor2 = new Doctor();
-				newDoctor2 = ui.utilities.Utilities.getDoctortByIdPassingInt(doctorId) ;
-				Appointment newAppointment = new Appointment(appointmentId, type, apSpeciality, date, time,newDoctor2);
-				appointmentList.add(newAppointment);*/
-				
 			}
 
 			try{
 				newPatient.setDoctors(doctorList);
 			}catch(NullPointerException n) {
 			}
-			/*try {
-				newPatient.setSchedule(appointmentList);
-			}catch(NullPointerException n){
-				System.out.println("This patient doesn't have any appointments");
-			}*/
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

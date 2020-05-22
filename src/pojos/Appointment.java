@@ -105,7 +105,6 @@ public class Appointment implements Serializable{
 		this.time=time2;
 		this.speciality=apSpeciality;
 		this.doctor=newDoctor2;
-		//this.patient=patient;
 	}
 	public Appointment(int id2, String type2, String speciality2, Date date2, float time2, int doctorId,
 			int patientId) {

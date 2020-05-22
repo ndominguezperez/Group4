@@ -54,7 +54,6 @@ public class Adds {
         System.out.println("Time: ");
         Float time = Exceptions.checkFloat();
         Utilities.listAllDoctors();
-        //System.out.println("Id: ");
         Doctor doctor=null;
         while(doctor==null) {
         	doctor= Exceptions.checkDoctor();

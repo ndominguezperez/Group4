@@ -1,11 +1,11 @@
 package db.sqlite;
 
 import java.sql.Connection;
+
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -468,7 +468,6 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 		User user = new User();
 		try {
 			String sql = "SELECT * FROM users "
-					//+ "AS u JOIN roles AS r ON u.roleId = r.id "
 					+ "WHERE id LIKE ? ";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, userId);
@@ -476,9 +475,6 @@ public class SQLiteAdministrationManager implements AdministrationManager {
 			while (rs.next()) {
 				String username = rs.getString("username");
 				byte[] password = rs.getBytes("password");
-				//int roleId=rs.getInt("roleId");
-				//Role role = getRoleById(roleId);
-				//user = new User(username,password,role);
 				user = new User(username,password);
 			}
 		} catch (Exception e) {

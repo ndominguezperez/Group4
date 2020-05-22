@@ -1,6 +1,7 @@
 package db.sqlite;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,7 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import db.interfaces.*;
-import pojos.*;
 
 public class SQLiteManager implements DBManager {
 	
@@ -24,15 +24,11 @@ public class SQLiteManager implements DBManager {
 	@Override
 	public void connect() {
 		try {
-			// Open database connection
 			Class.forName("org.sqlite.JDBC");
 			this.c = DriverManager.getConnection("jdbc:sqlite:./db/patients.db");
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
-			// Create DoctorManager
 			doctor = new SQLiteDoctorManager(c);
-			// Create PatientManager
 			patient = new SQLitePatientManager(c);
-			// Create AdminManager
 			admin  = new SQLiteAdministrationManager(c);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -142,7 +138,7 @@ public class SQLiteManager implements DBManager {
 			stmt6.close();
 			
 			Statement stmt7;
-			stmt7= c.createStatement();//many to many relation between doctor and patient 
+			stmt7= c.createStatement();
 			String sql7 = "CREATE TABLE doctorsPatients " + "(doctorId INTEGER  REFERENCES doctors(id) ON UPDATE CASCADE ON DELETE CASCADE, "
 					+ "patientId  INTEGER  REFERENCES patients(id) ON UPDATE CASCADE ON DELETE CASCADE, " 
 					+ "PRIMARY KEY(doctorId,patientId) )";

@@ -21,13 +21,13 @@ public class Action {
 			System.out.println("\n\t0.Back");
 			option = Exceptions.checkInt();
 			switch (option) {
-			case 1: // View schedule
+			case 1: 
 				Utilities.getDoctorSchedule(doctor.getId());
 				break;
 			case 2:
 				Utilities.listAllPatientsOfDoctor(doctor);
 				break;
-			case 3: // Patient
+			case 3: 
 				Patient patient = searchPatientMenu();
 				if(patient!=null) {
 					doctorPatientMenu(patient, doctor);
@@ -166,7 +166,7 @@ public class Action {
 				Utilities.listAllPatiens();
 				break;
 			case 2:
-				Patient p1=searchPatientMenu();
+				searchPatientMenu();
 				break;
 			case 3:
 				Patient p2=searchPatientMenu();

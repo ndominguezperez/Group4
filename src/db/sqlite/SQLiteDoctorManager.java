@@ -1,6 +1,7 @@
 package db.sqlite;
 
 import java.sql.Connection;
+
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +13,6 @@ import db.interfaces.DoctorManager;
 import pojos.Doctor;
 
 import pojos.Patient;
-import pojos.Treatment;
 import pojos.users.Role;
 import pojos.users.User;
 import ui.Menu;
@@ -42,11 +42,6 @@ public class SQLiteDoctorManager implements DoctorManager {
 			e.printStackTrace();
 		}
 	}
-	@Override
-	public List<Patient> listAllPatientsOfDoctor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	public Doctor getDoctorById(int id) {
 		Doctor newDoctor=null;
@@ -59,7 +54,7 @@ public class SQLiteDoctorManager implements DoctorManager {
 			int doctorId = rs.getInt("id");
 			String doctorName = rs.getString("name");
 			String speciality = rs.getString("speciality");
-			 newDoctor= new Doctor(id,doctorName,speciality);
+			 newDoctor= new Doctor(doctorId,doctorName,speciality);
 			
 		}
 		} catch (Exception e) {
@@ -71,14 +66,11 @@ public class SQLiteDoctorManager implements DoctorManager {
 
 	@Override
 	public List<Doctor> listAllDoctors() {
-		// Create an empty list of doctors
 				List<Doctor> doctorsList = new ArrayList<Doctor>();
-				// Search for all doctors
 				try {
 					String sql = "SELECT * FROM doctors";
 					PreparedStatement prep = c.prepareStatement(sql);
 					ResultSet rs = prep.executeQuery();
-					// For each result...
 					while (rs.next()) {
 						int id = rs.getInt("id");
 						String doctorName = rs.getString("name");
@@ -86,15 +78,12 @@ public class SQLiteDoctorManager implements DoctorManager {
 						String doctorSpeciality = rs.getString("speciality");
 						Date doctorStartDate = rs.getDate("startDate");
 						Date doctorDob = rs.getDate("dob");
-						// Create a new dog and...
 						Doctor newDoctor = new Doctor (id, doctorName, doctorSalary, doctorDob, doctorSpeciality, doctorStartDate);
-						// Add it to the list
 						doctorsList.add(newDoctor);
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				// Return the list
 				return doctorsList;
 	}
 	@Override
