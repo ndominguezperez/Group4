@@ -145,6 +145,7 @@ public class Utilities {
     public static List<Appointment> getPatientScheduleList(int id) {
     	List<Appointment> schedule= null;
         try {
+        	
                schedule = Menu.administrationManager.viewPatientSchedule(id);
                for (Appointment appointment : schedule) {
                       System.out.println(appointment);

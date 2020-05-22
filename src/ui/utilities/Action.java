@@ -124,8 +124,8 @@ public class Action {
 			p = Exceptions.checkPatient();
 			if(p==null) {
 				System.out.println("This patient doesn't exist");
-			}else {
-				System.out.println(p);
+			}else {		
+				System.out.println(p+"\n");
 			}
 			break;
 		case 2:
@@ -133,14 +133,14 @@ public class Action {
 			if(yes) {
 				p = Exceptions.checkPatient();
 			}
-			System.out.println(p);
+			System.out.println(p+"\n");
 			break;
 		case 3:
 			yes = Utilities.searchPatientBySurname();
 			if(yes) {
 				p = Exceptions.checkPatient();
 			}
-			System.out.println(p);
+			System.out.println(p+"\n");
 			break;
 		case 0:
 			return  p ;
