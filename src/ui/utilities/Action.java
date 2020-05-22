@@ -1,6 +1,9 @@
 package ui.utilities;
 
 
+import java.util.List;
+
+import pojos.Appointment;
 import pojos.Doctor;
 import pojos.Patient;
 import pojos.users.User;
@@ -121,6 +124,8 @@ public class Action {
 			p = Exceptions.checkPatient();
 			if(p==null) {
 				System.out.println("This patient doesn't exist");
+			}else {
+				System.out.println(p);
 			}
 			break;
 		case 2:
@@ -128,12 +133,14 @@ public class Action {
 			if(yes) {
 				p = Exceptions.checkPatient();
 			}
+			System.out.println(p);
 			break;
 		case 3:
 			yes = Utilities.searchPatientBySurname();
 			if(yes) {
 				p = Exceptions.checkPatient();
 			}
+			System.out.println(p);
 			break;
 		case 0:
 			return  p ;
@@ -160,9 +167,6 @@ public class Action {
 				break;
 			case 2:
 				Patient p1=searchPatientMenu();
-				if(p1!=null) {
-				System.out.println(p1);
-				}
 				break;
 			case 3:
 				Patient p2=searchPatientMenu();
@@ -184,14 +188,24 @@ public class Action {
 				if (doc) {
 					Utilities.listAllDoctors();
 					Doctor doctor =Exceptions.checkDoctor();
-					Utilities.getDoctorSchedule(doctor.getId());
-					id=Utilities.askForId();
+					List <Appointment> a=Utilities.getDoctorScheduleList(doctor.getId());
+					if(a.size()>=1) {
+						id=Utilities.askForId();
+						Utilities.generateXML(id);
+					}else{
+						System.out.println("There are no appointments");
+					}
 				}else {
 					Patient patient=searchPatientMenu();
-					Utilities.getDoctorSchedule(patient.getId());
-					id=Utilities.askForId();
+					List <Appointment> a=Utilities.getPatientScheduleList(patient.getId());
+					if(a.size()>=1) {
+						id=Utilities.askForId();
+						Utilities.generateXML(id);
+					}else{
+						System.out.println("There are no appointments");
+					}
 				}
-				Utilities.generateXML(id);
+				
 				break;
 			case 7:
 				settingsMenu(user);
@@ -221,8 +235,6 @@ public class Action {
 			p = searchPatientMenu();
 			if(p!=null) {
 				Adds.addAppointment(p);
-			}else {
-				System.out.println("This patient doesn't exist");
 			}
 			break;
 		case 2:
@@ -230,8 +242,6 @@ public class Action {
 			p = searchPatientMenu();
 			if(p!=null) {
 				Sets.modifyAppointment(p);
-			}else {
-				System.out.println("This patient doesn't exist");
 			}
 			break;
 		case 3:
@@ -242,8 +252,6 @@ public class Action {
 			p = searchPatientMenu();
 			if(p!=null) {
 				Delete.deleteAppointment(p);
-			}else {
-				System.out.println("This patient doesn't exist");
 			}
 			break;
 		case 0:

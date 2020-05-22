@@ -6,13 +6,15 @@
 	<!ELEMENT date (#PCDATA)>
 	<!ELEMENT time (#PCDATA)>
 	<!ELEMENT speciality (#PCDATA)>
+	<!ELEMENT doctor EMPTY>
+	<!ELEMENT patient EMPTY>
 	<!ATTLIST doctor id CDATA #REQUIRED name CDATA #IMPLIED >
-	<!ATTLIST patient id CDATA #REQUIRED name CDATA #IMPLIED>	
+	<!ATTLIST patient id CDATA #REQUIRED name CDATA #IMPLIED surname CDATA #IMPLIED>	
 ]>
 <appointment type="Results">
     <date>2018-03-16</date>
     <time>8</time>
-    <speciality>Orthodontist</speciality>
-    <doctor id="1" name ="Natalia" />
-    <patient id="1" name ="Gustavo"/>
+    <speciality>Hematology</speciality>
+    <doctor id="2" name ="Carmen" />
+    <patient id="7" name ="Alejandro" surname="Dantart"/>
 </appointment>

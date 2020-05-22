@@ -19,10 +19,16 @@ public class Menu {
 	public static AdministrationManager administrationManager;
 	public static DBManager dbManager;
 	public static UserManager userManager;
+	
+	public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    
+    public static final String ANSI_RESET = "\u001B[0m";
 
 
 	public static void main(String[] args) throws Exception {
-
+		
 		dbManager = new SQLiteManager();
 		dbManager.connect();
 		patientManager = dbManager.getPatientManager();
@@ -43,7 +49,7 @@ public class Menu {
 	public static void Beginning() throws Exception {
 		int option;
 		do {
-			System.out.println("What do you want to do?  ");
+			System.out.println("What do you want to do? ");
 			System.out.println("\n\t1.Create a new user");
 			System.out.println("\n\t2.Login");
 			System.out.println("\n\t0.Exit");

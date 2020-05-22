@@ -32,8 +32,11 @@ public class Delete {
                  appointmentList = null;
           }
           if (appointmentList != null) {
-                 System.out.println("Which appointment do you want to delete?: \n");
+                 System.out.println("\nWhich appointment do you want to delete?:");
                  Appointment appointment = null;
+                 for (Appointment a : appointmentList) {
+                	 System.out.println(a);
+				}
                  appointment = Exceptions.checkAppointment();
                  if (appointment != null) {
                         boolean sure = Exceptions.reconfirmation();

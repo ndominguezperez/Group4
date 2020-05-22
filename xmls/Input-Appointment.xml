@@ -14,7 +14,7 @@
 <appointment type="Results">
     <date>2018-03-10</date>
     <time>11</time>
-    <speciality>Cardiology</speciality>
-    <doctor id="1" name ="Natalia" />
-    <patient id="1" name ="Gustavo" surname="Gonzalez"/>
+    <speciality>Dermatology</speciality>
+    <doctor id="4" name ="Natalia" />
+    <patient id="2" name ="Sofia" surname="Chollet"/>
 </appointment>

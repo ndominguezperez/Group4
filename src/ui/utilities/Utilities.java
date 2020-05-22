@@ -125,7 +125,35 @@ public class Utilities {
           } catch (NullPointerException e) {
                  System.out.println("There are no appointments");
           }
+          
     }
+    
+    public static List<Appointment> getDoctorScheduleList(int id) {
+    	List<Appointment> schedule= null;
+        try {
+               schedule = Menu.administrationManager.viewDoctorSchedule(id);
+               for (Appointment appointment : schedule) {
+                      System.out.println(appointment);
+               }
+        } catch (NullPointerException e) {
+               System.out.println("There are no appointments");
+        }
+        return schedule;
+  }
+    
+    
+    public static List<Appointment> getPatientScheduleList(int id) {
+    	List<Appointment> schedule= null;
+        try {
+               schedule = Menu.administrationManager.viewPatientSchedule(id);
+               for (Appointment appointment : schedule) {
+                      System.out.println(appointment);
+               }
+        } catch (NullPointerException e) {
+               System.out.println("There are no appointments");
+        }
+        return schedule;
+  }
 
     public static void listAllPatientsOfDoctor(Doctor doctor) {
     	List<Patient> patientsList = Menu.doctorManager.listAllPatientsOfDoctor(doctor.getId());
@@ -162,7 +190,7 @@ public class Utilities {
     	for(Treatment treatment: treatmentList) {
 			j++;
 		}
-    	if(treatmentList==null) {
+    	if(j<1) {
 			System.out.println("You don't have treatments yet");
 		}else{
 		for(Treatment treatment: treatmentList) {
