@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<appointment type="revision">
-    <date>2020-09-09</date>
-    <time>20.0</time>
-    <speciality>derma</speciality>
-    <doctorId id="1" name="Natalia"/>
-    <patientId id="1" name="Gustavo" surname="Gonzalez"/>
+<appointment type="Results">
+    <date>2018-03-10</date>
+    <time>11.0</time>
+    <speciality>Dermatology</speciality>
+    <doctor id="4" name="Rodrigo Garcia"/>
+    <patient id="1" name="Constantino" surname="Garcia"/>
 </appointment>

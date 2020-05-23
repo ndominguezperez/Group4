@@ -28,7 +28,6 @@ public class Menu {
 		patientManager = dbManager.getPatientManager();
 		doctorManager = dbManager.getDoctorManager();
 		administrationManager= dbManager.getAdministrationManager();
-		
 		dbManager.createTables();
 		userManager = new JPAUserManager();
 		userManager.connect();

@@ -15,6 +15,6 @@
     <date>2018-03-10</date>
     <time>11</time>
     <speciality>Dermatology</speciality>
-    <doctor id="4" name ="Natalia" />
-    <patient id="2" name ="Sofia" surname="Chollet"/>
+    <doctor id="4" name ="Rodrigo Garcia" />
+    <patient id="1" name ="Constantino" surname="Garcia"/>
 </appointment>

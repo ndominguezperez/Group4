@@ -194,9 +194,6 @@ public class SQLitePatientManager implements PatientManager{
 		}
 
 	}
-	public void modifyPatient(Patient patient) {
-		
-	}
 	
 	@Override
 	public void deletePatient(Patient patient) {

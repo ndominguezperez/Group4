@@ -15,6 +15,6 @@
     <date>2018-03-16</date>
     <time>8</time>
     <speciality>Hematology</speciality>
-    <doctor id="2" name ="Carmen" />
-    <patient id="7" name ="Alejandro" surname="Dantart"/>
+   <doctor id="4" name ="Rodrigo Garcia" />
+    <patient id="1" name ="Constantino" surname="Garcia"/>
 </appointment>
